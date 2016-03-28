@@ -1,0 +1,23 @@
+E:\40 - Coding and Idea Studio\PPL\Backend Initial\proyeku-src>php artisan migra
+te:install
+
+
+  [PDOException]
+  SQLSTATE[HY000] [1045] Access denied for user 'homestead'@'localhost' (usin
+  g password: YES)
+
+
+
+E:\40 - Coding and Idea Studio\PPL\Backend Initial\proyeku-src>php artisan migra
+te:install
+Migration table created successfully.
+
+E:\40 - Coding and Idea Studio\PPL\Backend Initial\proyeku-src>php migrate
+Could not open input file: migrate
+
+E:\40 - Coding and Idea Studio\PPL\Backend Initial\proyeku-src>php artisan migra
+te
+Migrated: 2014_10_12_000000_create_users_table
+Migrated: 2014_10_12_100000_create_password_resets_table
+
+E:\40 - Coding and Idea Studio\PPL\Backend Initial\proyeku-src>

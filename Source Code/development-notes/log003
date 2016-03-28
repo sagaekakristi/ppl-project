@@ -1,0 +1,23 @@
+E:\40 - Coding and Idea Studio\PPL\Backend Initial\proyeku-src>php artisan make:
+auth
+Created View: E:\40 - Coding and Idea Studio\PPL\Backend Initial\proyeku-src\res
+ources/views/auth/login.blade.php
+Created View: E:\40 - Coding and Idea Studio\PPL\Backend Initial\proyeku-src\res
+ources/views/auth/register.blade.php
+Created View: E:\40 - Coding and Idea Studio\PPL\Backend Initial\proyeku-src\res
+ources/views/auth/passwords/email.blade.php
+Created View: E:\40 - Coding and Idea Studio\PPL\Backend Initial\proyeku-src\res
+ources/views/auth/passwords/reset.blade.php
+Created View: E:\40 - Coding and Idea Studio\PPL\Backend Initial\proyeku-src\res
+ources/views/auth/emails/password.blade.php
+Created View: E:\40 - Coding and Idea Studio\PPL\Backend Initial\proyeku-src\res
+ources/views/layouts/app.blade.php
+Created View: E:\40 - Coding and Idea Studio\PPL\Backend Initial\proyeku-src\res
+ources/views/home.blade.php
+Created View: E:\40 - Coding and Idea Studio\PPL\Backend Initial\proyeku-src\res
+ources/views/welcome.blade.php
+Installed HomeController.
+Updated Routes File.
+Authentication scaffolding generated successfully!
+
+E:\40 - Coding and Idea Studio\PPL\Backend Initial\proyeku-src>

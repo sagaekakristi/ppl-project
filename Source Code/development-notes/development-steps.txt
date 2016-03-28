@@ -1,0 +1,52 @@
+Catatan Penting Step Development Backend Proyeku
+Catatan berikut dibuat untuk merekam aktivitas penting dan catatan tambahan (seperti code snippet) dalam proses development.
+
+- Step by Step:
+-- Creating projects source code:
+composer create-project --prefer-dist laravel/laravel proyeku-src	[log: log001.txt]
+
+-- Migrate Standard Laravel Table ke database MySQL:
+buat database di XAMPP (MySQL)
+ubah 'connections' di file /config/database.php
+ubah DB_DATABASE, DB_USERNAME, DB_PASSWORD di file di /.env
+php artisan migrate:install
+php artisan migrate 	[log: log002.txt]
+
+-- Authentication
+php artisan make:auth 	[log: log003.txt]
+akan ter-update file /app/Http/Requests/routes.php , dibuatkan /app/Http/Controllers/Auth/HomeController.php , dsb (lihat log dan https://laravel.com/docs/5.2/authentication#included-views)
+sekarang sudah bisa login, register namun masih tanpa konfirmasi
+
+
+- Cara jalanin Laravel tanpa XAMPP atau webserver lainnya:
+php artisan serve
+
+- Akun Admin sementara:
+email: admin@proyeku.id
+password: admin@proyeku.id
+
+- Info MySQL Database:
+database name: proyeku-db
+privilege:
+	username: proyeku-dev
+	password: proyeku-dev
+
+- Creating table on database via artisan:
+php artisan make:migrate nama-migration
+ubah function up di /database/migrations/<waktu>_<nomor>_nama-action-migration.php
+contoh: isi up dengan:
+Schema::create('namaTable', function($newTable){
+	$newTable->increments('id');
+	$newTable->string('atributpertama');
+	$newTable->string('atributkedua',255);
+	$newTable->text('deskripsi');
+	$newTable->date('waktudibuat');
+	$newTable->boolean('status');
+	$newTable->timestamps();
+});
+contoh: isi down dengan:
+Schema::drop('namaTable');
+
+- Link-link penting:
+Perubahan comand artisan Laravel 4 ke 5: http://stackoverflow.com/questions/25840643/php-artisan-migratemake-create-mytable-fails-migratemake-is-not-defined
+Authentication Laravel: https://laravel.com/docs/5.2/authentication
