@@ -1,0 +1,25 @@
+@import url(https://fonts.googleapis.com/css?family=Titillium+Web);
+
+@font-face { 
+	font-family: Blenda Script; 
+	src: url('../font/Blenda Script.otf'); 
+}
+
+body {
+	color: #22313F;
+	font-family: Titillium Web;
+}
+
+#footer {
+	background-color: #1485A3;
+	border: none;
+	box-shadow: none;
+	color: #D5EDF5;
+	padding: 10px;
+	font-size: 14px;
+}
+
+#footer a {
+	text-decoration: none;
+	color: #D5EDF5;
+}
