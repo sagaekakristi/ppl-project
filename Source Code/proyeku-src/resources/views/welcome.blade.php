@@ -8,6 +8,7 @@
                 <div class="panel-heading">Welcome</div>
 
                 <div class="panel-body">
+                    <p>Synergize efficiently!</p>
                     Your Application's Landing Page.
                 </div>
             </div>

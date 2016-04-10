@@ -17,6 +17,10 @@ php artisan make:auth 	[log: log003.txt]
 akan ter-update file /app/Http/Requests/routes.php , dibuatkan /app/Http/Controllers/Auth/HomeController.php , dsb (lihat log dan https://laravel.com/docs/5.2/authentication#included-views)
 sekarang sudah bisa login, register namun masih tanpa konfirmasi
 
+-- Ubah sedikit template views
+Ubah 'Laravel' jadi 'Proyeku' di /resources/views/layouts/app.blade.php
+
+===== Catatan Tambahan =====
 
 - Cara jalanin Laravel tanpa XAMPP atau webserver lainnya:
 php artisan serve
