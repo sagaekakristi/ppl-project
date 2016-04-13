@@ -20,6 +20,22 @@ sekarang sudah bisa login, register namun masih tanpa konfirmasi
 -- Ubah sedikit template views
 Ubah 'Laravel' jadi 'Proyeku' di /resources/views/layouts/app.blade.php
 
+-- Membuat beberapa migrasi database untuk mendekati ERD
+php artisan make:migration <nama-migrasi>
+	nama-migrasi: create-user-info, create-freelancer-info, create-job-accjob
+mengubah file migration pada /database/migrations/<time>_<nama-migrasi>
+contoh up:
+	Schema::create('user_info', function($newTable){
+            $newTable->integer('user_id')->unsigned();
+            $newTable->date('tanggal_lahir');
+            $newTable->string('alamat',255);
+            $newTable->string('jenis_kelamin',1);
+            $newTable->foreign('user_id')->references('id')->on('users');
+        });
+contoh down:
+	Schema::drop('user_info');
+
+
 ===== Catatan Tambahan =====
 
 - Cara jalanin Laravel tanpa XAMPP atau webserver lainnya:
