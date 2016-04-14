@@ -35,6 +35,22 @@ contoh up:
 contoh down:
 	Schema::drop('user_info');
 
+-- Membuat model
+php artisan make:model <nama-model>
+	nama-model: UserInfo, FreelancerInfo, FreelancerInfoSkill, Job, Category, JobCategory, AcceptedJob, AcceptedJobLinks
+tambah 3 informasi penting berikut:
+    protected $table = 'nama table nya';
+    protected $primaryKey = 'nama primary key nya'; // kalo nama primary key nya bukan 'id'
+    public $timestamps = false; // kalo gak ada created_at, updated_at
+
+-- Membuat controller
+php artisan make:controller <nama-controller>
+	nama-controller: UserInfoController, ProfilePageController
+tambah di /app/routes.php
+	ex: Route::resource('/profile', 'ProfilePageController', ['only' => ['index']]);
+ubah controller nya. tambah public function index() misalkan
+
+
 
 ===== Catatan Tambahan =====
 
