@@ -66,6 +66,10 @@ Schema::create('namaTable', function($newTable){
 });
 contoh: isi down dengan:
 Schema::drop('namaTable');
+Untuk migrate: php artisan migrate
+Untuk rollback ke revisi sebelumnya: php artisan migrate:rollback
+Untuk kembali fresh di awal(rollback semuanya): php artisan migrate:reset
+
 
 - Link-link penting:
 Perubahan comand artisan Laravel 4 ke 5: http://stackoverflow.com/questions/25840643/php-artisan-migratemake-create-mytable-fails-migratemake-is-not-defined
