@@ -2,7 +2,8 @@
 
 <!-- Custom CSS -->
 <link href="{{url('/assets/css/login.css')}}" rel="stylesheet">
-@extends('layouts.master-header')
+
+@extends('layouts.header')
 @section('header')
 @parent
 @stop
@@ -80,10 +81,4 @@
         </div>
     </div>
 </div>
-@stop
-
-@extends('layouts.master-footer')
-
-@section('footer')
-@parent
 @stop

@@ -1,8 +1,9 @@
 <!-- Bagian header -->
+@section('header')
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Proyeku</title>
+    <title>Profile</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
@@ -10,7 +11,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
     <!-- Custom CSS -->
-    <link href="{{url('/assets/css/header.css')}}" rel="stylesheet">
+    <link href="{{url('/public/assets/css/header.css')}}" rel="stylesheet">
 </head>
 <body>
     <nav class="navbar navbar-default navbar-fixed-top">
@@ -18,9 +19,9 @@
 
             <!-- Logo Header -->
             <div class="navbar-header">
-                <a href="/" class="navbar-brand">
-                    <img class="hidden-xs" src="{{url('/assets/pictures/logo-md.png')}}">
-                    <img class="visible-xs" src="{{url('/assets/pictures/logo-xs.png')}}" style="margin-left: -10px; margin-top: 10px"> 
+                <a href="home" class="navbar-brand">
+                    <img class="hidden-xs" src="{{url('/public/assets/pictures/logo-md.png')}}">
+                    <img class="visible-xs" src="{{url('/public/assets/pictures/logo-xs.png')}}" style="margin-left: -10px; margin-top: 10px"> 
                 </a>
 
                 <!-- Hamburger Button -->
@@ -34,10 +35,12 @@
             <!-- Menu Bar -->
             <div class="collapse navbar-collapse" id="navbar" style="margin-top: 30px;">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="login" style="color: #D5EDF5;" class="hidden-xs">Login</a></li>
-                    <li><a href="#" style="color: #D5EDF5;" class="hidden-xs">Get Started</a></li>
-                    <li><a href="login" style="color: #D5EDF5; font-size: 20px;" class="visible-xs">Login</a></li>
-                    <li><a href="#" style="color: #D5EDF5; font-size: 20px" class="visible-xs">Get Started</a></li>
+                    <li><a href="#" style="color: #D5EDF5;" class="hidden-xs">Logout</a></li>
+                    <li><a href="#" style="color: #D5EDF5;" class="hidden-xs">My Profile</a></li>
+                    <li><a href="#" style="color: #D5EDF5;" class="hidden-xs">Open a Job</a></li>
+                    <li><a href="#" style="color: #D5EDF5; font-size: 20px;" class="visible-xs">Logout</a></li>
+                    <li><a href="#" style="color: #D5EDF5; font-size: 20px;" class="visible-xs">My Profile</a></li>
+                    <li><a href="#" style="color: #D5EDF5; font-size: 20px;" class="visible-xs">Open a Job</a></li>
                     <li>
                         <form class="navbar-form" role="search">
                             <div class="input-group">
@@ -52,3 +55,20 @@
             </div>
         </div>
     </nav>
+
+    <!-- Content -->
+    @yield('content')
+
+    <!-- JavaScripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
+
+    @extends('layouts.master-footer')
+    @section('footer')
+    @parent
+    @stop
+
+</body>
+</html>
+@show

@@ -1,7 +1,7 @@
 <!-- Custom CSS -->
 <link href="{{url('/assets/css/profile.css')}}" rel="stylesheet">
 
-@extends('layouts.master-header-profile')
+@extends('layouts.header-profile')
 
 @section('header')
 @parent
@@ -21,11 +21,4 @@
 		{{ $user_info->jenis_kelamin }}
 	</div>
 </div>
-
-@stop
-
-@extends('layouts.master-footer')
-
-@section('footer')
-@parent
 @stop

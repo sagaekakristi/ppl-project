@@ -1,18 +1,18 @@
-@extends('layouts.app')
+<!-- Custom CSS -->
+<link href="{{url('/assets/css/home.css')}}" rel="stylesheet">
+
+@extends('layouts.header')
+@section('header')
+@parent
+@stop
 
 @section('content')
-<div class="container">
+<!-- Body -->
+<div class="container" id="body1">
     <div class="row">
-        <div class="col-md-10 col-md-offset-1">
-            <div class="panel panel-default">
-                <div class="panel-heading">Welcome</div>
-
-                <div class="panel-body">
-                    <p>Synergize efficiently!</p>
-                    Your Application's Landing Page.
-                </div>
-            </div>
+        <div class="col-md-12">
+            <p id="moto">Synergize efficiently!</p>
         </div>
     </div>
 </div>
-@endsection
+@stop

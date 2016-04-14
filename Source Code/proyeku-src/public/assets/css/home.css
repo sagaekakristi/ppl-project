@@ -8,131 +8,20 @@
 body {
 	color: #22313F;
 	font-family: Titillium Web;
-}
-
-#header {
-	width: 1351px;
-	background-color: #1485A3;
-	margin-left: -10px;
-	margin-top: -10px;
-}
-
-td a {
-	font-size: 25px;
-	text-decoration: none;
-	color: #D5EDF5; 
-}
-
-td img {
-	margin-left: 50px;
-}
-
-input[type="text"] {
-	height: 40px;
-	font-family: Titillium Web;
-	background-image: url("../pictures/search.png");
-	background-position: 10px 10px;
-	background-repeat: no-repeat;
-	background-size: 25px;
-	padding-left: 40px;
-	border-top-left-radius: 10px;
-	border-top-right-radius: 0px;
-	border-bottom-right-radius: 0px;
-	border-bottom-left-radius: 10px;
-	border: 1px solid white; 
-}
-
-input[type="submit"] {
-	height: 43px;
-	background-color: white;
-	color: gray;
-	font-weight: bolder;
-	font-family: Titillium Web;
-	border-top-left-radius: 0px;
-	border-top-right-radius: 10px;
-	border-bottom-right-radius: 10px;
-	border-bottom-left-radius: 0px;
-	border: 1px solid white;
-	cursor: pointer;
+	background-image: url('../pictures/layout-home.png');
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover; 
 }
 
 #body1 {
-	height: 520px;
-	width: 1351px;
-	margin-left: -10px;
-	margin-top: -69px;
-	background-color: #D5EDF5;
+	margin-top: 260px;
+	margin-bottom: 20px;
+	text-align: center;
 }
 
-#body1 p {
-	padding-top: 200px;
-	margin-left: 428px;
+#moto {
 	font-family: Blenda Script;
 	font-size: 70px;
-}
-
-#body1 form {
-	margin-left: 460px;
-}
-
-#body1 input[type="text"] {
-	width: 300px;
-	border: 2px solid #D5EDF5;
-}
-
-#body1 input[type="submit"] {
-	width: 130px;
-	height: 45px;
-	border: 2px solid #F26151;
-	background-color: #F26151;
-	font-size: 16px;
-	color: white;
-	cursor: pointer;
-}
-
-#body2 {
-	margin-left: -10px;
-	width: 1321px;
-	height: 500px;
-	font-family: Blenda Script;
-	font-size: 35px;
-	padding-right: 30px;
-	padding-bottom: 20px;
-	background-color: #D5EDF5; 
-}
-
-#body3 p {
-	font-family: Blenda Script;
-	font-size: 50px; 
-	text-align: center;
-}
-
-#body3 span {
-	font-size: 20px;
-}
-
-#body3 {
-	margin-top: -70px;
-	margin-left: -10px;
-	width: 1352px;
-	background-color: #8EC4D4;
-	text-align: center;
-}
-
-#body3 #freelancerButton, #body3 #seekerButton {
-	font-size: 16px;
-	background-color: #F26151;
-	color: white;
-	width: 150px;
-	height: 50px;
-	cursor: pointer;
-	font-weight: bolder;
-	font-family: Titillium Web;
-}
-
-#body4 {
-	margin-top: -20px;
-}
-#body4 p {
-	text-align: center;
 }

@@ -1,12 +1,6 @@
 <!-- Custom CSS -->
 <link href="{{url('/assets/css/footer.css')}}" rel="stylesheet">
 
-<!-- Bagian konten -->
-<section>
-    @yield('content')
-</section>
-
-<!-- Bagian footer -->
 @section('footer')
 <footer id="footer">
     <div class="container-fluid">
@@ -38,6 +32,4 @@
         </div>
     </div>
 </footer>
-</body>
-</html>
 @show
