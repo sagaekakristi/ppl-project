@@ -11,7 +11,6 @@
 <footer id="footer">
     <div class="container-fluid">
         <div class="container">
-           <div class="container">
             <div class="col-md-3 col-md-offset-1">
                 <strong>Proyeku</strong><br><br>
                 <a href="#">About Proyeku</a><br>
@@ -33,12 +32,11 @@
                 <span>mail@proyeku.com</span>
             </div>
         </div>
+        <div class="col-md-12" style="text-align: center;">
+            <hr>
+            Copyright &copy; Proyeku 2016
+        </div>
     </div>
-    <div class="col-md-12" style="text-align: center;">
-        <hr>
-        Copyright &copy; Proyeku 2016
-    </div>
-</div>
 </footer>
 </body>
 </html>

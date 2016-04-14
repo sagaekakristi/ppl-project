@@ -1,7 +1,7 @@
 <!-- Custom CSS -->
-<link href="{{url('/public/assets/css/profile.css')}}" rel="stylesheet">
+<link href="{{url('/assets/css/profile.css')}}" rel="stylesheet">
 
-@extends('layout/master-header-profile')
+@extends('layouts.master-header-profile')
 
 @section('header')
 @parent
@@ -11,20 +11,20 @@
 <!-- Login Box -->
 
 <div class="container" id="body">
-    <div>
-        <img src="{{url('/public/assets/pictures/profile-default-icon.png')}}">
-    </div>
-    <div>
-        <h1>HEEEEE</h1>
-        {{ $user_info->alamat }}
-        {{ $user_info->tanggal_lahir }}
-        {{ $user_info->jenis_kelamin }}
-    </div>
+	<div>
+		<img src="{{url('/assets/pictures/profile-default-icon.png')}}">
+	</div>
+	<div>
+		<h1>HEEEEE</h1>
+		{{ $user_info->alamat }}
+		{{ $user_info->tanggal_lahir }}
+		{{ $user_info->jenis_kelamin }}
+	</div>
 </div>
 
 @stop
 
-@extends('layout/master-footer')
+@extends('layouts.master-footer')
 
 @section('footer')
 @parent

@@ -18,7 +18,7 @@
 
             <!-- Logo Header -->
             <div class="navbar-header">
-                <a href="home" class="navbar-brand">
+                <a href="/" class="navbar-brand">
                     <img class="hidden-xs" src="{{url('/assets/pictures/logo-md.png')}}">
                     <img class="visible-xs" src="{{url('/assets/pictures/logo-xs.png')}}" style="margin-left: -10px; margin-top: 10px"> 
                 </a>
