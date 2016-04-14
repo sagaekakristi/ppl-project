@@ -1,9 +1,8 @@
 <!-- Bagian header -->
-@section('header')
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Login</title>
+    <title>Proyeku</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
@@ -11,7 +10,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
     <!-- Custom CSS -->
-    <link href="{{url('/public/assets/css/header.css')}}" rel="stylesheet">
+    <link href="{{url('/assets/css/header.css')}}" rel="stylesheet">
 </head>
 <body>
     <nav class="navbar navbar-default navbar-fixed-top">
@@ -20,8 +19,8 @@
             <!-- Logo Header -->
             <div class="navbar-header">
                 <a href="home" class="navbar-brand">
-                    <img class="hidden-xs" src="{{url('/public/assets/pictures/logo-md.png')}}">
-                    <img class="visible-xs" src="{{url('/public/assets/pictures/logo-xs.png')}}" style="margin-left: -10px; margin-top: 10px"> 
+                    <img class="hidden-xs" src="{{url('/assets/pictures/logo-md.png')}}">
+                    <img class="visible-xs" src="{{url('/assets/pictures/logo-xs.png')}}" style="margin-left: -10px; margin-top: 10px"> 
                 </a>
 
                 <!-- Hamburger Button -->
@@ -53,4 +52,3 @@
             </div>
         </div>
     </nav>
-    @show

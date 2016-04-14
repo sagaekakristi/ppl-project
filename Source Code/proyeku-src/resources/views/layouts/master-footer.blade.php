@@ -1,5 +1,5 @@
 <!-- Custom CSS -->
-<link href="{{url('/public/assets/css/footer.css')}}" rel="stylesheet">
+<link href="{{url('/assets/css/footer.css')}}" rel="stylesheet">
 
 <!-- Bagian konten -->
 <section>
@@ -11,7 +11,7 @@
 <footer id="footer">
     <div class="container-fluid">
         <div class="container">
-         <div class="container">
+           <div class="container">
             <div class="col-md-3 col-md-offset-1">
                 <strong>Proyeku</strong><br><br>
                 <a href="#">About Proyeku</a><br>
