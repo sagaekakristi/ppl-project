@@ -16,6 +16,9 @@
     </div>
     <div>
         <h1>HEEEEE</h1>
+        {{ $user_info->alamat }}
+        {{ $user_info->tanggal_lahir }}
+        {{ $user_info->jenis_kelamin }}
     </div>
 </div>
 

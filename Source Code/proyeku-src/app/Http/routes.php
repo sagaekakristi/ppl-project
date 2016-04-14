@@ -17,7 +17,7 @@ Route::group(['middleware' => ['web']], function () {
         return view('welcome');
     });
 
-    Route::resource('ui', 'UserInfoController', ['only' => ['index']]);
+    Route::resource('/profile', 'ProfilePageController', ['only' => ['index']]);
 
 });
 
