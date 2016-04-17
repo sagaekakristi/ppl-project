@@ -26,3 +26,12 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::get('/home', 'HomeController@index');
 });
+
+Route::get('/searchredirect', function(){
+	$search = urlencode(e(Input::get('search')));
+	$route = "search/$search";
+	
+	return redirect($route);
+});
+
+Route::get('search/{search}', 'SearchController@search');

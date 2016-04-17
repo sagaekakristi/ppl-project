@@ -68,6 +68,15 @@
                         </li>
                     @endif
                 </ul>
+                <!--Search Bar-->
+                <form class="navbar-form" role="search" action="{{url('/searchredirect')}}">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name='search' placeholder="Search">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </nav>
