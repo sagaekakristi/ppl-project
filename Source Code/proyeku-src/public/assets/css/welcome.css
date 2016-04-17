@@ -6,20 +6,21 @@
 } 
 
 body {
+	
+}
+
+#body1 {
+	margin-top: 110px;
 	background-image: url('../pictures/layout-home.png');
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
 	background-size: cover; 
-}
-
-#body1 {
-	margin-top: 260px;
-	margin-bottom: 20px;
 	text-align: center;
 }
 
 #moto {
 	font-family: Blenda Script;
 	font-size: 70px;
+	margin-bottom: 70px;
 }
