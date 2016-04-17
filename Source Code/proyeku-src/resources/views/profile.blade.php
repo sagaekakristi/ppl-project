@@ -1,8 +1,7 @@
 <!-- Custom CSS -->
 <link href="{{url('/assets/css/profile.css')}}" rel="stylesheet">
 
-@extends('layouts.header-profile')
-
+@extends('layouts.header')
 @section('header')
 @parent
 @stop

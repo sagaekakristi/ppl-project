@@ -39,15 +39,9 @@
 					<li><a href="{{ url('/login') }}" style="color: #D5EDF5;">Login</a></li>
 					<li><a href="{{ url('/') }}" style="color: #D5EDF5;">Get Started</a></li>
 					@else
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="color: #D5EDF5; background-color: #1485A3;">
-							{{ Auth::user()->name }} <span class="caret"></span>
-						</a>
-
-						<ul class="dropdown-menu" role="menu" style="background-color: #1485A3; border: none">
-							<li><a href="{{ url('/logout') }}" style="background-color: #1485A3; color: #D5EDF5"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
-						</ul>
-					</li>
+					<li><a href="{{ url('/logout') }}" style="background-color: #1485A3; color: #D5EDF5"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
+					<li><a href="{{url('/profile')}}" style="color: #D5EDF5;" class="hidden-xs">My Profile</a></li>
+					<li><a href="#" style="color: #D5EDF5;" class="hidden-xs">Open a Job</a></li>
 					@endif
 					<li>
 						<form class="navbar-form" role="search">
