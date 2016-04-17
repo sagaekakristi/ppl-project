@@ -5,13 +5,74 @@
 	src: url('../font/Blenda Script.otf'); 
 }
 
-body {
-    color: #22313F;
-    font-family: Titillium Web;
+#body {
+	text-align: center;
+	margin-top: 160px;
+	margin-bottom: 20px;
+	color: #2c3e50;
 }
 
-#body {
-    text-align: center;
-    margin-top: 140px;
-    margin-bottom: 20px;
+.star-rating{
+	font-size: 0;
+}
+.star-rating__wrap{
+	display: inline-block;
+	font-size: 2rem;
+
+}
+.star-rating__wrap:after{
+	content: "";
+	display: table;
+	clear: both;
+}
+.star-rating__ico{
+	float: right;
+	padding-left: 2px;
+	color: #FFB300;
+}
+.star-rating__ico:last-child{
+	padding-left: 0;
+}
+.star-rating__input{
+	display: none;
+}
+
+.hr {
+	border-top: 3px solid #2c3e50;
+}
+
+div h1 {
+	font-family: Blenda Script;
+}
+
+.headline {
+	text-align: left;
+	font-size: 20px;
+}
+
+.row .col-md-3 table {
+	margin: 0 auto !important;
+	float: none !important;
+	background-color: white;
+}
+
+.table td, .table th{
+	border: none !important;
+}
+
+.headline input[type="submit"] {
+	height: 40px;
+	width: 140px;
+	background-color: #F26151;
+	color: aliceblue;
+	font-size: 16px;    
+	font-weight: bolder;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px;
+	border-bottom-left-radius: 10px;
+}
+
+.list {
+	background-color: white;
 }

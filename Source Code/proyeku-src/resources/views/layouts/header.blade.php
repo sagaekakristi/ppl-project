@@ -8,11 +8,11 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<!-- Styles -->
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" >
 	<!-- Custom CSS -->
 	<link href="{{url('/assets/css/header.css')}}" rel="stylesheet">
 </head>
-<body id="app-layout">
+<body>
 	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container-fluid">
 			<div class="navbar-header">
@@ -36,12 +36,12 @@
 				<ul class="nav navbar-nav navbar-right" id="navbar" style="margin-top: 30px;">
 					<!-- Authentication Links -->
 					@if (Auth::guest())
-					<li><a href="{{ url('/login') }}" style="color: #D5EDF5;">Login</a></li>
 					<li><a href="{{ url('/') }}" style="color: #D5EDF5;">Get Started</a></li>
+					<li><a href="{{ url('/login') }}" style="color: #D5EDF5;"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</a></li>
 					@else
-					<li><a href="{{ url('/logout') }}" style="background-color: #1485A3; color: #D5EDF5"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
-					<li><a href="{{url('/profile')}}" style="color: #D5EDF5;" class="hidden-xs">My Profile</a></li>
-					<li><a href="#" style="color: #D5EDF5;" class="hidden-xs">Open a Job</a></li>
+					<li><a href="{{url('/profile')}}" style="color: #D5EDF5;">My Profile</a></li>
+					<li><a href="#" style="color: #D5EDF5;">Open a Job</a></li>
+					<li><a href="{{ url('/logout') }}" style="background-color: #1485A3; color: #D5EDF5">Logout</a></li>
 					@endif
 					<li>
 						<form class="navbar-form" role="search">

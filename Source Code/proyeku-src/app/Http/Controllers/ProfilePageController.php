@@ -24,17 +24,19 @@ class ProfilePageController extends Controller
     {
     	$logged_user_id = Auth::user()->id;
         $user_info = UserInfo::find($logged_user_id);
+        $users = User::find($logged_user_id);
 
         $alamat = $user_info->alamat;
         $tanggal_lahir = $user_info->tanggal_lahir;
         $jenis_kelamin = $user_info->jenis_kelamin;
+        $nama = $users->name;
 
         // $out = '';
         // $out = $out . 'alamat: ' . $alamat . '<br>';
         // $out = $out . 'tanggal lahir: ' . $tanggal_lahir . '<br>';
         // $out = $out . 'gender: ' . $jenis_kelamin . '<br>';
 		//return $out;
-		
-        return view('profile', ['user_info' => $user_info]);
+
+        return view('profile', ['user_info' => $user_info], ['users' => $users]);
     }
 }
