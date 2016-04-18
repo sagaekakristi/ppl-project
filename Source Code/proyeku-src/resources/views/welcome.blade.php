@@ -10,6 +10,7 @@
                 <div class="panel-body">
                     <p>Synergize efficiently!</p>
                     Your Application's Landing Page.
+
                     <form class="navbar-form" role="search" action="{{url('/searchredirect')}}">
                         <div class="input-group">
                             <input type="text" class="form-control" name='search' placeholder="Search">
@@ -18,6 +19,7 @@
                             </div>
                         </div>
                     </form>
+                    
                 </div>
             </div>
         </div>

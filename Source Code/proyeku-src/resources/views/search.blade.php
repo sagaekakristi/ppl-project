@@ -19,6 +19,17 @@
 
                     @if(isset($message))
                     <div class="bg-warning" style='padding: 20px'>{{$message}}</div>
+                    
+                    @else
+                    <div class="bg-warning" style='padding: 20px'>{{$search}}</div>
+
+                    <div>
+                        @foreach ($jobs as $job)
+                            {{ $job->judul }}
+                            {{ $job->id }}
+                        @endforeach
+                    </div>
+
                     @endif
 
 
