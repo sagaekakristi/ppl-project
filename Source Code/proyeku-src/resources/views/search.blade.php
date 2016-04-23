@@ -25,8 +25,18 @@
 
                     <div>
                         @foreach ($jobs as $job)
+                            <a href="">{{ $job->name }}</a>
+                            <br/>
                             {{ $job->judul }}
-                            {{ $job->id }}
+                            <br/>
+                            {{ $job->alamat }}
+                            <br/>
+                            {{ $job->deskripsi }}
+                            <br/>
+                            {{ $job->upah_max }}
+                            {{ $job->upah_min }}
+                            <br/>
+                            <br/>
                         @endforeach
                     </div>
 
