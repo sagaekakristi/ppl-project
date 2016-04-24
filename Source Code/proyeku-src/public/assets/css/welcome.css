@@ -19,8 +19,65 @@ body {
 	text-align: center;
 }
 
+#feature-section {
+	background-color: #D5EDF5;
+}
+
+#choose-section {
+	background-color: #8EC4D4;
+}
+
 #moto {
 	font-family: Blenda Script;
 	font-size: 70px;
-	margin-bottom: 70px;
+	margin-bottom: 140px;
+}
+
+.topspace {
+	margin-top: 50px;
+}
+
+.blenda35 {
+	font-family: Blenda Script;
+	font-size: 35px;
+}
+
+.blenda45 {
+	font-family: Blenda Script;
+	font-size: 45px;
+}
+
+section .miring1,
+section .miring2 {
+	border-width: 130px 1124px 0px 0;
+}
+
+.miring1 {
+	position: relative;
+	left: 0;
+	height: 0;
+	width: 0;
+	
+	width: 100%;
+	display: block;
+	border-style: solid;
+	pointer-events: none;
+	z-index: 0;
+	border-width: 130px 1280px 30px 0;
+	border-color: transparent #8EC4D4 #8EC4D4 transparent;
+}
+
+.miring2 {
+	position: relative;
+	left: 0;
+	height: 0;
+	width: 0;
+	
+	width: 100%;
+	display: block;
+	border-style: solid;
+	pointer-events: none;
+	z-index: 0;
+	border-width: 130px 1280px 30px 0;
+	border-color: transparent #D5EDF5 #D5EDF5 transparent;
 }
