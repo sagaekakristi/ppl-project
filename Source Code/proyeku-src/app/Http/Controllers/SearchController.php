@@ -11,11 +11,18 @@ class SearchController extends Controller{
 	public function search($search){
 
         $search = urldecode($search);
+
+        $jobs = DB::table('job')
+                    -> join('users', 'users.id', '=', 'job.freelancer_info_id')
+                    -> join('user_info', 'user_info.user_id', '=', 'users.id')
+                    -> select('users.name', 'user_info.alamat', 'job.judul', 'job.deskripsi', 'job.upah_max', 'job.upah_min')
+                    ->  paginate(2);     
+
         /*
         $jobs = DB::table('job')
         	->where('judul', 'LIKE', '%'.$search.'%')
         	->orderBy('id')
-        	->paginate(10);
+        	->paginate(2);
         */
         
         //$jobs = DB::select("SELECT * FROM `job` WHERE `judul` LIKE '%".$search."%' ORDER BY `id`'");
@@ -30,10 +37,18 @@ class SearchController extends Controller{
         */
 
         /*
+        $jobs = DB::table(function($query){
+            $query  -> select('freelancer_info_id', 'judul', 'deskripsi', 'upah_max', 'upah_min')
+                ->where('judul', 'like', '%'.$search.'%');
+        }) ->get();
+        */
+
+        /*
         untuk sementara pake raw query.
         bakal diganti pake query builder setelah mvp selesai, tapi prioritas tinggi.
         soalnya kalo pake raw query gak aman sama query injection
         */
+        /*
         $jobs = DB::select(DB::raw(
             "select freelancer_info_id, judul, deskripsi, upah_max, upah_min, name, alamat
             from
@@ -55,6 +70,7 @@ class SearchController extends Controller{
                 on a.id = b.user_id) as d
             on c.freelancer_info_id = d.id"
         ));
+        */
 
         if(count($jobs)==0){
         	return View('search')

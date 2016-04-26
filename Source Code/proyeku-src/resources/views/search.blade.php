@@ -38,6 +38,7 @@
                             <br/>
                             <br/>
                         @endforeach
+                        {!! $jobs->links() !!}
                     </div>
 
                     @endif
