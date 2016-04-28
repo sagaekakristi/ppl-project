@@ -18,6 +18,7 @@ Route::group(['middleware' => ['web']], function () {
     });
 
     Route::resource('/profile', 'ProfilePageController', ['only' => ['index']]);
+    Route::get('/job/{job_id}', ['uses' =>'JobPageController@showJobPage']);
 
 });
 
