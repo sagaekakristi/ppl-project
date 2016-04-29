@@ -17,13 +17,14 @@ Route::group(['middleware' => ['web']], function () {
         return view('welcome');
     });
 
+    Route::get('/admin', 'AdminController@index');
+
     Route::resource('/profile', 'ProfilePageController', ['only' => ['index']]);
 
 });
 
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
-
     Route::get('/home', 'HomeController@index');
 });
 
@@ -35,3 +36,7 @@ Route::get('/searchredirect', function(){
 });
 
 Route::get('search/{search}', 'SearchController@search');
+
+/*Route::get('/admin', ['middleware' => ['admin'], function() {
+    return "this page requires that you be logged in and an Admin";
+}]);*/
