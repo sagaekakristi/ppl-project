@@ -15,7 +15,6 @@ class SearchController extends Controller{
         $jobs = DB::table('job')
                     -> join('users', 'users.id', '=', 'job.freelancer_info_id')
                     -> join('user_info', 'user_info.user_id', '=', 'users.id')
-                    -> select('users.name', 'user_info.alamat', 'job.judul', 'job.deskripsi', 'job.upah_max', 'job.upah_min')
                     -> select('users.name', 'user_info.alamat', 'job.judul', 'job.deskripsi', 'job.upah_max', 'job.upah_min', 'job.id')
                     -> where('judul', 'LIKE', '%'.$search.'%')
                     ->  paginate(2);     
