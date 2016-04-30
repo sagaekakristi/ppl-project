@@ -18,8 +18,10 @@ Route::group(['middleware' => ['web']], function () {
     });
 
     Route::resource('/profile', 'ProfilePageController', ['only' => ['index']]);
-    Route::get('/job/{job_id}', ['uses' =>'JobPageController@showJobPage']);
 
+    //Route::get('/job/{job_id}', ['uses' =>'JobPageController@showJobPage']);
+    Route::resource('/job', 'JobPageController');    
+    
 });
 
 Route::group(['middleware' => 'web'], function () {
