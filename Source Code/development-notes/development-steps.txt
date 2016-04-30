@@ -50,7 +50,14 @@ tambah di /app/routes.php
 	ex: Route::resource('/profile', 'ProfilePageController', ['only' => ['index']]);
 ubah controller nya. tambah public function index() misalkan
 
-
+-- Membuat fitur Job Pages
+membuat controller JobPageController
+menambah route: /job/{job_id} yang di handle oleh JobPageController@showJobPage
+membuat job.blade.php untuk template dasar
+menambah fungsi showJobPage($job_id) pada JobPageController
+enkapsulasi data yang diperlukan sebaga dictionary array $data dalam controller
+render view dan passing $data dengan return View::make('job')->with('data', $data);
+menampilkan info (simple print) pada job.blade.php dengan {{}} dan foreach
 
 ===== Catatan Tambahan =====
 
