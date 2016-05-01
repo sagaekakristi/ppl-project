@@ -27,7 +27,7 @@ class JobPageController extends Controller
      */
 	public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth', ['except' => ['show']]);
     }
 
 	/**
@@ -38,7 +38,6 @@ class JobPageController extends Controller
 	 */
 	public function show($id)
 	{
-		$logged_user_id = Auth::user()->id;
 		$job_id = $id;
 
 		$job_info = Job::find($job_id);
