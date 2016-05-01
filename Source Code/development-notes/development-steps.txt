@@ -69,6 +69,10 @@ menambah constructor controller untuk me-assign middleware auth
 	agar user harus login sebelum bisa melihat job
 update sql: berisi seed row2 yang dapat dipakai sebagai percobaan
 mengubah group job pada routing (minor update)
+Refrensi: 
+	Tutorial CRUD: https://scotch.io/tutorials/simple-laravel-crud-with-resource-controllers
+	Solusi penggunaan auth middleware dalam controller: http://stackoverflow.com/questions/28729228/laravel-5-route-resources-middleware
+	Doc resource controller: https://laravel.com/docs/5.2/controllers
 
 ===== Catatan Tambahan =====
 
