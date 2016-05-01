@@ -1,13 +1,16 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Edit Job</title>
-</head>
-<body>
-<div class="container">
+<!-- Custom CSS -->
+<link href="{{url('/assets/css/header.css')}}" rel="stylesheet">
 
+@extends('layouts.header')
+@section('header')
+@parent
+@stop
+
+@section('content')
+<div class="container-fluid">
+<div class="col-md-8 col-md-offset-2" style="color: #3D566E">
 <h1>Edit {{ $job->judul }}</h1>
-
+<br>
 {{ Form::model($job, array('route' => array('job.update', $job->id), 'method' => 'PUT')) }}
 
     <div class="form-group">
@@ -30,10 +33,9 @@
         {{ Form::number('upah_min', null, array('class' => 'form-control')) }}
     </div>
 
-    {{ Form::submit('Edit the Job!', array('class' => 'btn btn-primary')) }}
+    {{ Form::submit('Edit the Job!', array('class' => 'btn btn-success')) }}
 
 {{ Form::close() }}
-
 </div>
-</body>
-</html>
+</div>
+@stop

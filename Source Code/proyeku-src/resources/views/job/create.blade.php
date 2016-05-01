@@ -1,14 +1,16 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Create Job</title>
-</head>
-<body>
-<div class="container">
+<!-- Custom CSS -->
+<link href="{{url('/assets/css/header.css')}}" rel="stylesheet">
 
-<h1>Create a Job</h1>
+@extends('layouts.header')
+@section('header')
+@parent
+@stop
 
-{{ Form::open(array('url' => 'job')) }}
+@section('content')
+<div class="container-fluid">
+<div class="col-md-8 col-md-offset-2">
+    <h1>Create a Job</h1>
+        {{ Form::open(array('url' => 'job')) }}
 
     <div class="form-group">
         {{ Form::label('judul', 'Judul') }}
@@ -30,10 +32,9 @@
         {{ Form::number('upah_min', Input::old('upah_min'), array('class' => 'form-control')) }}
     </div>
 
-    {{ Form::submit('Create the Job!', array('class' => 'btn btn-primary')) }}
+    {{ Form::submit('Create the Job!', array('class' => 'btn btn-success')) }}
 
-{{ Form::close() }}
-
+    {{ Form::close() }}
 </div>
-</body>
-</html>
+</div>
+@stop
