@@ -8,6 +8,21 @@
 
 @section('content')
 
+<?php
+//Mengambil data pada tabel Job dengan id dari user yang sama
+$allJobOpen = App\Job::where('freelancer_info_id', $users->id)->get();
+
+function findAllCategoryByJobId($id){
+	return $jobCategory=App\JobCategory::where('job_id', $id)->get();
+}
+
+
+function categoryIdToName($id){
+	$Category=App\Category::where('id', $id)->get()->first();
+	return $Category['kategori'];
+}
+?>
+
 <!-- Login Box -->
 <div class="container" id="body">
 	<div>
@@ -35,50 +50,78 @@
 
 		<br>
 
-		<div class="md-col-12 headline">
+		<div class="col-md-12 headline">
 			<h1>Special Skills</h1>
 			<hr class="hr">
 			<div>
-				Web Development, Jasa Skripsi.
+				Web Development, Android Development
 			</div>
 		</div>
 
 		<br>
 
-		<div class="md-col-12 headline">
+		<div class="col-md-12 headline">
 			<h1>Jasa Dibuka</h1>
 			<hr class="hr">
 			<div class="row" style="text-align: center;">
-				@for ($i = 0; $i < 4; $i++)
-				<div class="col-md-3">
-					<table class="table" style="text-align: center; border-bottom: 5px solid #D5EDF5;">
-						<tr>
-							<td style="font-size: 25px;">
-								box {{$i}} Web Development
-							</td>
-						</tr>
-						<tr>
-							<td>
-								box {{$i}} Deskripsi
-							</td>
-						</tr>
-						<tr>
-							<td>
-								box {{$i}} Kategori
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<input type="submit" value="Pesan dan Kontak">
-							</td>
-						</tr>
-					</table>
-				</div>
-				@endfor
-			</div>
-		</div>
+				<?php $i=1; ?>
+				<div class="col-md-12" style="margin-bottom: 5px;">
 
-		<div class="md-col-12 headline">
+					@foreach($allJobOpen as $list) 
+					<div class="col-md-3">
+						<table class="table" style="text-align: center;">
+							<tr>
+								<td style="font-size: 25px;">
+									{{ $list['judul'] }}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									{{ $list['deskripsi'] }}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									Kategori:
+									<br>
+									<?php $category = findAllCategoryByJobId($list['id']); ?>
+									@if(count($category))
+									@foreach($category as $category)
+									{!!categoryIdToName($category['category_id'])!!}
+									@endforeach
+									@else
+									-
+									@endif
+								</td>
+							</tr>
+							<tr>
+								<td>
+									Upah:
+									<br>
+									Rp {{ $list['upah_max'] }} - Rp {{ $list['upah_min'] }}
+								</td>
+							</tr>
+							<tr>
+								@if (Auth::guest())
+								<td>
+									<input type="submit" value="Pesan dan Kontak">
+								</td>
+								@endif
+							</tr>
+						</table>
+					</div>
+					@if($i == 4 || $i == count($allJobOpen))
+				</div>
+				@if($i != count($allJobOpen))
+				<div class="col-md-12" style="margin-bottom: 5px;">
+					@endif
+					@endif
+					<?php $i++; ?>
+					@endforeach
+				</div>
+			</div>
+
+			{{--<div class="col-md-12 headline">
 			<h1>Projects</h1>
 			<hr class="hr">
 			<div class="row" style="text-align: center;">
@@ -122,7 +165,7 @@
 				</div>
 				@endfor
 			</div>
-		</div>
+		</div>--}}
 	</div>
 </div>
 @stop

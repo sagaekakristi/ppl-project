@@ -31,8 +31,14 @@ body {
 	box-shadow: none;
 }
 
-a:hover {
+.table-condensed {
+	font-size: 18px;
+	text-decoration: none;
+}
+
+a:hover, a:after {
 	font-weight: bolder;
+	text-decoration: none;
 }
 
 input[type="text"] {
