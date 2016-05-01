@@ -8,10 +8,13 @@ use App\Http\Requests;
 
 use App\User;
 use App\UserInfo;
+use App\FreelancerInfo;
+use App\Job;
+use App\JobCategory;
+use App\Category;
 use App\Http\Controllers\Controller;
-//use App\Http\Controllers\Auth;
-//use Illuminate\Auth;
 use Illuminate\Support\Facades\Auth;
+use View;
 
 class ProfilePageController extends Controller
 {
@@ -31,12 +34,15 @@ class ProfilePageController extends Controller
         $jenis_kelamin = $user_info->jenis_kelamin;
         $nama = $users->name;
 
-        // $out = '';
-        // $out = $out . 'alamat: ' . $alamat . '<br>';
-        // $out = $out . 'tanggal lahir: ' . $tanggal_lahir . '<br>';
-        // $out = $out . 'gender: ' . $jenis_kelamin . '<br>';
-		//return $out;
+        // get all the job
+        $user_info = UserInfo::find($logged_user_id);
+        $freelancer_info = FreelancerInfo::find($user_info->user_id);
+        $jobs = Job::where('freelancer_info_id', $freelancer_info->user_info_id)->get();
 
-        return view('profile', ['user_info' => $user_info], ['users' => $users]);
+        // load the view and pass the jobs
+        return View::make('profile')
+            ->with('jobs', $jobs)
+            ->with('user_info', $user_info)
+            ->with('users', $users);
     }
 }
