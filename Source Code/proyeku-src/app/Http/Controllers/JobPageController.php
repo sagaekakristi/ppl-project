@@ -9,6 +9,9 @@ use App\Http\Requests;
 use App\Job;
 use App\JobCategory;
 use App\Category;
+use App\FreelancerInfo;
+use App\User;
+use App\UserInfo;
 use Illuminate\Support\Facades\Auth;
 use View;
 use Validator;
@@ -18,6 +21,15 @@ use Session;
 
 class JobPageController extends Controller
 {
+	/**
+     * Instantiate a new JobPageController instance.
+     * Specify auth middleware for access control: harus login dulu!
+     */
+	public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
 	/**
 	 * Display the specified resource.
 	 *
@@ -56,7 +68,10 @@ class JobPageController extends Controller
 	public function index()
 	{
 		// get all the job
-        $jobs = Job::all();
+		$logged_user_id = Auth::user()->id;
+		$user_info = UserInfo::find($logged_user_id);
+		$freelancer_info = FreelancerInfo::find($user_info->user_id);
+        $jobs = Job::where('freelancer_info_id', $freelancer_info->user_info_id)->get();
 
         // load the view and pass the jobs
         return View::make('job.index')
