@@ -40,9 +40,9 @@
 	</div>
 </div>
 <section id="feature-section">
-	<div class="container">
+	<div class="container text-center">
 		<div class="row topspace">
-			<div class="col-md-5 col-md-offset-1">
+			<div class="col-md-5 col-md-offset-1 col-sm-5 col-sm-offset-1 col-xs-12">
 				<p class="blenda35">
 					Get amazing results working<br>
 					with a great talent
@@ -50,7 +50,7 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-5 col-md-offset-7">
+			<div class="col-md-5 col-md-offset-7 col-sm-5 col-sm-offset-7 col-xs-12">
 				<p class="blenda35">
 					Get a list of skilled<br>
 					freelancers instantly
@@ -58,7 +58,7 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-5 col-md-offset-1">
+			<div class="col-md-5 col-md-offset-1 col-sm-5 col-sm-offset-1 col-xs-12">
 				<p class="blenda35">
 					Collaborate in a secure<br>
 					online workplace
@@ -85,7 +85,9 @@
 				<p>
 					Seseorang yang memiliki kemampuan spesial. Kebanyakan dari Freelancer memiliki spesialisasi dalam bidang web development, application development, game development, graphic design, video editing, ataupun hal-hal lain yang mungkin hanya mereka yang tahu. Mereka membutuhkan Seeker untuk tetap menjaga kemampuan tersebut dan mempertahankan kehidupan di bumi.
 				</p>
-				<button class="btn btn-default">Join Freelancer</button>
+				<form action="{{url('register')}}">
+	                <input type="submit" value="Join Freelancer" style="background-color: #F26151;">
+	            </form>
 			</div>
 			<div class="col-md-4 col-md-offset-2">
 				<p class="blenda35">
@@ -94,7 +96,9 @@
 				<p>
 					Seseorang yang harus menyelesaikan sebuah misi rahasia. Misi tersebut sangat sulit diselesaikan karena membutuhkan kemampuan spesial. Dikarenakan hal tersebut, Seeker akan mencari dan menemukan seorang Freelancer untuk menyelesaikan misi tersebut dan mempertahankan kehidupan di bumi.
 				</p>
-				<button class="btn btn-default">Join Seeker</button>
+				<form action="{{url('register')}}">
+	                <input type="submit" value="Join Seeker" style="background-color: #F26151;">
+	            </form>
 			</div>
 		</div>
 	</div>
@@ -105,12 +109,24 @@
 		<div class="row topspace">
 			<div class="col-md-12 text-center">
 				<p class="blenda45">
+					Featured Freelancer
+				</p>
+			</div>
+		</div>
+		<div class="row topspace">
+		</div>
+	</div>
+</section>
+<section id="quote-section">
+	<div class="container">
+		<div class="row topspace">
+			<div class="col-md-12 text-center">
+				<p class="blenda45">
 					Apa Kata Mereka?
 				</p>
 			</div>
 		</div>
 		<div class="row topspace">
-			
 		</div>
 	</div>
 </section>

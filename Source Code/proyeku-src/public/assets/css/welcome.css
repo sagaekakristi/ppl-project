@@ -35,12 +35,12 @@
 
 .blenda35 {
 	font-family: Blenda Script;
-	font-size: 35px;
+	font-size: 2.7vw;
 }
 
 .blenda45 {
 	font-family: Blenda Script;
-	font-size: 45px;
+	font-size: 4vw;
 }
 
 section .miring1,
@@ -76,4 +76,17 @@ section .miring2 {
 	z-index: 0;
 	border-width: 130px 1280px 30px 0;
 	border-color: transparent #D5EDF5 #D5EDF5 transparent;
+}
+
+input[type="submit"] {
+    height: 40px;
+    width: auto;
+    background-color: #1485A3;
+    color: aliceblue;
+    font-size: 15px;    
+    font-weight: bolder;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
 }
