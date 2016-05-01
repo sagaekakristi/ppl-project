@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 14, 2016 at 06:01 AM
+-- Generation Time: May 01, 2016 at 05:49 AM
 -- Server version: 5.6.16
 -- PHP Version: 5.5.9
 
@@ -64,7 +64,17 @@ CREATE TABLE IF NOT EXISTS `category` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `kategori` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
+
+--
+-- Dumping data for table `category`
+--
+
+INSERT INTO `category` (`id`, `kategori`) VALUES
+(1, 'Test Alpha Category'),
+(2, 'Test Beta Category'),
+(3, 'Test Charlie Category'),
+(4, 'Test Delta Category');
 
 -- --------------------------------------------------------
 
@@ -77,6 +87,14 @@ CREATE TABLE IF NOT EXISTS `freelancer_info` (
   `available` tinyint(1) NOT NULL,
   PRIMARY KEY (`user_info_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `freelancer_info`
+--
+
+INSERT INTO `freelancer_info` (`user_info_id`, `available`) VALUES
+(2, 1),
+(3, 0);
 
 -- --------------------------------------------------------
 
@@ -105,7 +123,18 @@ CREATE TABLE IF NOT EXISTS `job` (
   `upah_min` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `job_freelancer_info_id_foreign` (`freelancer_info_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=9 ;
+
+--
+-- Dumping data for table `job`
+--
+
+INSERT INTO `job` (`id`, `freelancer_info_id`, `judul`, `deskripsi`, `upah_max`, `upah_min`) VALUES
+(1, 2, 'First Admin Test Job', 'lorem ipsum dolor. this is an updated admin job test instance', 502, 252),
+(2, 2, 'Admin Test Job Version 2', 'lorem ipsum dolor. this is second admin job test instance', 1000, 250),
+(4, 2, 'Proyeku Software Engineer Job', 'Proyeku Software Engineer Job Desc', 200, 100),
+(7, 2, 'Proyeku Data Scientist', 'machine learning, data mining', 5000000, 2000000),
+(8, 3, 'Job from the moon', 'go to the moon', 200, 10);
 
 -- --------------------------------------------------------
 
@@ -120,7 +149,15 @@ CREATE TABLE IF NOT EXISTS `job_category` (
   PRIMARY KEY (`id`),
   KEY `job_category_job_id_foreign` (`job_id`),
   KEY `job_category_category_id_foreign` (`category_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `job_category`
+--
+
+INSERT INTO `job_category` (`id`, `job_id`, `category_id`) VALUES
+(1, 1, 2),
+(2, 1, 3);
 
 -- --------------------------------------------------------
 
@@ -181,7 +218,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(2, 'Administrator', 'admin@proyeku.id', '$2y$10$.Prn3goHu7j6p3DZYSLB0.UAYTv8MpnrYOtbATWUzEtNOXhGwmD56', '8Lwivm5jNn9MlZv7b9BRHUjuciDPO1gLwihyU852Fo8rYTlixKl6cNR4lMhw', '2016-04-13 10:04:36', '2016-04-13 20:58:02'),
+(2, 'Administrator', 'admin@proyeku.id', '$2y$10$.Prn3goHu7j6p3DZYSLB0.UAYTv8MpnrYOtbATWUzEtNOXhGwmD56', 'daJ9LVG06MCOEjmOcX9fPQT8ewGBHP5VYtXik9MoRXsY8d366y01hFWDxo4O', '2016-04-13 10:04:36', '2016-04-30 20:47:55'),
 (3, 'Alpha', 'alpha@alpha.com', '$2y$10$lf8yeZlaeDjZAhqICCtbH.pCSriMVuPF18ANblLlH7dSeBLyLnnTS', 'HN4Zs5ab4hIRRktcvsnyvlBH1pcLIiHAtj50QteUeELQOdjFpYJFMhhWrNfY', '2016-04-13 18:31:25', '2016-04-13 18:31:27'),
 (4, 'Beta', 'beta@beta.com', '$2y$10$GAOd4I0JnILzKxHWlC.SUun3tL7otgJ0SYdJ6B7sCuj4e4LxO7nJO', 'yL5o6SvTifhcCT1wLcoW4ttYgsElZwVFex7j58ryMGRwvI68dlylSe4eriuh', '2016-04-13 18:31:39', '2016-04-13 18:31:42'),
 (5, 'Charlie', 'charlie@charlie.com', '$2y$10$euki6q5VF.uP99PN5ppBbeQxVoxNuQcmE0oicVs/bO0UTqShbBuA2', 'KqDmgjQ0ZW2Xs2iQ7slu0p2OSMcvA6kU44CTPY49Rmb3autIzqE5uFR6lOsu', '2016-04-13 18:31:57', '2016-04-13 18:32:00');
@@ -218,8 +255,8 @@ INSERT INTO `user_info` (`user_id`, `tanggal_lahir`, `alamat`, `jenis_kelamin`) 
 -- Constraints for table `accepted_job`
 --
 ALTER TABLE `accepted_job`
-  ADD CONSTRAINT `accepted_job_seeker_id_foreign` FOREIGN KEY (`seeker_id`) REFERENCES `user_info` (`user_id`),
-  ADD CONSTRAINT `accepted_job_job_id_foreign` FOREIGN KEY (`job_id`) REFERENCES `job` (`id`);
+  ADD CONSTRAINT `accepted_job_job_id_foreign` FOREIGN KEY (`job_id`) REFERENCES `job` (`id`),
+  ADD CONSTRAINT `accepted_job_seeker_id_foreign` FOREIGN KEY (`seeker_id`) REFERENCES `user_info` (`user_id`);
 
 --
 -- Constraints for table `accepted_job_links`

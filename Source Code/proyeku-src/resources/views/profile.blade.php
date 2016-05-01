@@ -7,8 +7,8 @@
 @stop
 
 @section('content')
-<!-- Login Box -->
 
+<!-- Login Box -->
 <div class="container" id="body">
 	<div>
 		<img src="{{url('/assets/pictures/profile-default-icon.png')}}">

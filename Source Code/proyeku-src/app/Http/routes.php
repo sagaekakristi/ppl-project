@@ -17,8 +17,11 @@ Route::group(['middleware' => ['web']], function () {
         return view('welcome');
     });
 
-    Route::resource('/profile', 'ProfilePageController', ['only' => ['index']]);
+    Route::resource('/profile', 'ProfilePageController', ['only' => ['index']]);    
+});
 
+Route::group(['middleware' => ['web']], function () {
+    Route::resource('/job', 'JobPageController');
 });
 
 Route::group(['middleware' => 'web'], function () {
@@ -26,3 +29,12 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::get('/home', 'HomeController@index');
 });
+
+Route::get('/searchredirect', function(){
+	$search = urlencode(e(Input::get('search')));
+	$route = "search/$search";
+	
+	return redirect($route);
+});
+
+Route::get('search/{search}', 'SearchController@search');

@@ -50,7 +50,29 @@ tambah di /app/routes.php
 	ex: Route::resource('/profile', 'ProfilePageController', ['only' => ['index']]);
 ubah controller nya. tambah public function index() misalkan
 
+-- Membuat fitur Job Pages
+membuat controller JobPageController
+menambah route: /job/{job_id} yang di handle oleh JobPageController@showJobPage
+membuat job.blade.php untuk template dasar
+menambah fungsi showJobPage($job_id) pada JobPageController
+enkapsulasi data yang diperlukan sebaga dictionary array $data dalam controller
+render view dan passing $data dengan return View::make('job')->with('data', $data);
+menampilkan info (simple print) pada job.blade.php dengan {{}} dan foreach
 
+-- Revisi fitur Job Pages: CRUD
+mengubah format JobPageController menjadi 'resource'
+mengubah routing untuk job menjadi 'resource'
+merevisi isi method JobPageController: index, show, create, store, edit, update, destroy
+merevisi view menjadi terpusat pada folder /resources/views/job 
+	dan berisi 4 file .blade.php baru: create, edit, index, show
+menambah constructor controller untuk me-assign middleware auth
+	agar user harus login sebelum bisa melihat job
+update sql: berisi seed row2 yang dapat dipakai sebagai percobaan
+mengubah group job pada routing (minor update)
+Refrensi: 
+	Tutorial CRUD: https://scotch.io/tutorials/simple-laravel-crud-with-resource-controllers
+	Solusi penggunaan auth middleware dalam controller: http://stackoverflow.com/questions/28729228/laravel-5-route-resources-middleware
+	Doc resource controller: https://laravel.com/docs/5.2/controllers
 
 ===== Catatan Tambahan =====
 
