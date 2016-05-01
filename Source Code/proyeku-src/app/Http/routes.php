@@ -17,8 +17,7 @@ Route::group(['middleware' => ['web']], function () {
         return view('welcome');
     });
 
-    Route::resource('/profile', 'ProfilePageController', ['only' => ['index']]);
-    
+    Route::resource('/profile', 'ProfilePageController', ['only' => ['index']]);    
 });
 
 Route::group(['middleware' => ['web']], function () {
