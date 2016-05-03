@@ -18,6 +18,9 @@
             <div class="jumbotron">
                 <div class="row">
                     <div class="col-md-4">
+                        <div>
+                            <img width="125" height="125" class="searchPic" src="{{url($job->profile_picture_link)}}">
+                        </div>
                         <div class="star-rating">
                             <div class="star-rating__wrap">
                                 <input class="star-rating__input" id="star-rating-5" type="radio" name="rating" value="5">
