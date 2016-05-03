@@ -38,7 +38,7 @@
 					@if (Auth::guest())
 					<li><a href="{{ url('/') }}" style="color: #D5EDF5;">Get Started</a></li>
 					<li><a href="{{ url('/login') }}" style="color: #D5EDF5;"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</a></li>
-					@elseif (Auth::user()->name == "Administrator")
+					@elseif (Auth::user()->id == 2)
 					<li><a href="{{ url('/logout') }}" style="background-color: #1485A3; color: #D5EDF5">Logout</a></li>
 					<li><a href="{{url('/admin/manage/user')}}" style="color: #D5EDF5;">Manage User</a></li>
 					<li><a href="{{url('/admin/manage/job')}}" style="color: #D5EDF5;">Manage Job</a></li>
