@@ -1,0 +1,31 @@
+@import url(https://fonts.googleapis.com/css?family=Titillium+Web);
+
+@font-face { 
+	font-family: Blenda Script; 
+	src: url('../font/Blenda Script.otf'); 
+}
+
+#body {
+	margin-top: 160px;
+	margin-bottom: 20px;
+	color: #2c3e50;
+}
+
+th {
+	color: white;
+	background-color: #1485A3;
+	border: 2px;
+}
+
+.admin-head {
+	text-align: center;
+}
+
+tr {
+	height: 40px;
+	background-color: #8EC4D4;
+}
+
+.icon {
+	width: 50px;
+}

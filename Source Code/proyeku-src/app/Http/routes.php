@@ -24,6 +24,13 @@ Route::group(['middleware' => ['web']], function () {
     Route::resource('/job', 'JobPageController');
 });
 
+Route::group(['middleware' => ['web']], function () {
+
+    Route::resource('/admin/manage/user', 'AdminUserController');
+    Route::resource('/admin/manage/job', 'AdminJobController');
+
+});
+
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
 
