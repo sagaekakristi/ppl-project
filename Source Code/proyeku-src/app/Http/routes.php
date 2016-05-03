@@ -17,9 +17,18 @@ Route::group(['middleware' => ['web']], function () {
         return view('welcome');
     });
 
-    Route::get('/admin', 'AdminController@index');
+    //Route::get('/admin', 'AdminController@index');
+    //Route::get('/admin/{id}', 'AdminController@destroy{id}');
 
     Route::resource('/profile', 'ProfilePageController', ['only' => ['index']]);
+
+});
+
+Route::group(['middleware' => ['web']], function () {
+
+    //Route::get('/admin', 'AdminController@index');
+    Route::resource('/admin/manage/user', 'AdminUserController');
+    Route::resource('/admin/manage/job', 'AdminJobController');
 
 });
 

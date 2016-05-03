@@ -40,8 +40,8 @@
 					<li><a href="{{ url('/login') }}" style="color: #D5EDF5;"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</a></li>
 					@elseif (Auth::user()->id == 1)
 					<li><a href="{{ url('/logout') }}" style="background-color: #1485A3; color: #D5EDF5">Logout</a></li>
-					<li><a href="{{url('/admin')}}" style="color: #D5EDF5;">Manage User</a></li>
-					<li><a href="{{url('/manage/job')}}" style="color: #D5EDF5;">Manage Job</a></li>
+					<li><a href="{{url('/admin/manage/user')}}" style="color: #D5EDF5;">Manage User</a></li>
+					<li><a href="{{url('/admin/manage/job')}}" style="color: #D5EDF5;">Manage Job</a></li>
 					@else
 					<li><a href="{{url('/profile')}}" style="color: #D5EDF5;">My Profile</a></li>
 					<li><a href="#" style="color: #D5EDF5;">Open a Job</a></li>
