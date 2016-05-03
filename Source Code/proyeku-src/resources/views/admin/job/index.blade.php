@@ -17,7 +17,7 @@
 			</div>
 			<table class="table table-hover table-condensed">
 				<tr>
-					<th class="admin-head">ID</th>
+					<th class="admin-head">Job ID</th>
 					<th class="admin-head">User ID</th>
 					<th class="admin-head">Judul</th>
 					<th class="admin-head">Deskripsi</th>
