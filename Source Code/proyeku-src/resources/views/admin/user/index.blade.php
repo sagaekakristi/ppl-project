@@ -17,6 +17,7 @@
 			</div>
 			<table class="table table-hover table-condensed">
 				<tr>
+					<th class="admin-head">ID</th>
 					<th class="admin-head">Name</th>
 					<th class="admin-head">Email</th>
 					<th class="admin-head"></th>
@@ -24,6 +25,7 @@
 				</tr>
 				@foreach ($users as $user)
 				<tr>
+					<td><a href="/admin/manage/user/{{ $user->id }}">{{ $user->id }}</a></td>
 					<td><a href="/admin/manage/user/{{ $user->id }}">{{ $user->name }}</a></td>
 					<td><a href="/admin/manage/user/{{ $user->id }}">{{ $user->email }}</a></td>
 					<td class="icon"><a href="/admin/manage/user/{{ $user->id }}/edit" class="btn btn-info pull-left" style="margin-right: 3px;">Edit</a></td>
