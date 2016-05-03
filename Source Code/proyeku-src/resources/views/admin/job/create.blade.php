@@ -37,7 +37,7 @@
 
 		    <div class="form-group">
 		        {{ Form::label('upah_min', 'Upah Minimum') }}
-		        {{ Form::tect('upah_min', Input::old('upah_min'), array('class' => 'form-control')) }}
+		        {{ Form::text('upah_min', Input::old('upah_min'), array('class' => 'form-control')) }}
 		    </div>
 
 		    {{ Form::submit('Add job', array('class' => 'btn btn-success')) }}
