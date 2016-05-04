@@ -16,10 +16,10 @@
 			<table class="table">
 				<tr>
 					<td>
-						Name
+						User ID
 					</td>
 					<td>
-						{{$user->name}}
+						{{$user->id}}
 					</td>
 				</tr>
 				<tr>

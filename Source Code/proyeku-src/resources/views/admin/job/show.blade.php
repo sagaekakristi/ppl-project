@@ -16,18 +16,18 @@
 			<table class="table">
 				<tr>
 					<td>
-						User ID
+						Job ID
 					</td>
 					<td>
-						{{$job->freelancer_info_id}}
+						{{$job->id}}
 					</td>
 				</tr>
 				<tr>
 					<td>
-						Judul
+						Freelancer
 					</td>
 					<td>
-						{{$job->judul}}
+						{{$user->name}}
 					</td>
 				</tr>
 				<tr>

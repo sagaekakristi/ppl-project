@@ -9,6 +9,7 @@ use Input;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests;
 use App\Job;
+use App\User;
 
 class AdminJobController extends Controller
 {
@@ -21,8 +22,11 @@ class AdminJobController extends Controller
     {
         //
         $jobs = Job::all();
+        $users = User::all();
+
         return View::make('admin.job.index')
-            ->with('jobs', $jobs);
+            ->with('jobs', $jobs)
+            ->with('users', $users);
     }
 
     /**
@@ -65,9 +69,11 @@ class AdminJobController extends Controller
     {
         //
         $job = Job::find($id);
+        $user = User::find($job->freelancer_info_id);
         
         return View::make('admin.job.show')
-            ->with('job', $job);
+            ->with('job', $job)
+            ->with('user', $user);
     }
 
     /**

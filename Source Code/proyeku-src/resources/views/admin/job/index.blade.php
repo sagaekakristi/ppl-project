@@ -18,7 +18,7 @@
 			<table class="table table-hover table-condensed">
 				<tr>
 					<th class="admin-head">Job ID</th>
-					<th class="admin-head">User ID</th>
+					<th class="admin-head">Freelancer</th>
 					<th class="admin-head">Judul</th>
 					<th class="admin-head">Deskripsi</th>
 					<th class="admin-head">Upah Max</th>
@@ -26,10 +26,11 @@
 					<th class="admin-head"></th>
 					<th class="admin-head"></th>
 				</tr>
+				@foreach ($users as $user)
 				@foreach ($jobs as $job)
 				<tr>
 					<td><a href="/admin/manage/job/{{ $job->id }}">{{ $job->id }}</a></td>
-					<td><a href="/admin/manage/job/{{ $job->id }}">{{ $job->freelancer_info_id }}</a></td>
+					<td><a href="/admin/manage/job/{{ $job->id }}">{{ $user->name }}</a></td>
 					<td><a href="/admin/manage/job/{{ $job->id }}">{{ $job->judul }}</a></td>
 					<td><a href="/admin/manage/job/{{ $job->id }}">{{ $job->deskripsi }}</a></td>
 					<td><a href="/admin/manage/job/{{ $job->id }}">{{ $job->upah_max }}</a></td>
@@ -39,6 +40,7 @@
                         {{ Form::submit('Delete', ['class' => 'btn btn-danger'])}}
                         {{ Form::close() }}</td>
 				</tr>
+				@endforeach
 				@endforeach
 			</table>
 		</div>
