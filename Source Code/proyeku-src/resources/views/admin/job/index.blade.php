@@ -26,11 +26,14 @@
 					<th class="admin-head"></th>
 					<th class="admin-head"></th>
 				</tr>
-				@foreach ($users as $user)
 				@foreach ($jobs as $job)
 				<tr>
 					<td><a href="/admin/manage/job/{{ $job->id }}">{{ $job->id }}</a></td>
-					<td><a href="/admin/manage/job/{{ $job->id }}">{{ $user->name }}</a></td>
+					@foreach ($users as $user)
+						@if($user->id == $job->freelancer_info_id)
+						<td><a href="/admin/manage/job/{{ $job->id }}">{{ $user->name }}</a></td>
+						@endif
+					@endforeach
 					<td><a href="/admin/manage/job/{{ $job->id }}">{{ $job->judul }}</a></td>
 					<td><a href="/admin/manage/job/{{ $job->id }}">{{ $job->deskripsi }}</a></td>
 					<td><a href="/admin/manage/job/{{ $job->id }}">{{ $job->upah_max }}</a></td>
@@ -40,7 +43,6 @@
                         {{ Form::submit('Delete', ['class' => 'btn btn-danger'])}}
                         {{ Form::close() }}</td>
 				</tr>
-				@endforeach
 				@endforeach
 			</table>
 		</div>
