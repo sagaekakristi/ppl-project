@@ -17,7 +17,10 @@ class SearchController extends Controller{
                     -> join('user_info', 'user_info.user_id', '=', 'users.id')
                     -> select('users.name', 'user_info.alamat', 'job.judul', 'job.deskripsi', 'job.upah_max', 'job.upah_min', 'job.id', 'user_info.profile_picture_link')
                     -> where('judul', 'LIKE', '%'.$search.'%')
-                    ->  paginate(2);
+                    -> where('user_info.alamat', 'LIKE', '%'.$location.'%')
+                    -> where('job.upah_max', '>=', $upah_max)
+                    -> where('job.upah_min', '>=', $upah_min)
+                    -> paginate(2);
 
         if(count($jobs)==0){
         	return View('search')
