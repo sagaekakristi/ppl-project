@@ -45,6 +45,7 @@
 				</tr>
 				@endforeach
 			</table>
+			<div class="pagination"> {{ $jobs->links() }} </div>
 		</div>
 	</div>
 	@stop

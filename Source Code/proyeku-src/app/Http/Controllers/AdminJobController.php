@@ -21,7 +21,7 @@ class AdminJobController extends Controller
     public function index()
     {
         //
-        $jobs = Job::all();
+        $jobs = Job::paginate(3);
         $users = User::all();
 
         return View::make('admin.job.index')
