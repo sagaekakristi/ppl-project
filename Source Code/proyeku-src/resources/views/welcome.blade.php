@@ -117,7 +117,7 @@
 		</div>
 	</div>
 </section>
-<section id="quote-section">
+<section id="testimonial-section">
 	<div class="container">
 		<div class="row topspace">
 			<div class="col-md-12 text-center">

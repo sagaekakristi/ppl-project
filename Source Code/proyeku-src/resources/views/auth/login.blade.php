@@ -78,6 +78,9 @@
             <form action="{{url('register')}}">
                 <input type="submit" value="Sign Up" style="background-color: #F26151;">
             </form>
+            <form action="{{url('fbred')}}">
+                <input type="submit" value="Login with Facebook" style="background-color: #F26151;">
+            </form>
         </div>
     </div>
 </div>

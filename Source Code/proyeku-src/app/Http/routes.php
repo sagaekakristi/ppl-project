@@ -17,7 +17,10 @@ Route::group(['middleware' => ['web']], function () {
         return view('welcome');
     });
 
-    Route::resource('/profile', 'ProfilePageController', ['only' => ['index']]);    
+    Route::resource('/profile', 'ProfilePageController', ['only' => ['index']]);
+
+    Route::get('/fbred', 'SocialAuthController@redirect');
+    Route::get('/callback', 'SocialAuthController@callback');
 });
 
 Route::group(['middleware' => ['web']], function () {
