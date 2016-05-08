@@ -8,7 +8,8 @@
 
 @section('content')
 <div class="container" id="body">
-
+{{$search}}<br>
+{{$kategori}}<br>
     <form class="col-md-6 col-md-offset-3" role="search" style="margin-bottom: 170px;" action="{{url('/searchredirect')}}">
         <div class="input-group">
             <input type="text" class="form-control" placeholder="Search" style="height: 40px;" name="search">
@@ -16,10 +17,55 @@
                 <button class="btn btn-default" type="submit" style="background-color: #F26151; color: white; height: 40px;"><strong>Cari Freelancer</strong></button>
             </div>
         </div>
+
+        <div>
+            <div class="row">
+              <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="katList">Kategori</label>
+                        <select class="form-control" id="katList" name="kategori">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>
+                    </div>
+              </div>
+              <div class="col-md-3">
+                  <div class="form-group">
+                      <label for="min">Upah Minimal</label>
+                      <select class="form-control" id="min" name="upah_min">
+                          <option>1</option>
+                          <option>2</option>
+                          <option>3</option>
+                          <option>4</option>
+                      </select>
+                  </div>
+              </div>
+              <div class="col-md-3">
+                  <div class="form-group">
+                      <label for="max">Upah Maximal</label>
+                      <select class="form-control" id="max" name="upah_max">
+                          <option>1</option>
+                          <option>2</option>
+                          <option>3</option>
+                          <option>4</option>
+                      </select>
+                  </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                    <label for="lok">Lokasi</label>
+                    <input type="text" class="form-control" placeholder="Lokasi.." style="height: 40px;" name="Lokasi" id="lok">
+              </div>
+              <div class="col-md-1">.col-md-4</div>
+            </div>
+        </div>
+
     </form>
 
-    
-    <hr class="hr"></hr>
     @if(isset($message))
     <div class="bg-warning" style='padding: 20px'>{{$message}}</div>
 

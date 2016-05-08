@@ -37,4 +37,18 @@ Route::get('/searchredirect', function(){
 	return redirect($route);
 });
 
-Route::get('search/{search}', 'SearchController@search');
+Route::get('search/{search}', 'SearchController@baseSearch');
+
+Route::get('/advsearchredirect', function(){
+    $search = urlencode(e(Input::get('search')));
+    $lokasi = urlencode(e(Input::get('lokasi')));
+    $kategori = urlencode(e(Input::get('kategori')));
+    $upah_max = urlencode(e(Input::get('upah_max')));
+    $upah_min = urlencode(e(Input::get('upah_min')));
+
+    $route = "search/$search&&$lokasi&&$kategori&&$upah_max&&$upah_min";
+
+    return redirect($route);
+});
+
+Route::get('search/{search}&&{lokasi}&&{kategori}&&{upah_max}&&{upah_min}', 'SearchController@search');
