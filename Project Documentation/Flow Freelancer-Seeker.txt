@@ -1,0 +1,10 @@
+Freelancer bikin job
+Seeker cari
+Seeker apply
+Freelancer liat list seeker request
+Freelance send message seeker
+Seeker send message freelancer
+loop sampe
+Freelancer accept
+Freelancer/Seeker nandain proyek selesai
+!Freelancer/Seeker oke proyek selesai - accepted jobs ganti status jadi finished
