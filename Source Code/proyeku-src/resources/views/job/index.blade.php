@@ -8,7 +8,39 @@
 @stop
 
 @section('content')
-<div class="container" style="color: #3D566E; margin-bottom: 20px;">
+
+<?php
+
+//Method agar upah mudah dibaca 
+function convertToCurrency($uang) {
+    $number = (string) $uang;
+    $numberLength = strlen($number);
+    $numberArray = array();
+    $currencyArray = array();
+    $currency = "";
+    for($i = 0; $i < $numberLength; $i++) {
+        array_push($numberArray, $number[$i]);
+    }
+
+    $j = $numberLength-1;
+    $k = $numberLength-1;
+    for($i = 0; $i <= $j; $i++) {
+        $currencyArray[$i] = $numberArray[$k];
+        $k--;
+    }
+
+    $count = 0;
+    for($i = 0; $i < sizeof($currencyArray); $i++) {
+        if(($count % 3 == 0) && ($count != 0)) {
+            $currency = $currency . ".";
+        }
+        $currency = $currency . $currencyArray[$i];
+        $count++;
+    }
+    return strrev($currency);
+}
+?>
+<div class="container">
     <h1 style="font-family: Titillium Web;">List Of Job</h1>
     <br>
     <table class="table">
@@ -23,8 +55,8 @@
         <tr>
             <td>{{ $value->judul }}</td>
             <td>{{ $value->deskripsi }}</td>
-            <td>{{ $value->upah_max }}</td>
-            <td>{{ $value->upah_min }}</td>
+            <td>Rp {{ convertToCurrency($value->upah_max) }}</td>
+            <td>Rp {{ convertToCurrency($value->upah_min) }}</td>
 
             <!-- we will also add show, edit, and delete buttons -->
             <td>

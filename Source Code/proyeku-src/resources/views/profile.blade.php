@@ -23,6 +23,37 @@ function categoryIdToName($id){
 }
 ?>
 
+<?php
+//Method agar upah mudah dibaca 
+function convertToCurrency($uang) {
+	$number = (string) $uang;
+	$numberLength = strlen($number);
+	$numberArray = array();
+	$currencyArray = array();
+	$currency = "";
+	for($i = 0; $i < $numberLength; $i++) {
+		array_push($numberArray, $number[$i]);
+	}
+
+	$j = $numberLength-1;
+	$k = $numberLength-1;
+	for($i = 0; $i <= $j; $i++) {
+		$currencyArray[$i] = $numberArray[$k];
+		$k--;
+	}
+
+	$count = 0;
+	for($i = 0; $i < sizeof($currencyArray); $i++) {
+		if(($count % 3 == 0) && ($count != 0)) {
+			$currency = $currency . ".";
+		}
+		$currency = $currency . $currencyArray[$i];
+		$count++;
+	}
+	return strrev($currency);
+}
+?>
+
 <div class="container-fluid" id="body">
 	<div class="col-md-12">
 		<div class="col-md-6">
@@ -149,7 +180,7 @@ function categoryIdToName($id){
 													Upah
 												</td>
 												<td>
-													: Rp {{ $list['upah_min'] }} - Rp {{ $list['upah_max'] }}
+													: Rp {{ convertToCurrency($list['upah_min']) }} - Rp {{ convertToCurrency($list['upah_max']) }}
 												</td>
 											</tr>
 										</table>

@@ -76,3 +76,7 @@ div h1 {
 .list {
 	background-color: white;
 }
+
+.form-group {
+	text-align: left;
+}
