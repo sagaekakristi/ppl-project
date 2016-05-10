@@ -53,16 +53,14 @@ function convertToCurrency($uang) {
         </tr>
         @foreach($jobs as $a_job => $value)
         <tr>
-            <td>{{ $value->judul }}</td>
-            <td>{{ $value->deskripsi }}</td>
-            <td>Rp {{ convertToCurrency($value->upah_max) }}</td>
-            <td>Rp {{ convertToCurrency($value->upah_min) }}</td>
+            <td><a href="{{ URL::to('job/' . $value->id) }}">{{ $value->judul }}</a></td>
+            <td><a href="{{ URL::to('job/' . $value->id) }}">{{ $value->deskripsi }}</a></td>
+            <td><a href="{{ URL::to('job/' . $value->id) }}">Rp {{ convertToCurrency($value->upah_max) }}</a></td>
+            <td><a href="{{ URL::to('job/' . $value->id) }}">Rp {{ convertToCurrency($value->upah_min) }}</a></td>
 
             <!-- we will also add show, edit, and delete buttons -->
             <td>
                 {{ Form::open(array('url' => 'job/' . $value->id, 'class' => '')) }}
-                <!-- show the job (uses the show method found at GET /job/{id} -->
-                <a class="btn btn-small btn-success" href="{{ URL::to('job/' . $value->id) }}">Show</a>
 
                 <!-- edit this job (uses the edit method found at GET /job/{id}/edit -->
                 <a class="btn btn-small btn-info" href="{{ URL::to('job/' . $value->id . '/edit') }}">Edit</a>

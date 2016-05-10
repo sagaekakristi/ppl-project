@@ -12,6 +12,10 @@ body {
 	margin-top: 110px;
 }
 
+button:focus { 
+	outline:0 !important; 
+}
+
 .navbar-default {
 	height: 110px;
 	background-color: #1485A3;
