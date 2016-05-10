@@ -1,0 +1,13 @@
+th {
+	color: white;
+	background-color: #1485A3;
+	border: 2px;
+}
+
+tr {
+	background-color: white;
+}
+
+tr td a {
+	color: #22313F;
+}

@@ -50,13 +50,13 @@ div h1 {
 	font-size: 20px;
 }
 
-.row .col-md-3 table {
+.row .col-md-6 table {
 	margin: 0 auto !important;
 	float: none !important;
 	background-color: white;
 }
 
-.table td, .table th{
+.table td, .table th {
 	border: none !important;
 }
 
