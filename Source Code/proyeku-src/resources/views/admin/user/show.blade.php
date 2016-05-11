@@ -57,6 +57,50 @@
 					</tr>
 				</table>
 			</div>
+		<h1>{{ $user->name }}</h1>
+		<div>
+			<table class="table">
+				<tr>
+					<td>
+						User ID
+					</td>
+					<td>
+						{{$user->id}}
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Email
+					</td>
+					<td>
+						{{$user->email}}
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Tgl lahir
+					</td>
+					<td>
+						{{$userinfo->tanggal_lahir}}
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Alamat
+					</td>
+					<td>
+						{{$userinfo->alamat}}
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Jenis kelamin
+					</td>
+					<td>	
+						{{$userinfo->jenis_kelamin}}
+					</td>
+				</tr>
+			</table>
 		</div>
 	</div>
 	@stop

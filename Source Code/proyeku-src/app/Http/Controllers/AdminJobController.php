@@ -8,10 +8,10 @@ use View;
 use Input;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests;
+use App\Job;
 use App\User;
-use App\UserInfo;
 
-class AdminUserController extends Controller
+class AdminJobController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,8 +21,11 @@ class AdminUserController extends Controller
     public function index()
     {
         //
-        $users = User::paginate(2);
-        return View::make('admin.user.index')
+        $jobs = Job::paginate(3);
+        $users = User::all();
+
+        return View::make('admin.job.index')
+            ->with('jobs', $jobs)
             ->with('users', $users);
     }
 
@@ -34,7 +37,7 @@ class AdminUserController extends Controller
     public function create()
     {
         //
-        return View::make('admin.user.create');
+        return View::make('admin.job.create');
     }
 
     /**
@@ -46,15 +49,14 @@ class AdminUserController extends Controller
     public function store(Request $request)
     {
         //
-        $user = new User;
+        $job = new Job;
 
-        $user->name     = Input::get('name');
-        $user->email    = Input::get('email');
-        $user->password = bcrypt(Input::get('password'));
-        
-        $user->save();
-
-        return Redirect::to('/admin/manage/user');
+        $job->id = Input::get('id');
+        $job->freelancer_id = Input::get('freelancer_id');
+        $job->judul = Input::get('judul');
+        $job->deskripsi = Input::get('deskripsi');
+        $job->upah_max = Input::get('upah_max');
+        $job->upah_min = Input::get('upah_min');
     }
 
     /**
@@ -66,12 +68,12 @@ class AdminUserController extends Controller
     public function show($id)
     {
         //
-        $user = User::find($id);
-        $userinfo = Userinfo::find($id);
-
-        return View::make('admin.user.show')
-            ->with('user', $user)
-            ->with('userinfo', $userinfo);
+        $job = Job::find($id);
+        $user = User::find($job->freelancer_info_id);
+        
+        return View::make('admin.job.show')
+            ->with('job', $job)
+            ->with('user', $user);
     }
 
     /**
@@ -83,10 +85,10 @@ class AdminUserController extends Controller
     public function edit($id)
     {
         //
-        $user = User::find($id);
+        $job = Job::find($id);
 
-        return View::make('admin.user.edit')
-            ->with('user',$user);
+        return View::make('admin.job.edit')
+            ->with('job',$job);
     }
 
     /**
@@ -99,14 +101,16 @@ class AdminUserController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $user = User::find($id);
+        $job = Job::find($id);
 
-        $user->name   = Input::get('name');
-        $user->email  = Input::get('email');
+        $job->judul = Input::get('judul');
+        $job->deskripsi = Input::get('deskripsi');
+        $job->upah_max = Input::get('upah_max');
+        $job->upah_min = Input::get('upah_min');
 
-        $user->save();
+        $job->save();
 
-        return Redirect::to('/admin/manage/user');
+        return Redirect::to('/admin/manage/job');
     }
 
     /**
@@ -118,8 +122,8 @@ class AdminUserController extends Controller
     public function destroy($id)
     {
         //
-        User::destroy($id);
+        Job::destroy($id);
 
-        return Redirect::to('/admin/manage/user');
+        return Redirect::to('/admin/manage/job');
     }
 }
