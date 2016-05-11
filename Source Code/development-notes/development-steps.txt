@@ -1,6 +1,9 @@
 Catatan Penting Step Development Backend Proyeku
 Catatan berikut dibuat untuk merekam aktivitas penting dan catatan tambahan (seperti code snippet) dalam proses development.
 
+-- Untuk refresh database ke file2 migration yg ada di folder database/migrations
+php artisan migrate:refresh
+
 - Step by Step:
 -- Creating projects source code:
 composer create-project --prefer-dist laravel/laravel proyeku-src	[log: log001.txt]
@@ -104,7 +107,7 @@ Schema::create('namaTable', function($newTable){
 });
 contoh: isi down dengan:
 Schema::drop('namaTable');
-Untuk migrate: php artisan migrate
+Untuk migrate: php artisan migrate  // kalo gabisa migrate, coba jalanin: php artisan config:clear
 Untuk rollback ke revisi sebelumnya: php artisan migrate:rollback
 Untuk kembali fresh di awal(rollback semuanya): php artisan migrate:reset
 
