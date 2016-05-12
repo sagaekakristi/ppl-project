@@ -4,6 +4,35 @@
 </head>
 
 <body>
+	<?php
+		function convertToCurrency($uang) {
+			$number = (string) $uang;
+			$numberLength = strlen($number);
+			$numberArray = array();
+			$currencyArray = array();
+			$currency = "";
+			for($i = 0; $i < $numberLength; $i++) {
+				array_push($numberArray, $number[$i]);
+			}
+
+			$j = $numberLength-1;
+			$k = $numberLength-1;
+			for($i = 0; $i <= $j; $i++) {
+				$currencyArray[$i] = $numberArray[$k];
+				$k--;
+			}
+
+			$count = 0;
+			for($i = 0; $i < sizeof($currencyArray); $i++) {
+				if(($count % 3 == 0) && ($count != 0)) {
+					$currency = $currency . ".";
+				}
+				$currency = $currency . $currencyArray[$i];
+				$count++;
+			}
+			return strrev($currency);
+		}
+	?>
 	@extends('layouts.header')
 	@section('header')
 	@parent
@@ -36,8 +65,8 @@
 					@endforeach
 					<td><a href="/admin/manage/job/{{ $job->id }}">{{ $job->judul }}</a></td>
 					<td><a href="/admin/manage/job/{{ $job->id }}">{{ $job->deskripsi }}</a></td>
-					<td><a href="/admin/manage/job/{{ $job->id }}">{{ $job->upah_max }}</a></td>
-					<td><a href="/admin/manage/job/{{ $job->id }}">{{ $job->upah_min }}</a></td>
+					<td><a href="/admin/manage/job/{{ $job->id }}">Rp {{ convertToCurrency($job->upah_max) }}</a></td>
+					<td><a href="/admin/manage/job/{{ $job->id }}">Rp {{ convertToCurrency($job->upah_min) }}</a></td>
 					<td class="icon"><a href="/admin/manage/job/{{ $job->id }}/edit" class="btn btn-info pull-left" style="margin-right: 3px;">Edit</a></td>
 					<td class="icon">{{ Form::open(['url' => '/admin/manage/job/' . $job->id, 'method' => 'DELETE']) }}
                         {{ Form::submit('Delete', ['class' => 'btn btn-danger'])}}

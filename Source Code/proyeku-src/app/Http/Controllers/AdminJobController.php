@@ -57,6 +57,10 @@ class AdminJobController extends Controller
         $job->deskripsi = Input::get('deskripsi');
         $job->upah_max = Input::get('upah_max');
         $job->upah_min = Input::get('upah_min');
+
+        $job->save();
+
+        return Redirect::to('/admin/manage/job');
     }
 
     /**
