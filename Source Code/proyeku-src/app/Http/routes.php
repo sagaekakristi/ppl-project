@@ -17,7 +17,7 @@ Route::group(['middleware' => ['web']], function () {
         return view('welcome');
     });
 
-    Route::resource('/profile', 'ProfilePageController', ['only' => ['index']]);
+    //Route::resource('/profile', 'ProfilePageController', ['only' => ['index', 'edit', 'update']);
 
     Route::get('/fbred', 'SocialAuthController@redirect');
     Route::get('/callback', 'SocialAuthController@callback');
@@ -28,10 +28,17 @@ Route::group(['middleware' => ['web']], function () {
 });
 
 Route::group(['middleware' => ['web']], function () {
+    Route::get('/profile', 'ProfilePageController@index');
+    Route::get('/profile/edit/general', 'ProfilePageController@editGeneral');
+    Route::get('/profile/edit/info', 'ProfilePageController@editInfo');
+    Route::get('/profile/update/general', 'ProfilePageController@updateGeneral');
+    Route::get('/profile/update/info', 'ProfilePageController@updateInfo');
+    //Route::get('/profile/update/info', ['as' => 'info.update', 'uses' => 'ProfilePageController@updateInfo']);
+});
 
+Route::group(['middleware' => ['web']], function () {
     Route::resource('/admin/manage/user', 'AdminUserController');
     Route::resource('/admin/manage/job', 'AdminJobController');
-
 });
 
 Route::group(['middleware' => 'web'], function () {
