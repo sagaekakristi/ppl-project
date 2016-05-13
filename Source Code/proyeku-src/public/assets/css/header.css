@@ -40,7 +40,7 @@ button:focus {
 	text-decoration: none;
 }
 
-a:hover, a:after {
+li a:hover, a:after {
 	font-weight: bolder;
 	text-decoration: none;
 }
