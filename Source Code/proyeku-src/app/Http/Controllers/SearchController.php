@@ -26,6 +26,9 @@ class SearchController extends Controller{
             $upah_min = intval($upah_min);
         //dump($upah_min);
 
+        $kategori = $request->category;
+        //dump($kategori);
+
         $catList = DB::table('category')
                         -> select('kategori')
                         -> get();
@@ -34,12 +37,16 @@ class SearchController extends Controller{
         $jobs = DB::table('job')
                     -> join('users', 'users.id', '=', 'job.freelancer_info_id')
                     -> join('user_info', 'user_info.user_id', '=', 'users.id')
+                    -> join('job_category', 'job_category.job_id', '=', 'job.id')
+                    -> join('category', 'category.id', '=', 'job_category.category_id')
                     -> select('users.name', 'user_info.alamat', 'job.judul', 'job.deskripsi', 'job.upah_max', 'job.upah_min', 'job.id', 'user_info.profile_picture_link')
                     -> where('judul', 'LIKE', '%'.$search.'%')
                     -> where('user_info.alamat', 'LIKE', '%'.$location.'%')
                     -> where('job.upah_max', '<=', $upah_max)
                     -> where('job.upah_min', '>=', $upah_min)
+                    -> where('category.kategori', 'LIKE', '%'.$kategori.'%')
                     -> paginate(2);
+                    //->get();
         //dd($jobs);
 
         if(count($jobs)==0){
