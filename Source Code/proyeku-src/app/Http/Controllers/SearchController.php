@@ -1,19 +1,35 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use DB;
-
 class SearchController extends Controller{
+    public function search(Request $request){
 
-	public function search($search, $category, $location, $upah_max, $upah_min){
+        $search = $request->search;
+        //dump($search);
 
-        $search = urldecode($search);
+        $location = $request->location;
+        //dump($location);
+
+        $upah_max = $request->upah_max;
+        if(is_null($upah_max) || $upah_max===""){
+            $upah_max = PHP_INT_MAX;
+        } else 
+            $upah_max = intval($upah_max);
+        //dump($upah_max);
+
+        $upah_min = $request->upah_min;
+        if(is_null($upah_min)){
+            $upah_min = 0;
+        } else 
+            $upah_min = intval($upah_min);
+        //dump($upah_min);
 
         $catList = DB::table('category')
-                        -> select('kategori');
+                        -> select('kategori')
+                        -> get();
+        //dump($catList);
 
         $jobs = DB::table('job')
                     -> join('users', 'users.id', '=', 'job.freelancer_info_id')
@@ -24,27 +40,17 @@ class SearchController extends Controller{
                     -> where('job.upah_max', '<=', $upah_max)
                     -> where('job.upah_min', '>=', $upah_min)
                     -> paginate(2);
+        //dd($jobs);
 
         if(count($jobs)==0){
-        	return View('search')
-        	->with('message','unexist')
-        	->with('search', $search);
+            return View('search')
+            ->with('message','unexist')
+            ->with('search', $search);
         } else{
-        	return View('search')
-        	->with('jobs', $jobs)
-        	->with('search', $search)
-            ->with('kategori', $category)
-            ->with('location', $location)
-            ->with('upah_max', $upah_max)
-            ->with('upah_min', $upah_min)
+            return View('search')
+            ->with('jobs', $jobs)
+            ->with('search', $search)
             ->with('catList', $catList);
         }
     }
-
-    public function baseSearch($search){
-
-        return $this->search($search, "", "", PHP_INT_MAX, 0);
-
-    }
-
 }

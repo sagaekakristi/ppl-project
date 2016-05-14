@@ -13,7 +13,7 @@
         <div class="col-md-12" style="margin-top: 140px;">
             <p id="moto">Synergize efficiently!</p>
         </div>
-        <form class="col-md-6 col-md-offset-3" role="search" style="margin-bottom: 170px;" action="{{url('/searchredirect')}}">
+        <form class="col-md-6 col-md-offset-3" role="search" style="margin-bottom: 170px;" action="{{url('/search')}}">
             <div class="input-group">
                 <input type="text" class="form-control" placeholder="Search" style="height: 40px;" name="search">
                 <div class="input-group-btn">

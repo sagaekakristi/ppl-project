@@ -8,9 +8,7 @@
 
 @section('content')
 <div class="container" id="body">
-{{$search}}<br>
-{{$kategori}}<br>
-    <form class="col-md-6 col-md-offset-3" role="search" style="margin-bottom: 170px;" action="{{url('/searchredirect')}}">
+    <form class="col-md-6 col-md-offset-3" role="search" style="margin-bottom: 170px;" action="{{url('/search')}}">
         <div class="input-group">
             <input type="text" class="form-control" placeholder="Search" style="height: 40px;" name="search">
             <div class="input-group-btn">
@@ -23,44 +21,38 @@
               <div class="col-md-6">
                     <div class="form-group">
                         <label for="katList">Kategori</label>
-                        <select class="form-control" id="katList" name="kategori">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
+                        <select class="form-control" id="katList" name="category">
+                            <option value="" selected="selected"></option>
+                            @foreach ($catList as $cat)
+                            <option value="{{$cat->kategori}}">{{$cat->kategori}}</option>
+                            @endforeach
                         </select>
                     </div>
               </div>
               <div class="col-md-3">
-                  <div class="form-group">
-                      <label for="min">Upah Minimal</label>
-                      <select class="form-control" id="min" name="upah_min">
-                          <option>1</option>
-                          <option>2</option>
-                          <option>3</option>
-                          <option>4</option>
-                      </select>
-                  </div>
+                    <div class="input-group">
+                        <label for="upah_min">Upah Minimal</label>
+                        <input type="text" class="form-control" style="height: 40px;" name="upah_min" id="upah_min" value="">
+                    </div>
               </div>
               <div class="col-md-3">
-                  <div class="form-group">
-                      <label for="max">Upah Maximal</label>
-                      <select class="form-control" id="max" name="upah_max">
-                          <option>1</option>
-                          <option>2</option>
-                          <option>3</option>
-                          <option>4</option>
-                      </select>
-                  </div>
+                    <div class="input-group">
+                        <label for="upah_max">Upah Maksimal</label>
+                        <input type="text" class="form-control" style="height: 40px;" name="upah_max" id="upah_max" value="">
+                    </div>
               </div>
             </div>
 
             <div class="row">
-              <div class="col-md-6">
+                <div class="col-md-6">
                     <label for="lok">Lokasi</label>
-                    <input type="text" class="form-control" placeholder="Lokasi.." style="height: 40px;" name="Lokasi" id="lok">
-              </div>
-              <div class="col-md-1">.col-md-4</div>
+                    <input type="text" class="form-control" placeholder="Lokasi.." style="height: 40px;" name="location" id="lok">
+                </div>
+                <div class="col-md-1">
+                    <div class="input-group-btn">
+                        <button class="btn btn-default" type="reset" style="background-color: #F26151; color: white; height: 40px;"><strong>Reset Field</strong></button>
+                    </div>
+                </div>
             </div>
         </div>
 
