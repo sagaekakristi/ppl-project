@@ -48,6 +48,17 @@
                     <label for="lok">Lokasi</label>
                     <input type="text" class="form-control" placeholder="Lokasi.." style="height: 40px;" name="location" id="lok">
                 </div>
+                <div class="col-md-6">
+                      <div class="form-group">
+                          <label for="order">Sort By</label>
+                          <select class="form-control" id="order" name="order">
+                              <option value="user_info.user_rating" selected="selected"></option>
+                              <option value="user_info.user_rating">Rating</option>
+                              <option value="users.created_at">Newest Freelancer</option>
+                              <option value="users.updated_at">Most Active Freelancer</option>
+                          </select>
+                      </div>
+                </div>
                 <div class="col-md-1">
                     <div class="input-group-btn">
                         <button class="btn btn-default" type="reset" style="background-color: #F26151; color: white; height: 40px;"><strong>Reset Field</strong></button>
