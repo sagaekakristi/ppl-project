@@ -20,6 +20,9 @@
 					<th class="admin-head">ID</th>
 					<th class="admin-head">Name</th>
 					<th class="admin-head">Email</th>
+					<th class="admin-head">Tanggal Lahir</th>
+					<th class="admin-head">Alamat</th>
+					<th class="admin-head">Jenis Kelamin</th>
 					<th class="admin-head"></th>
 					<th class="admin-head"></th>
 				</tr>
@@ -28,6 +31,13 @@
 					<td><a href="/admin/manage/user/{{ $user->id }}">{{ $user->id }}</a></td>
 					<td><a href="/admin/manage/user/{{ $user->id }}">{{ $user->name }}</a></td>
 					<td><a href="/admin/manage/user/{{ $user->id }}">{{ $user->email }}</a></td>
+					@foreach ($userinfo as $infouser)
+						@if($user->id == $infouser->user_id)
+						<td><a href="/admin/manage/job/{{ $user->id }}">{{ $infouser->tanggal_lahir }}</a></td>
+						<td><a href="/admin/manage/job/{{ $user->id }}">{{ $infouser->alamat }}</a></td>
+						<td><a href="/admin/manage/job/{{ $user->id }}">{{ $infouser->jenis_kelamin }}</a></td>
+						@endif
+					@endforeach
 					<td class="icon"><a href="/admin/manage/user/{{ $user->id }}/edit" class="btn btn-info pull-left" style="margin-right: 3px;">Edit</a></td>
 					<td class="icon">{{ Form::open(['url' => '/admin/manage/user/' . $user->id, 'method' => 'DELETE']) }}
                         {{ Form::submit('Delete', ['class' => 'btn btn-danger'])}}

@@ -22,8 +22,26 @@
 				{{ Form::text('email', null, array('class' => 'form-control')) }}
 			</div>
 
+			{{ Form::model($userinfo, array('route' => array('admin.manage.user.update', $userinfo->user_id), 'method' => 'PUT')) }}
+
+			<div class="form-group">
+				{{ Form::label('tanggal_lahir', 'Tanggal Lahir') }}
+				{{ Form::text('tanggal_lahir', null, array('class' => 'form-control')) }}
+			</div>
+
+			<div class="form-group">
+				{{ Form::label('alamat', 'Alamat') }}
+				{{ Form::text('alamat', null, array('class' => 'form-control')) }}
+			</div>
+
+			<div class="form-group">
+				{{ Form::label('jenis_kelamin', 'Jenis Kelamin') }}
+				{{ Form::text('jenis_kelamin', null, array('class' => 'form-control')) }}
+			</div>
+
 			{{ Form::submit('Edit user', array('class' => 'btn btn-success')) }}
 
+			{{ Form::close() }}
 			{{ Form::close() }}
 		</div>
 	</div>

@@ -21,9 +21,11 @@ class AdminUserController extends Controller
     public function index()
     {
         //
-        $users = User::paginate(2);
+        $users = User::paginate(3);
+        $userinfo = UserInfo::all();
         return View::make('admin.user.index')
-            ->with('users', $users);
+            ->with('users', $users)
+            ->with('userinfo', $userinfo);
     }
 
     /**
@@ -51,8 +53,17 @@ class AdminUserController extends Controller
         $user->name     = Input::get('name');
         $user->email    = Input::get('email');
         $user->password = bcrypt(Input::get('password'));
-        
+
         $user->save();
+
+        $userinfo = new UserInfo;
+
+        $userinfo->user_id           = $user->id;
+        $userinfo->tanggal_lahir     = Input::get('tanggal_lahir');
+        $userinfo->alamat            = Input::get('alamat');
+        $userinfo->jenis_kelamin     = Input::get('jenis_kelamin');
+
+        $userinfo->save();
 
         return Redirect::to('/admin/manage/user');
     }
@@ -67,7 +78,7 @@ class AdminUserController extends Controller
     {
         //
         $user = User::find($id);
-        $userinfo = Userinfo::find($id);
+        $userinfo = UserInfo::find($id);
 
         return View::make('admin.user.show')
             ->with('user', $user)
@@ -84,9 +95,11 @@ class AdminUserController extends Controller
     {
         //
         $user = User::find($id);
+        $userinfo = UserInfo::find($id);
 
         return View::make('admin.user.edit')
-            ->with('user',$user);
+            ->with('user',$user)
+            ->with('userinfo', $userinfo);
     }
 
     /**
@@ -100,11 +113,17 @@ class AdminUserController extends Controller
     {
         //
         $user = User::find($id);
+        $userinfo = UserInfo::find($id);
 
         $user->name   = Input::get('name');
         $user->email  = Input::get('email');
 
+        $userinfo->tanggal_lahir = Input::get('tanggal_lahir');
+        $userinfo->alamat        = Input::get('alamat');
+        $userinfo->jenis_kelamin = Input::get('jenis_kelamin');
+
         $user->save();
+        $userinfo->save();
 
         return Redirect::to('/admin/manage/user');
     }

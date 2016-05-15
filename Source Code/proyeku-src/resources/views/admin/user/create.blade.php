@@ -27,6 +27,21 @@
 				{{ Form::password('password', array('class' => 'form-control')) }}
 			</div>
 
+			<div class="form-group">
+				{{ Form::label('tanggal_lahir', 'Tanggal Lahir') }}
+				{{ Form::text('tanggal_lahir', Input::old('tanggal_lahir'), array('class' => 'form-control')) }}
+			</div>
+
+			<div class="form-group">
+				{{ Form::label('alamat', 'Alamat') }}
+				{{ Form::text('alamat', Input::old('alamat'), array('class' => 'form-control')) }}
+			</div>
+
+			<div class="form-group">
+				{{ Form::label('jenis_kelamin', 'Jenis Kelamin') }}
+				{{ Form::text('jenis_kelamin', Input::old('jenis_kelamin'), array('class' => 'form-control')) }}
+			</div>
+
 			{{ Form::submit('Add user', array('class' => 'btn btn-success')) }}
 
 			{{ Form::close() }}
