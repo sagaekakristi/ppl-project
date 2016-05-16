@@ -12,13 +12,17 @@
 //Mengambil data pada tabel Job dengan id dari user yang sama
 $allJobOpen = App\Job::where('freelancer_info_id', $users->id)->get();
 
-function findAllCategoryByJobId($id){
+function findAllCategoryByJobId($id) {
 	return $jobCategory=App\JobCategory::where('job_id', $id)->get();
 }
 
+function getJobId($id) {
+	$job = App\Job::where('id', $id)->get()->first(); //ambil baris pertama dari tabel Job
+	return $job['id'];
+}
 
-function categoryIdToName($id){
-	$Category=App\Category::where('id', $id)->get()->first();
+function categoryIdToName($id) {
+	$Category = App\Category::where('id', $id)->get()->first();
 	return $Category['kategori'];
 }
 ?>
@@ -56,12 +60,12 @@ function convertToCurrency($uang) {
 
 <div class="container-fluid" id="body">
 	<div class="col-md-12">
-		<div class="col-md-6">
-			<div>
-				<img src="{{url('/assets/pictures/profile-default-icon.png')}}">
-			</div>
-			<div>
-				<h1>{{ $users->name }}</h1>
+		<div class="col-md-4"> 
+			<div class="col-md-8 col-md-offset-2"> 
+				<img src="{{url('/assets/pictures/profile-default-icon.png')}}" style="height: 200px; width: 210px;"> 
+			</div> 
+			<div class="col-md-8 col-md-offset-2" style="text-align: center;"> 
+				<h3>{{ $users->name }}</h3> 
 				<div class="star-rating">
 					<div class="star-rating__wrap">
 						<input class="star-rating__input" id="star-rating-5" type="radio" name="rating" value="5">
@@ -77,14 +81,14 @@ function convertToCurrency($uang) {
 					</div>
 				</div>
 				<div>
-					<h3>{{ $user_info->alamat }}</h3>
+					<h4>{{ $user_info->alamat }}</h4> 
 				</div>
 			</div>
 		</div>
 
 		<br>
 
-		<div class="col-md-6">
+		<div class="col-md-8">
 			<div class="col-md-12 headline">
 				<h1>Special Skills</h1>
 				<hr class="hr">
@@ -100,20 +104,20 @@ function convertToCurrency($uang) {
 					<?php $j = 1; ?>
 					<div class="col-md-12">
 						@foreach($allJobOpen as $list) 
-						<div class="col-md-6" style="margin-bottom: 10px;">
+						<div class="col-md-3" style="margin-bottom: 10px;"> 
 							<table class="table" style="text-align: center;">
 								<tr style="height: 100px;">
-									<td style="font-size: 25px;">
+									<td style="font-size: 18px;"> 
 										{{ $list['judul'] }}
 									</td>
 								</tr>
-								<tr style="height: 100px;">
-									<td>
+								<tr style="height: 120px; text-align: justify;"> 
+									<td style="font-size: 15px;"> 
 										{{ $list['deskripsi'] }}
 									</td>
 								</tr>
 								<tr style="height: 100px;">
-									<td>
+									<td style="font-size: 15px;"> 
 										Kategori:
 										<br>
 										<?php $category = findAllCategoryByJobId($list['id']); ?>
@@ -128,8 +132,8 @@ function convertToCurrency($uang) {
 								</tr>
 								<tr>
 									<td>
-										<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target=#<?php print $j; ?>>View Details</button>
-									</td>
+										<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target=#<?php echo $j; ?>>View Details</button> 
+									</td> 
 								</tr>
 							</table>
 						</div>
@@ -184,61 +188,20 @@ function convertToCurrency($uang) {
 												</td>
 											</tr>
 										</table>
+										<div> 
+											<?php $id = getJobId($list['id']); ?>
+											<a href="{{url('job/'.$id)}}" type="button" class="btn btn-danger btn-md">Pesan dan Kontak</a> 
+										</div>
 									</div>
 								</div>
 							</div>
+							<?php $j++; ?>
 						</div>
-						<?php $j++; ?>
-						{{--<div class="col-md-12 headline">
-						<h1>Projects</h1>
-						<hr class="hr">
-						<div class="row" style="text-align: center;">
-							@for ($i = 0; $i < 10; $i++)
-							<div class="col-md-3">
-								<table class="table" style="text-align: center; border-bottom: 5px solid #D5EDF5;">
-									<tr>
-										<td style="font-size: 25px;">
-											box {{$i}} Kategori
-										</td>
-									</tr>
-									<tr>
-										<td>
-											box {{$i}} As a $role
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<div class="star-rating">
-												<div class="star-rating__wrap">
-													<input class="star-rating__input" id="star-rating-5" type="radio" name="rating" value="5">
-													<label class="star-rating__ico fa fa-star-o fa-lg" for="star-rating-5"></label>
-													<input class="star-rating__input" id="star-rating-4" type="radio" name="rating" value="4">
-													<label class="star-rating__ico fa fa-star-o fa-lg" for="star-rating-4"></label>
-													<input class="star-rating__input" id="star-rating-3" type="radio" name="rating" value="3">
-													<label class="star-rating__ico fa fa-star-o fa-lg" for="star-rating-3"></label>
-													<input class="star-rating__input" id="star-rating-2" type="radio" name="rating" value="2">
-													<label class="star-rating__ico fa fa-star-o fa-lg" for="star-rating-2"></label>
-													<input class="star-rating__input" id="star-rating-1" type="radio" name="rating" value="1">
-													<label class="star-rating__ico fa fa-star-o fa-lg" for="star-rating-1"></label>
-												</div>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											Rating in integer
-										</td>
-									</tr>
-								</table>
-							</div>
-							@endfor
-						</div>
-					</div>--}}
-					@endforeach
+						@endforeach
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
 </div>
 @stop

@@ -27,6 +27,15 @@ Route::group(['middleware' => ['web']], function () {
     Route::resource('/job', 'JobPageController');
 });
 
+Route::group(['middleware' => ['web']], function () { 
+    Route::get('/profile', 'ProfilePageController@index'); 
+    Route::get('/profile/edit/general', 'ProfilePageController@editGeneral'); 
+    Route::get('/profile/edit/info', 'ProfilePageController@editInfo'); 
+    Route::get('/profile/update/general', 'ProfilePageController@updateGeneral'); 
+    Route::get('/profile/update/info', 'ProfilePageController@updateInfo'); 
+    //Route::get('/profile/update/info', ['as' => 'info.update', 'uses' => 'ProfilePageController@updateInfo']); 
+}); 
+
 Route::group(['middleware' => ['web']], function () {
 
     Route::resource('/admin/manage/user', 'AdminUserController');
