@@ -43,13 +43,13 @@ class ProfilePageController extends Controller
         ->with('user_info', $user_info)
         ->with('users', $users);
     }
-    public function editGeneral() 
+    public function editAccount() 
     { 
         $logged_user_id = Auth::user()->id; 
         $user_info = UserInfo::find($logged_user_id); 
         $user = user::find($user_info->user_id); 
 
-        return View::make('general') 
+        return View::make('account') 
         ->with('user_info', $user_info) 
         ->with('user', $user); 
     } 
@@ -65,7 +65,7 @@ class ProfilePageController extends Controller
         ->with('user', $user); 
     } 
 
-    public function updateGeneral()  
+    public function updateAccount()  
     { 
 
         $rules = array( 
@@ -77,7 +77,7 @@ class ProfilePageController extends Controller
         $validator = Validator::make(Input::all(), $rules); 
 
         if ($validator->fails()) { 
-            return Redirect::to('/profile/edit/general'); 
+            return Redirect::to('/profile/edit/account'); 
         } else { 
             $id = Auth::user()->id; 
 
@@ -91,7 +91,6 @@ class ProfilePageController extends Controller
             return Redirect::to('/profile'); 
         } 
     }
-
 
     public function updateInfo() 
     { 
