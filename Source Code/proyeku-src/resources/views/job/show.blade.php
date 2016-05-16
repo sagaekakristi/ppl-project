@@ -91,6 +91,21 @@ function convertToCurrency($uang) {
 				</td>
 			</tr>
 		</table>
+
+		@if(Auth::user() != null)
+			@if($show_request_button == true)
+				{{ Form::open(array('action'=>'JobRequestController@requestJob', 'method' => 'post')) }}
+				{{ Form::hidden('job_id', $job_id) }}
+				{{ Form::hidden('seeker_id', Auth::user()->id) }}
+				{{ Form::submit('Request this Job!', array('class' => 'btn btn-success')) }}
+				{{ Form::close() }}
+			@elseif($this_is_the_owner == false)
+				You have send your request for this job!
+			@endif
+		@else
+			You need to login to request this job.
+		@endif
+
 	</div>
 </div>
 @stop

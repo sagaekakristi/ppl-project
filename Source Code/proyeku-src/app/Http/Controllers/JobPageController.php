@@ -18,6 +18,7 @@ use Validator;
 use Input;
 use Illuminate\Support\Facades\Redirect;
 use Session;
+use App\JobRequest;
 
 class JobPageController extends Controller
 {
@@ -54,9 +55,35 @@ class JobPageController extends Controller
 		$data['job_info'] = $job_info;
 		$data['category_array'] = $category_array;
 
+		// find out whether the logged-in user have already request this job (as a seeker)
+		// if the owner of this job is the logged-in user, then don't show the request button
+		$show_request_button = true;
+		$this_is_the_owner = false;
+		if(Auth::user() != null ){
+			$logged_user_id = Auth::user()->id;
+			if($job_info->freelancer_info_id == $logged_user_id) { 
+				// if the owner of this job is the logged-in user
+				$show_request_button = false;
+				$this_is_the_owner = true;
+			}
+			else {
+				// if logged-in user already request this job (as a seeker)
+				if(JobRequest::find($job_id, $logged_user_id) != null){
+					$show_request_button = false;
+				}
+			}
+		}
+		else{
+			//if guest (not logged-in user)
+		}
+		
+
 		return View::make('job.show')
 			->with('data', $data)
-			->with('jobs', $job_info);
+			->with('jobs', $job_info)
+			->with('job_id', $id)
+			->with('show_request_button', $show_request_button)
+			->with('this_is_the_owner', $this_is_the_owner);
 	}
 
 	/**

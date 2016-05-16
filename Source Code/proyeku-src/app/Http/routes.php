@@ -25,6 +25,8 @@ Route::group(['middleware' => ['web']], function () {
 
 Route::group(['middleware' => ['web']], function () {
     Route::resource('/job', 'JobPageController');
+    Route::post('/send-job-request', 'JobRequestController@requestJob');
+    //Route::get('/show-job-request', 'JobRequestController@showAll');
 });
 
 Route::group(['middleware' => ['web']], function () {
