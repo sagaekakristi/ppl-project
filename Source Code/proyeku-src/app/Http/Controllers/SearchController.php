@@ -31,7 +31,7 @@ class SearchController extends Controller{
 
         $order = $request->order;
         if(is_null($order) || $order===""){
-            $upah_max = "users.user_rating";
+            $order = "user_info.user_rating";
         }
         //dump($order);
 
@@ -51,7 +51,7 @@ class SearchController extends Controller{
                     -> where('job.upah_max', '<=', $upah_max)
                     -> where('job.upah_min', '>=', $upah_min)
                     -> where('category.kategori', 'LIKE', '%'.$kategori.'%')
-                    -> orderBy($order);
+                    -> orderBy($order)
                     -> paginate(2);
                     //->get();
         //dd($jobs);
