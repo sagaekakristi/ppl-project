@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -10,9 +9,7 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-
 Route::group(['middleware' => ['web']], function () {
-
     Route::get('/', function () {
         return view('welcome');
     });
@@ -22,7 +19,6 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/fbred', 'SocialAuthController@redirect');
     Route::get('/callback', 'SocialAuthController@callback');
 });
-
 Route::group(['middleware' => ['web']], function () {
     Route::resource('/job', 'JobPageController');
 });
@@ -47,11 +43,4 @@ Route::group(['middleware' => 'web'], function () {
     Route::auth();
 });
 
-Route::get('/searchredirect', function(){
-	$search = urlencode(e(Input::get('search')));
-	$route = "search/$search";
-	
-	return redirect($route);
-});
-
-Route::get('search/{search}', 'SearchController@search');
+Route::get( '/search', 'SearchController@search');
