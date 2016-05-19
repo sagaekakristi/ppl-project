@@ -14,6 +14,10 @@ use App\JobCategory;
 use App\Category;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
+use Input;
+use Session;
+use Validator;
 use View;
 
 class ProfilePageController extends Controller
@@ -50,7 +54,6 @@ class ProfilePageController extends Controller
         $user = user::find($user_info->user_id); 
 
         return View::make('account') 
-        ->with('user_info', $user_info) 
         ->with('user', $user); 
     } 
 
@@ -61,33 +64,31 @@ class ProfilePageController extends Controller
         $user = user::find($user_info->user_id); 
 
         return View::make('info') 
-        ->with('user_info', $user_info) 
-        ->with('user', $user); 
+        ->with('user_info', $user_info);
     } 
 
     public function updateAccount()  
     { 
 
         $rules = array( 
-            'image'         => 'required|mimes:png', 
             'email'         => 'required', 
-            'password'      => 'required', 
+            'password'      => 'required' 
             ); 
 
         $validator = Validator::make(Input::all(), $rules); 
 
         if ($validator->fails()) { 
-            return Redirect::to('/profile/edit/account'); 
-        } else { 
-            $id = Auth::user()->id; 
-
-            $updated_user = User::find($id); 
+            return Redirect::to('/profile/edit/account')
+            ->withErrors($validator)
+            ->withInput(Input::except('password'));
+        } else {
+            $id = Auth::user()->id;
+            $updated_user = User::find($id);
             $updated_user->email = Input::get('email'); 
-            $updated_user->password = Input::get('password'); 
-
+            $updated_user->password = bcrypt(Input::get('password')); 
             $updated_user->save(); 
 
-            Session::flash('message', 'Successfully updated job!'); 
+            Session::flash('message', 'Successfully updated profile!'); 
             return Redirect::to('/profile'); 
         } 
     }
@@ -97,16 +98,17 @@ class ProfilePageController extends Controller
 
         $rules = array( 
             'alamat'        => 'required', 
-            'jenis_kelamin' => 'required', 
-            'tanggal_lahir' => 'required' 
+            'jenis_kelamin' => 'required',
+            'tanggal_lahir' => 'required'
             ); 
         $validator = Validator::make(Input::all(), $rules); 
 
         if ($validator->fails()) { 
-            return Redirect::to('/profile/edit/info'); 
+            return Redirect::to('/profile/edit/info')
+            ->withErrors($validator)
+            ->withInput(Input::except('password'));
         } else { 
             $id = Auth::user()->id; 
-
             $updated_user_info = UserInfo::find($id); 
             $updated_user_info->tanggal_lahir = Input::get('tanggal_lahir'); 
             $updated_user_info->alamat = Input::get('alamat'); 
@@ -114,29 +116,31 @@ class ProfilePageController extends Controller
 
             $updated_user_info->save(); 
 
-            Session::flash('message', 'Successfully updated job!'); 
+            Session::flash('message', 'Successfully updated profile!'); 
             return Redirect::to('/profile'); 
         } 
     } 
-    //Store photo 
-    /*public function store(ProductRequest $request) 
-    { 
- 
-        $product = new Product(array( 
-            'name' => $request->get('name'), 
-            'sku'  => $request->get('sku') 
-            )); 
- 
-        $product->save(); 
- 
-        $imageName = $product->id . '.' .  
-        $request->file('image')->getClientOriginalExtension(); 
- 
-        $request->file('image')->move( 
-            base_path() . '/public/images/catalog/', $imageName 
-            ); 
- 
-        return \Redirect::route('admin.products.edit',  
-            array($product->id))->with('message', 'Product added!');     
-        }*/ 
+
+    public function upload() {
+        $rules = array( 
+            'image' => 'required|'
+            );
+        $validator = Validator::make(Input::all(), $rules); 
+        if (!$validator->fails()) {
+            $id = Auth::user()->id; 
+            $destinationPath = ('upload');
+            $extension = Input::file('image')->getClientOriginalExtension();
+            $fileName = $id.'.'.$extension;
+            Input::file('image')->move($destinationPath, $fileName);
+
+            Session::flash('message', 'Successfully updated picture!'); 
+            return Redirect::to('/profile'); 
+        }
+        else {
+            Session::flash('error', 'update is not valid');
+            return Redirect::to('/profile/edit/account')
+            ->withErrors($validator);
+        }
+
     }
+}

@@ -29,48 +29,59 @@
 </script> 
 
 <div class="container" id="body"> 
-    <div class="col-md-6 col-md-offset-3" style="background-color: white; border-radius: 5px; margin-top: 15px; margin-bottom: 30px; padding-bottom: 30px; padding-top: 20px;"> 
-        <h2>Edit Profile</h2> 
-        <!--<div class="btn-group btn-toggle">  
-            <button class="btn btn-sm btn-default" id="on">ON</button> 
-            <button class="btn btn-sm btn-default" id="off">OFF</button> 
-        </div>--> 
-        <br> 
-        <div>  
+    <div class="col-md-6 col-md-offset-3" style="background-color: white; border-radius: 5px; margin-top: 15px; margin-bottom: 30px; padding-bottom: 30px; padding-top: 20px;">
+        @if (count($errors) > 0)
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
+
+        <h2 style="margin-bottom: 20px;">Edit Profile</h2> 
+
+        <div style="margin-bottom: 20px;">  
             <a href="{{url('profile/edit/account')}}" class="btn btn-md btn-default" id="account">Account</a> 
             <a href="{{url('profile/edit/info')}}" class="btn btn-md btn-default">Information</a> 
         </div> 
-        
-        
-        <div>
-            <div class="col-md-6 hidden-xs" style="float: right; margin-bottom: 20px;"> 
-                <img src="{{url('/assets/pictures/profile-default-icon.png')}}"> 
+
+        <div class="col-md-12 hidden-xs" style="float: right; margin-bottom: 20px;"> 
+            <?php $picture = $user->id . '.jpg';?>
+            <img src="{{url('/upload/'.$picture)}}" class="img-circle" style="height: 200px; width: 200px;"> 
+        </div>
+        <div class="visible-xs" style="float: center; margin-bottom: 20px;"> 
+            <?php $picture = $user->id . '.jpg';?>
+            <img src="{{url('/upload/'.$picture)}}" class="img-circle" style="height: 150px; width: 150px;"> 
+        </div>
+        <div class="col-md-12" style="margin-bottom: 20px;">
+            {{ Form::model($user, array('enctype'=>'multipart/form-data', 'action'=>'ProfilePageController@upload','files'=>true, 'method' => 'PUT')) }}
+            <div class="col-md-12">
+                {{ Form::file('image', array('class' => '')) }}
             </div>
-            <div class="visible-xs" style="float: center; margin-bottom: 20px;"> 
-                <img src="{{url('/assets/pictures/profile-default-icon.png')}}" style="width: 150px; height: 150px;">
-            </div>
-            <div class="col-md-6"> 
-                {{-- Form::model($user, array('route' => array('profile', $user->id), 'files' => true, 'method' => 'PUT')) --}} 
-                {{ Form::model($user, array('action'=>'ProfilePageController@updateAccount', $user->id, 'files'=>true, 'method' => 'PUT')) }} 
-                <div class="form-group"> 
-                    {!! Form::label('Profile Picture') !!} 
-                    {!! Form::file('image', null) !!} 
-                </div> 
-
-                <div class="form-group"> 
-                    {{ Form::label('email', 'Email') }} 
-                    {{ Form::text('email', null, array('class' => 'form-control')) }} 
-                </div> 
-
-                <div class="form-group"> 
-                    {{ Form::label('password', 'Password') }} 
-                    {{ Form::text(null, null, array('class' => 'form-control')) }} 
-                </div> 
-
-                {{ Form::submit('Update', array('class' => 'btn btn-success')) }} 
-
-                {{ Form::close() }} 
+            <div class="col-md-12" style="margin-top: 10px;">
+                {{ Form::submit('Update', array('class' => 'btn btn-xs btn-success')) }}
             </div> 
+            {{ Form::close() }} 
+        </div>
+        <hr style="width: 100%; height: 1px; background-color: #E3E7EA;">
+        <div class="col-md-12" style="margin-top: 20px;">
+            {{ Form::model($user, array('enctype'=>'multipart/form-data', 'action'=>'ProfilePageController@updateAccount', $user->id, 'files'=>true, 'method' => 'PUT')) }}
+
+            <div class="form-group"> 
+                {{ Form::label('email', 'Email') }} 
+                {{ Form::text('email', null, array('class' => 'form-control')) }} 
+            </div> 
+
+            <div class="form-group"> 
+                {{ Form::label('password', 'Password') }}
+                {{ Form::password('password', array('placeholder'=>'Password', 'class'=>'form-control' )) }} 
+            </div> 
+
+            {{ Form::submit('Update', array('class' => 'btn btn-success')) }} 
+
+            {{ Form::close() }} 
         </div> 
     </div> 
 </div> 

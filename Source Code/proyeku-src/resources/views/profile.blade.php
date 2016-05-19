@@ -61,8 +61,9 @@ function convertToCurrency($uang) {
 <div class="container-fluid" id="body">
 	<div class="col-md-12">
 		<div class="col-md-4"> 
-			<div class="col-md-8 col-md-offset-2"> 
-				<img src="{{url('/assets/pictures/profile-default-icon.png')}}" style="height: 200px; width: 210px;"> 
+			<div class="col-md-8 col-md-offset-2">
+				<?php $picture = $users->id . '.jpg';?>
+				<img src="{{url('/upload/'.$picture)}}" class="img-circle" style="height: 200px; width: 200px;"> 
 			</div> 
 			<div class="col-md-8 col-md-offset-2" style="text-align: center;"> 
 				<h3>{{ $users->name }}</h3> 
