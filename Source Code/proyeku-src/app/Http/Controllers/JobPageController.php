@@ -77,7 +77,6 @@ class JobPageController extends Controller
 			//if guest (not logged-in user)
 		}
 		
-
 		return View::make('job.show')
 			->with('data', $data)
 			->with('jobs', $job_info)
