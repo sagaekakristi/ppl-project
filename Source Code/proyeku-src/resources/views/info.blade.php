@@ -40,40 +40,34 @@
         </div>
         @endif
         <h2>Edit Profile</h2> 
-        <!--<div class="btn-group btn-toggle">  
-        <button class="btn btn-sm btn-default" id="on">ON</button> 
-        <button class="btn btn-sm btn-default" id="off">OFF</button> 
-    </div>--> 
-    <br>
-    <div>  
-        <a href="{{url('profile/edit/account')}}" class="btn btn-md btn-default">Account</a> 
-        <a href="{{url('profile/edit/info')}}" class="btn btn-md btn-default" id="info">Information</a> 
-    </div>
+        <br>
+        <div>  
+            <a href="{{url('profile/edit/account')}}" class="btn btn-md btn-default">Account</a> 
+            <a href="{{url('profile/edit/info')}}" class="btn btn-md btn-default" id="info">Information</a> 
+        </div>
 
-    <div class="col-md-12" style="padding-bottom: 30px;"> 
-        {{ Form::model($user_info, array('action'=>'ProfilePageController@updateInfo', $user_info->id, 'method' => 'PUT')) }} 
+        <div class="col-md-12" style="padding-bottom: 30px;"> 
+            {{ Form::model($user_info, array('action'=>'ProfilePageController@updateInfo', $user_info->id, 'method' => 'PUT')) }} 
 
-        <div class="form-group"> 
-            {{ Form::label('alamat', 'Alamat') }} 
-            {{ Form::text('alamat', null, array('placeholder'=>'Alamat, Kota, Provinsi', 'class' => 'form-control')) }} 
+            <div class="form-group"> 
+                {{ Form::label('alamat', 'Alamat') }} 
+                {{ Form::text('alamat', null, array('placeholder'=>'Alamat, Kota, Provinsi', 'class' => 'form-control')) }} 
+            </div> 
+
+            <div class="form-group"> 
+                {{ Form::label('jenis_kelamin', 'Jenis Kelamin') }}
+                <br>
+                {{ Form::select('jenis_kelamin', array('L' => 'Laki-Laki', 'P' => 'Perempuan')) }}
+            </div> 
+
+            <div class="form-group">
+                {{ Form::label('tanggal_lahir', 'Tanggal Lahir') }} 
+                {{ Form::text('tanggal_lahir', null, array('placeholder'=>'YYYY-MM-DD', 'class' => 'form-control')) }}
+            </div> 
+
+            {{ Form::submit('Update', array('class' => 'btn btn-success')) }}
+            {{ Form::close() }} 
         </div> 
-
-        <div class="form-group"> 
-            {{ Form::label('jenis_kelamin', 'Jenis Kelamin') }}
-            <br>
-            {{ Form::select('jenis_kelamin', array('L' => 'Laki-Laki', 'P' => 'Perempuan')) }}
-        </div> 
-
-        <div class="form-group">
-
-            {{ Form::label('tanggal_lahir', 'Tanggal Lahir') }} 
-            {{ Form::text('tanggal_lahir', null, array('placeholder'=>'YYYY-MM-DD', 'class' => 'form-control')) }}
-        </div> 
-
-        {{ Form::submit('Update', array('class' => 'btn btn-success')) }} 
-
-        {{ Form::close() }} 
     </div> 
-</div> 
 </div> 
 @stop

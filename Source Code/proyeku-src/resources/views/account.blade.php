@@ -55,6 +55,8 @@
             <?php $picture = $user->id . '.jpg';?>
             <img src="{{url('/upload/'.$picture)}}" class="img-circle" style="height: 150px; width: 150px;"> 
         </div>
+
+        <!-- UPLOAD PHOTO -->
         <div class="col-md-12" style="margin-bottom: 20px;">
             {{ Form::model($user, array('enctype'=>'multipart/form-data', 'action'=>'ProfilePageController@upload','files'=>true, 'method' => 'PUT')) }}
             <div class="col-md-12">
@@ -65,7 +67,10 @@
             </div> 
             {{ Form::close() }} 
         </div>
+
         <hr style="width: 100%; height: 1px; background-color: #E3E7EA;">
+
+        <!-- UPDATE ACCOUNT -->
         <div class="col-md-12" style="margin-top: 20px;">
             {{ Form::model($user, array('enctype'=>'multipart/form-data', 'action'=>'ProfilePageController@updateAccount', $user->id, 'files'=>true, 'method' => 'PUT')) }}
 
@@ -80,7 +85,6 @@
             </div> 
 
             {{ Form::submit('Update', array('class' => 'btn btn-success')) }} 
-
             {{ Form::close() }} 
         </div> 
     </div> 

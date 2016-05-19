@@ -29,7 +29,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/profile/edit/info', 'ProfilePageController@editInfo'); 
     Route::put('/profile/update/account', 'ProfilePageController@updateAccount'); 
     Route::put('/profile/update/info', 'ProfilePageController@updateInfo');
-    Route::put('/profile/update/info', 'ProfilePageController@upload'); 
+    Route::put('/profile/update/upload', 'ProfilePageController@upload'); 
 }); 
 
 Route::group(['middleware' => ['web']], function () {

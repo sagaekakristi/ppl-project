@@ -119,14 +119,18 @@ class ProfilePageController extends Controller
             Session::flash('message', 'Successfully updated profile!'); 
             return Redirect::to('/profile'); 
         } 
-    } 
+    }
 
     public function upload() {
         $rules = array( 
-            'image' => 'required|'
+            'image' => ''
             );
         $validator = Validator::make(Input::all(), $rules); 
-        if (!$validator->fails()) {
+        if ($validator->fails()) {
+            return Redirect::to('/profile/edit/account')
+            ->withErrors($validator);
+        }
+        else {
             $id = Auth::user()->id; 
             $destinationPath = ('upload');
             $extension = Input::file('image')->getClientOriginalExtension();
@@ -136,11 +140,5 @@ class ProfilePageController extends Controller
             Session::flash('message', 'Successfully updated picture!'); 
             return Redirect::to('/profile'); 
         }
-        else {
-            Session::flash('error', 'update is not valid');
-            return Redirect::to('/profile/edit/account')
-            ->withErrors($validator);
-        }
-
     }
 }
