@@ -63,7 +63,11 @@ function convertToCurrency($uang) {
 		<div class="col-md-4"> 
 			<div class="col-md-8 col-md-offset-2">
 				<?php $picture = $users->id . '.jpg';?>
-				<img src="{{url('/upload/'.$picture)}}" class="img-circle" style="height: 200px; width: 200px;"> 
+				@if (file_exists(public_path('/upload/'.$picture)))
+				<img src="{{url('/upload/'.$picture)}}" class="img-circle" style="height: 200px; width: 200px;">
+				@else
+				<img src="{{url('/assets/pictures/profile-default-icon.png')}}" class="img-circle" style="height: 200px; width: 200px;">
+				@endif
 			</div> 
 			<div class="col-md-8 col-md-offset-2" style="text-align: center;"> 
 				<h3>{{ $users->name }}</h3> 

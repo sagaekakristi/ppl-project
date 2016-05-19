@@ -49,11 +49,19 @@
 
         <div class="col-md-12 hidden-xs" style="float: right; margin-bottom: 20px;"> 
             <?php $picture = $user->id . '.jpg';?>
-            <img src="{{url('/upload/'.$picture)}}" class="img-circle" style="height: 200px; width: 200px;"> 
+            @if (file_exists(public_path('/upload/'.$picture)))
+            <img src="{{url('/upload/'.$picture)}}" class="img-circle" style="height: 200px; width: 200px;">
+            @else
+            <img src="{{url('/assets/pictures/profile-default-icon.png')}}" class="img-circle" style="height: 200px; width: 200px;">
+            @endif
         </div>
         <div class="visible-xs" style="float: center; margin-bottom: 20px;"> 
             <?php $picture = $user->id . '.jpg';?>
-            <img src="{{url('/upload/'.$picture)}}" class="img-circle" style="height: 150px; width: 150px;"> 
+            @if (file_exists(public_path('/upload/'.$picture)))
+            <img src="{{url('/upload/'.$picture)}}" class="img-circle" style="height: 200px; width: 200px;">
+            @else
+            <img src="{{url('/assets/pictures/profile-default-icon.png')}}" class="img-circle" style="height: 150px; width: 150px;">
+            @endif
         </div>
 
         <!-- UPLOAD PHOTO -->
