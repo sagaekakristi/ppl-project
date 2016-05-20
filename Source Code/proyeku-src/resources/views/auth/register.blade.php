@@ -29,17 +29,14 @@
         <div class="panel-body">
             <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
                 {!! csrf_field() !!}
-                <div>
+                <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">    
+                    <input type="text" class="form-control" name="name" value="{{ old('name') }}" placeholder="Name">
 
-                    <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">    
-                        <input type="text" class="form-control" name="name" value="{{ old('name') }}" placeholder="Name">
-
-                        @if ($errors->has('name'))
-                        <span class="help-block">
-                            {{ $errors->first('name') }}
-                        </span>
-                        @endif
-                    </div>
+                    @if ($errors->has('name'))
+                    <span class="help-block">
+                        {{ $errors->first('name') }}
+                    </span>
+                    @endif
                 </div>
 
                 <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">

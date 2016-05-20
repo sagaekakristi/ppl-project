@@ -13,4 +13,5 @@ class UserInfo extends Model
     // disable timestamps created_at updated_at
     public $timestamps = false;
 
+    
 }
