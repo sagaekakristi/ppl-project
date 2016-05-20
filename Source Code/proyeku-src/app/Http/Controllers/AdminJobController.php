@@ -21,12 +21,12 @@ class AdminJobController extends Controller
     public function index()
     {
         //
-        $jobs = Job::paginate(3);
+        $jobs = Job::paginate(10);
         $users = User::all();
 
         return View::make('admin.job.index')
-            ->with('jobs', $jobs)
-            ->with('users', $users);
+        ->with('jobs', $jobs)
+        ->with('users', $users);
     }
 
     /**
@@ -76,8 +76,8 @@ class AdminJobController extends Controller
         $user = User::find($job->freelancer_info_id);
         
         return View::make('admin.job.show')
-            ->with('job', $job)
-            ->with('user', $user);
+        ->with('job', $job)
+        ->with('user', $user);
     }
 
     /**
@@ -92,7 +92,7 @@ class AdminJobController extends Controller
         $job = Job::find($id);
 
         return View::make('admin.job.edit')
-            ->with('job',$job);
+        ->with('job',$job);
     }
 
     /**

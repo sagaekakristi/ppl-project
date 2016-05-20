@@ -103,9 +103,10 @@ function convertToCurrency($uang) {
 			</div>
 
 			<div class="col-md-12 headline">
-				<h1>Jasa Dibuka</h1>
+				<h1>Services Opened</h1>
 				<hr class="hr">
 				<div class="row" style="text-align: center;">
+					@if($allJobOpen != "[]")
 					<?php $j = 1; ?>
 					<div class="col-md-12">
 						@foreach($allJobOpen as $list) 
@@ -116,7 +117,7 @@ function convertToCurrency($uang) {
 										{{ $list['judul'] }}
 									</td>
 								</tr>
-								<tr style="height: 120px; text-align: justify;"> 
+								<tr style="height: 120px; text-align: center;"> 
 									<td style="font-size: 15px;"> 
 										{{ $list['deskripsi'] }}
 									</td>
@@ -204,6 +205,11 @@ function convertToCurrency($uang) {
 						</div>
 						@endforeach
 					</div>
+					@else
+					<div class="col-md-12">
+						<span style="float: left;">{{ $users->name }} has not open any job at this time</span>
+					</div>
+					@endif
 				</div>
 			</div>
 		</div>

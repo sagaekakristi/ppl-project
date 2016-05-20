@@ -34,10 +34,11 @@
 				{{ Form::text('alamat', null, array('class' => 'form-control')) }}
 			</div>
 
-			<div class="form-group">
+			<div class="form-group"> 
 				{{ Form::label('jenis_kelamin', 'Jenis Kelamin') }}
-				{{ Form::text('jenis_kelamin', null, array('class' => 'form-control')) }}
-			</div>
+				<br>
+				{{ Form::select('jenis_kelamin', array('L' => 'Laki-Laki', 'P' => 'Perempuan')) }}
+			</div> 
 
 			{{ Form::submit('Edit user', array('class' => 'btn btn-success')) }}
 

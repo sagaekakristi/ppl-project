@@ -40,10 +40,14 @@ class ProfilePageController extends Controller
 
         $user_info = UserInfo::find($logged_user_id);
         $freelancer_info = FreelancerInfo::find($user_info->user_id);
-        $jobs = Job::where('freelancer_info_id', $freelancer_info->user_info_id)->get();
+        /*$jobs;
+        if(Job::where('freelancer_info_id', $freelancer_info->user_info_id)->get()) {
+            $jobs = Job::where('freelancer_info_id', $freelancer_info->user_info_id)->get();
+        }*/
+
 
         return View::make('profile')
-        ->with('jobs', $jobs)
+        //->with('jobs', $jobs)
         ->with('user_info', $user_info)
         ->with('users', $users);
     }
@@ -136,6 +140,10 @@ class ProfilePageController extends Controller
             $extension = Input::file('image')->getClientOriginalExtension();
             $fileName = $id.'.'.$extension;
             Input::file('image')->move($destinationPath, $fileName);
+
+            /*$img = Image::make('upload/'.$id.'.'.$extension);
+            $img->resize(200, 200);
+            $img->save('upload/'.$id.'.'.$extension);*/
 
             Session::flash('message', 'Successfully updated picture!'); 
             return Redirect::to('/profile'); 

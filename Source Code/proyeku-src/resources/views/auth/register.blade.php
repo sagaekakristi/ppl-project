@@ -11,7 +11,7 @@
 @section('content')
 <!-- Register Box --> 
 <div class="container">
-    <div class="col-md-4 col-md-offset-4" id="register-div">
+    <div class="col-md-6 col-md-offset-3" id="register-div">
         <table>
             <tr>
                 <td>
@@ -30,7 +30,7 @@
             <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
                 {!! csrf_field() !!}
                 <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">    
-                    <input type="text" class="form-control" name="name" value="{{ old('name') }}" placeholder="Name">
+                    <input type="text" class="form-control" name="name" value="{{ old('name') }}" placeholder="Name (Required)">
 
                     @if ($errors->has('name'))
                     <span class="help-block">
@@ -40,7 +40,7 @@
                 </div>
 
                 <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                    <input type="text" class="form-control" name="email" value="{{ old('email') }}" placeholder="E-mail">
+                    <input type="text" class="form-control" name="email" value="{{ old('email') }}" placeholder="E-mail (Required)">
 
                     @if ($errors->has('email'))
                     <span class="help-block">
@@ -50,7 +50,7 @@
                 </div>
 
                 <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                    <input type="password" class="form-control" name="password" placeholder="Password">
+                    <input type="password" class="form-control" name="password" placeholder="Password (Required)">
 
                     @if ($errors->has('password'))
                     <span class="help-block">
@@ -60,7 +60,7 @@
                 </div>
 
                 <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
-                    <input type="password" class="form-control" name="password_confirmation" placeholder="Reenter Password">
+                    <input type="password" class="form-control" name="password_confirmation" placeholder="Reenter Password (Required)">
 
                     @if ($errors->has('password_confirmation'))
                     <span class="help-block">
@@ -70,7 +70,7 @@
                 </div>
 
                 <div class="form-group {{ $errors->has('tanggal_lahir') ? ' has-error' : '' }}">    
-                    <input type="text" class="form-control" name="tanggal_lahir" value="{{ old('tanggal_lahir') }}" placeholder="Tanggal Lahir">
+                    <input type="text" class="form-control" name="tanggal_lahir" value="{{ old('tanggal_lahir') }}" placeholder="Tanggal Lahir (YYYY-MM-DD)">
 
                     @if ($errors->has('tanggal_lahir'))
                     <span class="help-block">
@@ -89,8 +89,12 @@
                     @endif
                 </div>
 
-                <div class="form-group {{ $errors->has('jenis_kelamin') ? ' has-error' : '' }}">    
-                    <input type="text" class="form-control" name="jenis_kelamin" value="{{ old('jenis_kelamin') }}" placeholder="Jenis Kelamin">
+                <div class="form-group {{ $errors->has('jenis_kelamin') ? ' has-error' : '' }}">
+                    <select class="form-control" name="jenis_kelamin" value="{{ old('jenis_kelamin') }}">
+                        <option value="">Jenis Kelamin</option>
+                        <option value="L">Laki-Laki</option>
+                        <option value="P">Perempuan</option>
+                    </select>  
 
                     @if ($errors->has('jenis_kelamin'))
                     <span class="help-block">
@@ -104,6 +108,6 @@
                 </div>
             </form>
         </div>
-    </div>
+    </div>  
 </div>
 @stop
