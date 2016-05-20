@@ -68,6 +68,37 @@
                     </span>
                     @endif
                 </div>
+
+                <div class="form-group {{ $errors->has('tanggal_lahir') ? ' has-error' : '' }}">    
+                    <input type="text" class="form-control" name="tanggal_lahir" value="{{ old('tanggal_lahir') }}" placeholder="Tanggal Lahir">
+
+                    @if ($errors->has('tanggal_lahir'))
+                    <span class="help-block">
+                        {{ $errors->first('tanggal_lahir') }}
+                    </span>
+                    @endif
+                </div>
+
+                <div class="form-group {{ $errors->has('alamat') ? ' has-error' : '' }}">    
+                    <input type="text" class="form-control" name="alamat" value="{{ old('alamat') }}" placeholder="Alamat">
+
+                    @if ($errors->has('alamat'))
+                    <span class="help-block">
+                        {{ $errors->first('alamat') }}
+                    </span>
+                    @endif
+                </div>
+
+                <div class="form-group {{ $errors->has('jenis_kelamin') ? ' has-error' : '' }}">    
+                    <input type="text" class="form-control" name="jenis_kelamin" value="{{ old('jenis_kelamin') }}" placeholder="Jenis Kelamin">
+
+                    @if ($errors->has('jenis_kelamin'))
+                    <span class="help-block">
+                        {{ $errors->first('jenis_kelamin') }}
+                    </span>
+                    @endif
+                </div>
+
                 <div class="form-group">
                     <input type="submit" value="Sign Up" id="submit">
                 </div>

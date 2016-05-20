@@ -13,5 +13,5 @@ class UserInfo extends Model
     // disable timestamps created_at updated_at
     public $timestamps = false;
 
-    
+    protected $fillable = array('user_id', 'tanggal_lahir', 'alamat', 'jenis_kelamin');
 }
