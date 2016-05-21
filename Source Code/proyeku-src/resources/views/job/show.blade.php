@@ -94,9 +94,14 @@ function convertToCurrency($uang) {
 
 		@if(Auth::user() != null)
 			@if($show_request_button == true)
+				<h2>Request this Job</h2>
 				{{ Form::open(array('action'=>'JobRequestController@requestJob', 'method' => 'post')) }}
 				{{ Form::hidden('job_id', $job_id) }}
 				{{ Form::hidden('seeker_id', Auth::user()->id) }}
+
+				{{ Form::label('message', 'Pesan Tambahan') }}
+				{{ Form::text('message', Input::old('deskripsi'), array('class' => 'form-control')) }}
+
 				{{ Form::submit('Request this Job!', array('class' => 'btn btn-success')) }}
 				{{ Form::close() }}
 			@elseif($this_is_the_owner == false)

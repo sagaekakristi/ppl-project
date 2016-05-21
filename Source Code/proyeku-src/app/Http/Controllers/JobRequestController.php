@@ -12,12 +12,12 @@ use App\JobRequest;
 use Input;
 use App\UserInfo;
 use App\FreelancerInfo;
-//use App\Http\Controllers\JobPageController;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Auth;
 use View;
 use DB;
 use App\AcceptedJob;
+use App\Message;
 
 class JobRequestController extends Controller
 {
@@ -38,13 +38,17 @@ class JobRequestController extends Controller
 	{
 		$job_id = Input::get('job_id');
 		$seeker_id = Input::get('seeker_id');
+		$message = Input::get('message');
 
 		if(JobRequest::find($job_id, $seeker_id) == null){
 			if(Job::find($job_id)->freelancer_info_id != $seeker_id){
+				// create job_request instances
 				$newJobRequest = new JobRequest;
 				$newJobRequest->job_id = $job_id;
 				$newJobRequest->seeker_id = $seeker_id;
 				$newJobRequest->save();	
+
+				// send message from seeker to freelancer
 			}
 			else{ 
 				// if the seeker is the owner itself!
@@ -54,6 +58,19 @@ class JobRequestController extends Controller
 		else{
 			// seeker already requested this job
 			// mungkin mau nambah session info disini
+		}
+
+		// store
+		if($message != ''){
+			$logged_user_id = Auth::user()->id;
+			$freelancer_info_id = Job::find($job_id)->freelancer_info_id;
+			$job_owner_user_id = $freelancer_info_id;
+
+			$new_message = new Message;
+	        $new_message->sender_user_id = $logged_user_id;
+	        $new_message->receiver_user_id = $job_owner_user_id;
+	        $new_message->message_content = $message;
+	        $new_message->save();
 		}
 
 		return Redirect::to('job/'.$job_id); // need revise into calling JobPageController controller to be more scalable
@@ -118,6 +135,9 @@ class JobRequestController extends Controller
 		//delete request
 		$job_request = JobRequest::find($job_id, $seeker_id);
 		//$job_request->delete();
+		$query = "DELETE FROM job_request ";
+        $query = $query."WHERE job_id = " . $job_id . " and seeker_id = " . $seeker_id;
+        DB::select(DB::raw($query));
 
 		return Redirect::to('show-job-request/');
 	}

@@ -32,6 +32,10 @@ Route::group(['middleware' => ['web']], function () {
 });
 
 Route::group(['middleware' => ['web']], function () {
+    Route::resource('/message', 'MessagingController', ['only' => ['index', 'create', 'store', 'show']]);
+});
+
+Route::group(['middleware' => ['web']], function () {
 
     Route::resource('/admin/manage/user', 'AdminUserController');
     Route::resource('/admin/manage/job', 'AdminJobController');
