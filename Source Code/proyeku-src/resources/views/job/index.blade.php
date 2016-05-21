@@ -42,7 +42,7 @@ function convertToCurrency($uang) {
     return strrev($currency);
 }
 ?>
-<div class="container">
+<div class="container" style="margin-bottom: 100px;">
     <h1 style="font-family: Titillium Web;">List of Jobs</h1>
     <br>
     @if($jobs != "[]")
@@ -77,7 +77,7 @@ function convertToCurrency($uang) {
         @endforeach
     </table>
     @else
-    <div class="col-md-12" style="background-color: white; height: 100px; text-align: center;">
+    <div class="col-md-12" style="background-color: white; height: 100px; text-align: center; margin-bottom: 10px;">
         <br>
         <br>
         <span style="float: center; font-size: 17px;">Oops, you have not open any job!</span>

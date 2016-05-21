@@ -67,7 +67,7 @@
 					<td><a href="/admin/manage/job/{{ $job->id }}">Rp {{ convertToCurrency($job->upah_min) }}</a></td>
 					<td class="icon"><a href="/admin/manage/job/{{ $job->id }}/edit" class="btn btn-info pull-left" style="margin-right: 3px;">Edit</a></td>
 					<td class="icon">{{ Form::open(['url' => '/admin/manage/job/' . $job->id, 'method' => 'DELETE']) }}
-						{{ Form::submit('Delete', ['class' => 'btn btn-danger'])}}
+						{{ Form::submit('Delete', ['class' => 'btn btn-danger', 'onclick'=>'return confirm("Are you sure want to delete this job?")'])}}
 						{{ Form::close() }}</td>
 					</tr>
 					@endforeach
