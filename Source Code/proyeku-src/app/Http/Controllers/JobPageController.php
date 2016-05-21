@@ -87,7 +87,18 @@ class JobPageController extends Controller
 	public function create()
 	{
 		// load the create form (app/views/nerds/create.blade.php)
-		return View::make('job.create');
+		$id = Auth::user()->id;
+		if(FreelancerInfo::where('user_info_id', '=', '$id')->exists()) {
+			return View::make('job.create');
+		}
+		else{
+			$newFreelancerInfo = new FreelancerInfo;
+			$newFreelancerInfo->user_info_id = $id;
+			$newFreelancerInfo->available = true;
+			$newFreelancerInfo->save();
+			return View::make('job.create');	
+		}
+		
 	}
 
 	/**

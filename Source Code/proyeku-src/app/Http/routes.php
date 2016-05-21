@@ -21,6 +21,8 @@ Route::group(['middleware' => ['web']], function () {
 });
 Route::group(['middleware' => ['web']], function () {
     Route::resource('/job', 'JobPageController');
+    Route::get('/freelancer/createinfo', 'FreelancerInfoController@create');
+    Route::post('/freelancer/store', 'FreelancerInfoController@store');
 });
 
 Route::group(['middleware' => ['web']], function () { 
