@@ -26,7 +26,7 @@
             $('#on').css('color', 'black'); 
         }); 
     }); 
-</script> 
+</script>
 
 <div class="container" id="body"> 
     <div class="col-md-6 col-md-offset-3" style="background-color: white; border-radius: 5px; margin-top: 15px; margin-bottom: 30px; padding-bottom: 30px; padding-top: 20px;">
@@ -44,7 +44,10 @@
 
         <div style="margin-bottom: 20px;">  
             <a href="{{url('profile/edit/account')}}" class="btn btn-md btn-default" id="account">Account</a> 
-            <a href="{{url('profile/edit/info')}}" class="btn btn-md btn-default">Information</a> 
+            <a href="{{url('profile/edit/info')}}" class="btn btn-md btn-default">Information</a>
+            @if(!empty($freelancer_info))
+            <a href="{{url('profile/view/skill')}}" class="btn btn-md btn-default">Skill</a> 
+            @endif
         </div> 
 
         <div class="col-md-12 hidden-xs" style="float: right; margin-bottom: 20px;"> 

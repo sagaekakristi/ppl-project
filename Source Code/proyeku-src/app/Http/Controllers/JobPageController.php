@@ -97,12 +97,13 @@ class JobPageController extends Controller
 		$user_info = UserInfo::find($logged_user_id);
 		$freelancer_info = FreelancerInfo::find($user_info->user_id);
 		$users = User::find($logged_user_id);
-        //$jobs = Job::where('freelancer_info_id', $freelancer_info->user_info_id)->get();
+		$jobs = Job::where('freelancer_info_id', $logged_user_id)->paginate(5);
 
         // load the view and pass the jobs
 		return View::make('job.index')
             //->with('jobs', $jobs);
-		->with('users', $users);
+		->with('users', $users)
+		->with('jobs', $jobs);
 	}
 
 	/**
