@@ -27,9 +27,9 @@ class JobPageController extends Controller
      * Specify auth middleware for access control: harus login dulu!
      */
 	public function __construct()
-    {
-        $this->middleware('auth', ['except' => ['show']]);
-    }
+	{
+		$this->middleware('auth', ['except' => ['show']]);
+	}
 
 	/**
 	 * Display the specified resource.
@@ -96,11 +96,13 @@ class JobPageController extends Controller
 		$logged_user_id = Auth::user()->id;
 		$user_info = UserInfo::find($logged_user_id);
 		$freelancer_info = FreelancerInfo::find($user_info->user_id);
-        $jobs = Job::where('freelancer_info_id', $freelancer_info->user_info_id)->get();
+		$users = User::find($logged_user_id);
+        //$jobs = Job::where('freelancer_info_id', $freelancer_info->user_info_id)->get();
 
         // load the view and pass the jobs
-        return View::make('job.index')
-            ->with('jobs', $jobs);
+		return View::make('job.index')
+            //->with('jobs', $jobs);
+		->with('users', $users);
 	}
 
 	/**
@@ -111,7 +113,18 @@ class JobPageController extends Controller
 	public function create()
 	{
 		// load the create form (app/views/nerds/create.blade.php)
-        return View::make('job.create');
+		$id = Auth::user()->id;
+		if(FreelancerInfo::where('user_info_id', '=', $id)->exists()) {
+			return View::make('job.create');
+		}
+		else {
+			$newFreelancerInfo = new FreelancerInfo;
+			$newFreelancerInfo->user_info_id = $id;
+			$newFreelancerInfo->available = true;
+			$newFreelancerInfo->save();
+			return View::make('job.create');	
+		}
+		
 	}
 
 	/**
@@ -123,35 +136,35 @@ class JobPageController extends Controller
 	{
 		// validate
         // read more on validation at http://laravel.com/docs/validation
-        $rules = array(
-            'judul'		=> 'required',
-            'deskripsi'	=> 'required',
-            'upah_max'	=> 'required|numeric',
-            'upah_min'	=> 'required|numeric'
-        );
-        $validator = Validator::make(Input::all(), $rules);
+		$rules = array(
+			'judul'		=> 'required',
+			'deskripsi'	=> 'required',
+			'upah_max'	=> 'required|numeric',
+			'upah_min'	=> 'required|numeric'
+			);
+		$validator = Validator::make(Input::all(), $rules);
 
         // process the login
-        if ($validator->fails()) {
-            return Redirect::to('job/create')
-                ->withErrors($validator)
+		if ($validator->fails()) {
+			return Redirect::to('job/create')
+			->withErrors($validator)
                 ->withInput(Input::except('password')); // TODO: Check
-        } else {
-        	$logged_user_id = Auth::user()->id;
+            } else {
+            	$logged_user_id = Auth::user()->id;
             // store
-            $new_job = new Job;
-            $new_job->freelancer_info_id = $logged_user_id;
-            $new_job->judul = Input::get('judul');
-            $new_job->deskripsi = Input::get('deskripsi');
-            $new_job->upah_max = Input::get('upah_max');
-            $new_job->upah_min = Input::get('upah_min');
-            $new_job->save();
+            	$new_job = new Job;
+            	$new_job->freelancer_info_id = $logged_user_id;
+            	$new_job->judul = Input::get('judul');
+            	$new_job->deskripsi = Input::get('deskripsi');
+            	$new_job->upah_max = Input::get('upah_max');
+            	$new_job->upah_min = Input::get('upah_min');
+            	$new_job->save();
 
             // redirect
             //Session::flash('message', 'Successfully created job!');
-            return Redirect::to('job');
+            	return Redirect::to('job');
+            }
         }
-	}
 
 	/**
 	 * Show the form for editing the specified resource.
@@ -162,11 +175,11 @@ class JobPageController extends Controller
 	public function edit($id)
 	{
 		// get the job
-        $job = Job::find($id);
+		$job = Job::find($id);
 
         // show the edit form and pass the nerd
-        return View::make('job.edit')
-            ->with('job', $job);
+		return View::make('job.edit')
+		->with('job', $job);
 	}
 
 	/**
@@ -179,33 +192,33 @@ class JobPageController extends Controller
 	{
 		// validate
         // read more on validation at http://laravel.com/docs/validation
-        $rules = array(
-            'judul'		=> 'required',
-            'deskripsi'	=> 'required',
-            'upah_max'	=> 'required|numeric',
-            'upah_min'	=> 'required|numeric'
-        );
-        $validator = Validator::make(Input::all(), $rules);
+		$rules = array(
+			'judul'		=> 'required',
+			'deskripsi'	=> 'required',
+			'upah_max'	=> 'required|numeric',
+			'upah_min'	=> 'required|numeric'
+			);
+		$validator = Validator::make(Input::all(), $rules);
 
         // process the login
-        if ($validator->fails()) {
-            return Redirect::to('job/' . $id . '/edit')
-                ->withErrors($validator)
+		if ($validator->fails()) {
+			return Redirect::to('job/' . $id . '/edit')
+			->withErrors($validator)
                 ->withInput(Input::except('password')); // TODO: Check
-        } else {
+            } else {
             // store
-            $updated_job = Job::find($id);
-            $updated_job->judul = Input::get('judul');
-            $updated_job->deskripsi = Input::get('deskripsi');
-            $updated_job->upah_max = Input::get('upah_max');
-            $updated_job->upah_min = Input::get('upah_min');
-            $updated_job->save();
+            	$updated_job = Job::find($id);
+            	$updated_job->judul = Input::get('judul');
+            	$updated_job->deskripsi = Input::get('deskripsi');
+            	$updated_job->upah_max = Input::get('upah_max');
+            	$updated_job->upah_min = Input::get('upah_min');
+            	$updated_job->save();
 
             // redirect
-            Session::flash('message', 'Successfully updated job!');
-            return Redirect::to('job/' . $id);
+            	Session::flash('message', 'Successfully updated job!');
+            	return Redirect::to('job/' . $id);
+            }
         }
-	}
 
 	/**
 	 * Remove the specified resource from storage.
@@ -216,12 +229,12 @@ class JobPageController extends Controller
 	public function destroy($id)
 	{
 		// delete
-        $deleted_job = Job::find($id);
-        $deleted_job->delete();
+		$deleted_job = Job::find($id);
+		$deleted_job->delete();
 
         // redirect
-        Session::flash('message', 'Successfully deleted the job!');
-        return Redirect::to('job');
+		Session::flash('message', 'Successfully deleted the job!');
+		return Redirect::to('job');
 	}
 
 }

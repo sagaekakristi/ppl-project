@@ -4,15 +4,22 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use View;
-use Input;
-use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests;
-use App\Job;
+use App\FreelancerInfo;
 use App\User;
 
-class AdminJobController extends Controller
+class FreelancerInfoController extends Controller
 {
+
+    /**
+     * Instantiate a new JobPageController instance.
+     * Specify auth middleware for access control: harus login dulu!
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -21,12 +28,6 @@ class AdminJobController extends Controller
     public function index()
     {
         //
-        $jobs = Job::paginate(10);
-        $users = User::all();
-
-        return View::make('admin.job.index')
-        ->with('jobs', $jobs)
-        ->with('users', $users);
     }
 
     /**
@@ -37,7 +38,6 @@ class AdminJobController extends Controller
     public function create()
     {
         //
-        return View::make('admin.job.create');
     }
 
     /**
@@ -49,18 +49,6 @@ class AdminJobController extends Controller
     public function store(Request $request)
     {
         //
-        $job = new Job;
-
-        $job->id = Input::get('id');
-        $job->freelancer_id = Input::get('freelancer_id');
-        $job->judul = Input::get('judul');
-        $job->deskripsi = Input::get('deskripsi');
-        $job->upah_max = Input::get('upah_max');
-        $job->upah_min = Input::get('upah_min');
-
-        $job->save();
-
-        return Redirect::to('/admin/manage/job');
     }
 
     /**
@@ -72,12 +60,6 @@ class AdminJobController extends Controller
     public function show($id)
     {
         //
-        $job = Job::find($id);
-        $user = User::find($job->freelancer_info_id);
-        
-        return View::make('admin.job.show')
-        ->with('job', $job)
-        ->with('user', $user);
     }
 
     /**
@@ -89,10 +71,6 @@ class AdminJobController extends Controller
     public function edit($id)
     {
         //
-        $job = Job::find($id);
-
-        return View::make('admin.job.edit')
-        ->with('job',$job);
     }
 
     /**
@@ -105,16 +83,6 @@ class AdminJobController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $job = Job::find($id);
-
-        $job->judul = Input::get('judul');
-        $job->deskripsi = Input::get('deskripsi');
-        $job->upah_max = Input::get('upah_max');
-        $job->upah_min = Input::get('upah_min');
-
-        $job->save();
-
-        return Redirect::to('/admin/manage/job');
     }
 
     /**
@@ -126,8 +94,5 @@ class AdminJobController extends Controller
     public function destroy($id)
     {
         //
-        Job::destroy($id);
-
-        return Redirect::to('/admin/manage/job');
     }
 }

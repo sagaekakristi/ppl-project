@@ -47,7 +47,7 @@
 						<a href="#" style="color: #D5EDF5; background-color: #1485A3;" class="dropdown-toggle" type="button" data-toggle="dropdown">{{Auth::user()->name}}  <span class="caret"></span></a>
 						<ul class="dropdown-menu" style="margin-top: 30px; background-color: #1485A3;">
 							<li><a href="{{url('profile')}}" style="background-color: #1485A3; color: #D5EDF5;">Profile</a></li>
-							<li><a href="{{url('editprofile')}}" style="background-color: #1485A3; color: #D5EDF5;">Edit Profile</a></li>
+							<li><a href="{{url('profile/edit/account')}}" style="background-color: #1485A3; color: #D5EDF5;">Edit Profile</a></li>
 							@if(Auth::user()->name == 'Administrator')
 							<li><a href="{{url('/admin/manage/job')}}" style="background-color: #1485A3; color: #D5EDF5;">Manage Job</a></li>
 							<li><a href="{{url('/admin/manage/user')}}" style="background-color: #1485A3; color: #D5EDF5;">Manage User</a></li>

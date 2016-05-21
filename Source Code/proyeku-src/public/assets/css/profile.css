@@ -50,7 +50,7 @@ div h1 {
 	font-size: 20px;
 }
 
-.row .col-md-6 table {
+.row .col-md-3 table {
 	margin: 0 auto !important;
 	float: none !important;
 	background-color: white;
@@ -79,4 +79,9 @@ div h1 {
 
 .form-group {
 	text-align: left;
+}
+
+input[type=file] {
+	width: 180px;
+	margin: 0 auto;
 }

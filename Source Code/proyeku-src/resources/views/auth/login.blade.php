@@ -75,12 +75,18 @@
                 </table>
             </form>
             <p style="font-family: Titillium Web; font-size: 20px;"><strong>Or</strong></p>
-            <form action="{{url('register')}}">
-                <input type="submit" value="Sign Up" style="background-color: #F26151;">
-            </form>
-            <form action="{{url('fbred')}}">
-                <input type="submit" value="Login with Facebook" style="background-color: #F26151;">
-            </form>
+            <div class="col-md-12">
+                <div class="">
+                    <form action="{{url('register')}}">
+                        <input type="submit" value="Sign Up" style="background-color: #F26151;">
+                    </form>
+                </div>
+                <div class="">
+                    <form action="{{url('fbred')}}">
+                        <input type="image" src="{{url('/assets/pictures/fb-logo.png')}}" style="height: 80px; width: 80px;" >
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </div>

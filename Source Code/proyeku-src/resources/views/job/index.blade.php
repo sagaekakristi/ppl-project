@@ -11,6 +11,8 @@
 
 <?php
 
+$jobs = App\Job::where('freelancer_info_id', $users->id)->get();
+
 //Method agar upah mudah dibaca 
 function convertToCurrency($uang) {
     $number = (string) $uang;
@@ -41,8 +43,9 @@ function convertToCurrency($uang) {
 }
 ?>
 <div class="container">
-    <h1 style="font-family: Titillium Web;">List Of Job</h1>
+    <h1 style="font-family: Titillium Web;">List of Jobs</h1>
     <br>
+    @if($jobs != "[]")
     <table class="table">
         <tr>
             <th>Judul</th>
@@ -73,6 +76,13 @@ function convertToCurrency($uang) {
         </tr>
         @endforeach
     </table>
+    @else
+    <div class="col-md-12" style="background-color: white; height: 100px; text-align: center;">
+        <br>
+        <br>
+        <span style="float: center; font-size: 17px;">Oops, you have not open any job!</span>
+    </div>
+    @endif
     <a class="btn btn-small btn-success" href="{{url('job/create')}}">Create Job</a>
 </div>
 @stop

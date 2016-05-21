@@ -21,11 +21,11 @@ class AdminUserController extends Controller
     public function index()
     {
         //
-        $users = User::paginate(3);
-        $userinfo = UserInfo::all();
-        return View::make('admin.user.index')
-            ->with('users', $users)
-            ->with('userinfo', $userinfo);
+    	$users = User::paginate(10);
+    	$userinfo = UserInfo::all();
+    	return View::make('admin.user.index')
+    	->with('users', $users)
+    	->with('userinfo', $userinfo);
     }
 
     /**
@@ -36,7 +36,7 @@ class AdminUserController extends Controller
     public function create()
     {
         //
-        return View::make('admin.user.create');
+    	return View::make('admin.user.create');
     }
 
     /**
@@ -48,24 +48,24 @@ class AdminUserController extends Controller
     public function store(Request $request)
     {
         //
-        $user = new User;
+    	$user = new User;
 
-        $user->name     = Input::get('name');
-        $user->email    = Input::get('email');
-        $user->password = bcrypt(Input::get('password'));
+    	$user->name     = Input::get('name');
+    	$user->email    = Input::get('email');
+    	$user->password = bcrypt(Input::get('password'));
 
-        $user->save();
+    	$user->save();
 
-        $userinfo = new UserInfo;
+    	$userinfo = new UserInfo;
 
-        $userinfo->user_id           = $user->id;
-        $userinfo->tanggal_lahir     = Input::get('tanggal_lahir');
-        $userinfo->alamat            = Input::get('alamat');
-        $userinfo->jenis_kelamin     = Input::get('jenis_kelamin');
+    	$userinfo->user_id           = $user->id;
+    	$userinfo->tanggal_lahir     = Input::get('tanggal_lahir');
+    	$userinfo->alamat            = Input::get('alamat');
+    	$userinfo->jenis_kelamin     = Input::get('jenis_kelamin');
 
-        $userinfo->save();
+    	$userinfo->save();
 
-        return Redirect::to('/admin/manage/user');
+    	return Redirect::to('/admin/manage/user');
     }
 
     /**
@@ -77,12 +77,12 @@ class AdminUserController extends Controller
     public function show($id)
     {
         //
-        $user = User::find($id);
-        $userinfo = UserInfo::find($id);
+    	$user = User::find($id);
+    	$userinfo = UserInfo::find($id);
 
-        return View::make('admin.user.show')
-            ->with('user', $user)
-            ->with('userinfo', $userinfo);
+    	return View::make('admin.user.show')
+    	->with('user', $user)
+    	->with('userinfo', $userinfo);
     }
 
     /**
@@ -94,12 +94,12 @@ class AdminUserController extends Controller
     public function edit($id)
     {
         //
-        $user = User::find($id);
-        $userinfo = UserInfo::find($id);
+    	$user = User::find($id);
+    	$userinfo = UserInfo::find($id);
 
-        return View::make('admin.user.edit')
-            ->with('user',$user)
-            ->with('userinfo', $userinfo);
+    	return View::make('admin.user.edit')
+    	->with('user',$user)
+    	->with('userinfo', $userinfo);
     }
 
     /**
@@ -112,20 +112,20 @@ class AdminUserController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $user = User::find($id);
-        $userinfo = UserInfo::find($id);
+    	$user = User::find($id);
+    	$userinfo = UserInfo::find($id);
 
-        $user->name   = Input::get('name');
-        $user->email  = Input::get('email');
+    	$user->name   = Input::get('name');
+    	$user->email  = Input::get('email');
 
-        $userinfo->tanggal_lahir = Input::get('tanggal_lahir');
-        $userinfo->alamat        = Input::get('alamat');
-        $userinfo->jenis_kelamin = Input::get('jenis_kelamin');
+    	$userinfo->tanggal_lahir = Input::get('tanggal_lahir');
+    	$userinfo->alamat        = Input::get('alamat');
+    	$userinfo->jenis_kelamin = Input::get('jenis_kelamin');
 
-        $user->save();
-        $userinfo->save();
+    	$user->save();
+    	$userinfo->save();
 
-        return Redirect::to('/admin/manage/user');
+    	return Redirect::to('/admin/manage/user');
     }
 
     /**
@@ -137,8 +137,8 @@ class AdminUserController extends Controller
     public function destroy($id)
     {
         //
-        User::destroy($id);
+    	User::destroy($id);
 
-        return Redirect::to('/admin/manage/user');
+    	return Redirect::to('/admin/manage/user');
     }
 }
