@@ -9,6 +9,7 @@ use App\Http\Requests;
 use App\User;
 use App\UserInfo;
 use App\FreelancerInfo;
+use App\FreelancerInfoSkill;
 use App\Job;
 use App\JobCategory;
 use App\Category;
@@ -45,11 +46,13 @@ class ProfilePageController extends Controller
             $jobs = Job::where('freelancer_info_id', $freelancer_info->user_info_id)->get();
         }*/
 
+        $skills = FreelancerInfoSkill::where('freelancer_info_id','=',$logged_user_id)->get();
 
         return View::make('profile')
         //->with('jobs', $jobs)
         ->with('user_info', $user_info)
-        ->with('users', $users);
+        ->with('users', $users)
+        ->with('skills', $skills);
     }
     public function editAccount() 
     { 

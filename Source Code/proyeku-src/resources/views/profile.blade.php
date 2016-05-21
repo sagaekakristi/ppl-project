@@ -98,7 +98,15 @@ function convertToCurrency($uang) {
 				<h1>Special Skills</h1>
 				<hr class="hr">
 				<div>
-					Web Development, Android Development
+					<ul>
+					@if(empty($skills))
+						<li>-
+					@else
+						@foreach($skills as $skill)
+							<li>{{ $skill->skill }}
+						@endforeach
+					@endif
+					</ul>
 				</div>
 			</div>
 

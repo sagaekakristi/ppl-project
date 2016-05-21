@@ -88,10 +88,10 @@ class JobPageController extends Controller
 	{
 		// load the create form (app/views/nerds/create.blade.php)
 		$id = Auth::user()->id;
-		if(FreelancerInfo::where('user_info_id', '=', '$id')->exists()) {
+		if(FreelancerInfo::where('user_info_id', '=', $id)->exists()) {
 			return View::make('job.create');
 		}
-		else{
+		else {
 			$newFreelancerInfo = new FreelancerInfo;
 			$newFreelancerInfo->user_info_id = $id;
 			$newFreelancerInfo->available = true;
