@@ -98,15 +98,14 @@ function convertToCurrency($uang) {
 				<h1>Special Skills</h1>
 				<hr class="hr">
 				<div>
-					<ul>
-					@if(empty($skills))
-						<li>-
+					@if($skills == "[]")
+					{{$users->name}} has no any special skills at this time
 					@else
-						@foreach($skills as $skill)
-							<li>{{ $skill->skill }}
-						@endforeach
+					@foreach($skills as $skill)
+					{{ $skill->skill }}
+					@endforeach
 					@endif
-					</ul>
+
 				</div>
 			</div>
 
