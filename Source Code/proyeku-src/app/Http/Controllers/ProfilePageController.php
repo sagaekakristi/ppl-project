@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use DB;
 
 use App\User;
 use App\UserInfo;
@@ -46,7 +47,7 @@ class ProfilePageController extends Controller
             $jobs = Job::where('freelancer_info_id', $freelancer_info->user_info_id)->get();
         }*/
 
-        $skills = FreelancerInfoSkill::where('freelancer_info_id','=',$logged_user_id)->get();
+        $skills = FreelancerInfoSkill::where('freelancer_info_id', $logged_user_id)->get();
 
         return View::make('profile')
         //->with('jobs', $jobs)
@@ -58,21 +59,89 @@ class ProfilePageController extends Controller
     { 
         $logged_user_id = Auth::user()->id; 
         $user_info = UserInfo::find($logged_user_id); 
-        $user = user::find($user_info->user_id); 
+        $user = user::find($user_info->user_id);
+        $freelancer_info = FreelancerInfo::where('user_info_id', '=', $logged_user_id)->get();
 
         return View::make('account') 
-        ->with('user', $user); 
+        ->with('user', $user)
+        ->with('freelancer_info', $freelancer_info);
     } 
 
     public function editInfo() 
     { 
         $logged_user_id = Auth::user()->id; 
         $user_info = UserInfo::find($logged_user_id); 
-        $user = user::find($user_info->user_id); 
+        $user = user::find($user_info->user_id);
+        $freelancer_info = FreelancerInfo::where('user_info_id', '=', $logged_user_id)->get();
 
         return View::make('info') 
-        ->with('user_info', $user_info);
+        ->with('user_info', $user_info)
+        ->with('freelancer_info', $freelancer_info);
     } 
+
+    public function viewSkill() 
+    { 
+        $logged_user_id = Auth::user()->id; 
+        $user_info = UserInfo::find($logged_user_id); 
+        $user = user::find($user_info->user_id);
+        $freelancer_info = FreelancerInfo::where('user_info_id', '=', $logged_user_id)->get();
+
+        $skill = new FreelancerInfoSkill;
+        $skill->freelancer_info_id = $logged_user_id;
+        $skill->skill = Input::get('skill');
+        $skills = FreelancerInfoSkill::where('freelancer_info_id', $logged_user_id)->get();
+
+        return View::make('skill') 
+        ->with('user_info', $user_info)
+        ->with('skills', $skills)
+        ->with('freelancer_info', $freelancer_info);
+    }
+
+    public function deleteSkill()
+    {
+
+        $freelancer_info_id = Input::get('freelancer_id');
+        $skill = Input::get('skill');
+        DB::table('freelancer_info_skill')
+        ->where('freelancer_info_id', '=', $freelancer_info_id)
+        ->where('skill', '=', $skill)
+        ->delete();
+
+        $logged_user_id = Auth::user()->id;
+        $user_info = UserInfo::find($logged_user_id);
+        $skills = FreelancerInfoSkill::where('freelancer_info_id', $logged_user_id)->get();
+
+        return Redirect::to('/profile/view/skill')
+        ->with('user_info', $user_info)
+        ->with('skills', $skills);
+    }
+
+    public function createSkill()
+    {
+        $logged_user_id = Auth::user()->id; 
+        $user_info = UserInfo::find($logged_user_id); 
+        $user = user::find($user_info->user_id);
+        $freelancer_info = FreelancerInfo::where('user_info_id', '=', $logged_user_id)->get();
+
+        return View::make('skillForm')
+        ->with('freelancer_info', $freelancer_info);
+    }
+
+    public function addSkill()
+    {
+        $logged_user_id = Auth::user()->id;
+        $user_info = UserInfo::find($logged_user_id);
+        $skills = FreelancerInfoSkill::where('freelancer_info_id', $logged_user_id)->get();
+
+        $freelancer_info_skill = new FreelancerInfoSkill;
+        $freelancer_info_skill->freelancer_info_id = $logged_user_id;
+        $freelancer_info_skill->skill = Input::get('skill');
+        $freelancer_info_skill->save();
+
+        return Redirect::to('/profile/view/skill')
+        ->with('user_info', $user_info)
+        ->with('skills', $skills);
+    }
 
     public function updateAccount()  
     { 

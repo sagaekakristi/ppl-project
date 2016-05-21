@@ -11,8 +11,6 @@
 
 <?php
 
-$jobs = App\Job::where('freelancer_info_id', $users->id)->get();
-
 //Method agar upah mudah dibaca 
 function convertToCurrency($uang) {
     $number = (string) $uang;
@@ -76,6 +74,7 @@ function convertToCurrency($uang) {
         </tr>
         @endforeach
     </table>
+    <div class="pagination"> {{ $jobs->links() }} </div>
     @else
     <div class="col-md-12" style="background-color: white; height: 100px; text-align: center;">
         <br>

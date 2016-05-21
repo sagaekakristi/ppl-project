@@ -31,17 +31,16 @@ Route::group(['middleware' => ['web']], function () {
     Route::resource('/message', 'MessagingController', ['only' => ['index', 'create', 'store', 'show']]);
 });
 
-Route::group(['middleware' => ['web']], function () {
-    Route::get('/freelancer/createinfo', 'FreelancerInfoController@create');
-    Route::post('/freelancer/store', 'FreelancerInfoController@store');
-});
-
 Route::group(['middleware' => ['web']], function () { 
     Route::get('/profile', 'ProfilePageController@index'); 
     Route::get('/profile/edit/account', 'ProfilePageController@editAccount'); 
     Route::get('/profile/edit/info', 'ProfilePageController@editInfo'); 
+    Route::get('/profile/view/skill', 'ProfilePageController@viewSkill');
+    Route::post('/profile/delete/skill', 'ProfilePageController@deleteSkill');
     Route::put('/profile/update/account', 'ProfilePageController@updateAccount'); 
     Route::put('/profile/update/info', 'ProfilePageController@updateInfo');
+    Route::get('/profile/create/skill', 'ProfilePageController@createSkill');
+    Route::post('/profile/add/skill', 'ProfilePageController@addSkill');
     Route::put('/profile/update/upload', 'ProfilePageController@upload'); 
 }); 
 
