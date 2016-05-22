@@ -12,6 +12,11 @@
 	<!-- Custom CSS -->
 	<link href="{{url('/assets/css/header.css')}}" rel="stylesheet">
 </head>
+<?php 
+if(!(Auth::guest())) { 
+	$FreelancerInfo = App\FreelancerInfo::where('user_info_id', '=', Auth::user()->id)->get(); 
+} 
+?> 
 <body>
 	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container-fluid">
@@ -38,10 +43,6 @@
 					@if (Auth::guest())
 					<li><a href="{{ url('/') }}" style="color: #D5EDF5;">Get Started</a></li>
 					<li><a href="{{ url('/login') }}" style="color: #D5EDF5;"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</a></li>
-					{{--@elseif (Auth::user()->id == 2)
-					<li><a href="{{ url('/logout') }}" style="background-color: #1485A3; color: #D5EDF5">Logout</a></li>
-					<li><a href="{{url('/admin/manage/user')}}" style="color: #D5EDF5;">Manage User</a></li>
-					<li><a href="{{url('/admin/manage/job')}}" style="color: #D5EDF5;">Manage Job</a></li>--}}
 					@else
 					<li class="dropdown">
 						<a href="#" style="color: #D5EDF5; background-color: #1485A3;" class="dropdown-toggle" type="button" data-toggle="dropdown">{{Auth::user()->name}}  <span class="caret"></span></a>
@@ -49,12 +50,16 @@
 							<li><a href="{{url('profile')}}" style="background-color: #1485A3; color: #D5EDF5;">Profile</a></li>
 							<li><a href="{{url('profile/edit/account')}}" style="background-color: #1485A3; color: #D5EDF5;">Edit Profile</a></li>
 							<li><a href="{{url('/message')}}" style="background-color: #1485A3; color: #D5EDF5;">Message</a></li>
+							@if(count($FreelancerInfo) > 0) 
 							<li><a href="{{url('/show-job-request')}}" style="background-color: #1485A3; color: #D5EDF5;">Job Request</a></li>
-							@if(Auth::user()->id == 2)
+							@if(Auth::user()->id != 2)
+							<li><a href="{{url('job')}}" style="background-color: #1485A3; color: #D5EDF5;">Manage Job</a></li> 
+							@endif 
+							@endif 
+							@if(Auth::user()->id == 2) 
 							<li><a href="{{url('/admin/manage/job')}}" style="background-color: #1485A3; color: #D5EDF5;">Manage Job</a></li>
 							<li><a href="{{url('/admin/manage/user')}}" style="background-color: #1485A3; color: #D5EDF5;">Manage User</a></li>
-							@else
-							<li><a href="{{url('job')}}" style="background-color: #1485A3; color: #D5EDF5;">Manage Job</a></li>
+
 							@endif
 						</ul>
 					</li>
