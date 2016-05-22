@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\SocialAccountService;
+use App\UserInfo;
 use Socialite;
 
 class SocialAuthController extends Controller
@@ -16,8 +17,8 @@ class SocialAuthController extends Controller
 		//return Socialite::driver('facebook')->redirect();
 		return Socialite::driver('facebook')
             ->scopes(['user_friends'])->redirect();
-	}   
-
+	}
+	
 	public function callback(SocialAccountService $service)
 	{
 		$providerUser = Socialite::driver('facebook')->user();
@@ -25,6 +26,11 @@ class SocialAuthController extends Controller
 		$token = $providerUser->token;
 		\Session::put('fb_user_access_token', (string) $token);
 		auth()->login($user);
-		return redirect()->to('/');
+		$userinfo = UserInfo::find($user->id);
+        if(empty($userinfo)) {
+            return redirect()->to('/profile/create/info');
+        } else {
+            return redirect()->to('/');
+        }
 	}
 }
