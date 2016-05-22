@@ -34,10 +34,9 @@ class AcceptedJobController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function freelancerIndex()
     {
         $logged_user_id = Auth::user()->id;
-        $accepted_jobs = AcceptedJob::all();
         $query = "SELECT * ";
         $query .= "FROM accepted_job ac, job j ";
         $query .= "WHERE ac.job_id = j.id and j.freelancer_info_id = ".$logged_user_id;
@@ -48,14 +47,18 @@ class AcceptedJobController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    // public function create()
-    // {
-    //     //
-    // }
+    public function seekerIndex()
+    {
+        $logged_user_id = Auth::user()->id;
+        $accepted_jobs = AcceptedJob::where('seeker_id', $logged_user_id)->get();
+
+        return View::make('job.accepted')
+            ->with('accepted_jobs', $accepted_jobs);
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -74,7 +77,7 @@ class AcceptedJobController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function freelancerShow($id)
     {
         $accepted_job = AcceptedJob::find($id);
         $logged_user_id = Auth::user()->id;
@@ -82,6 +85,7 @@ class AcceptedJobController extends Controller
         // if the accepted job with those id exist
         if($accepted_job != null){
             $job_freelancer_id = Job::find($accepted_job->job_id)->freelancer_info_id;
+
             // check if the owner of this accepted job is the logged-in user
             if($logged_user_id == $job_freelancer_id){
                 return View::make('accepted.show')
@@ -89,12 +93,43 @@ class AcceptedJobController extends Controller
             }
             // if not the owner, redirect to accepted index
             else{
-                return Redirect::to('show-job-accepted');
+                return Redirect::to('freelancer/accepted');
             }
         }
         // if the accepted job with those id does not exist
         else {
-            return Redirect::to('show-job-accepted');
+            return Redirect::to('freelancer/accepted');
+        }
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function seekerShow($id)
+    {
+        $accepted_job = AcceptedJob::find($id);
+        $logged_user_id = Auth::user()->id;
+
+        // if the accepted job with those id exist
+        if($accepted_job != null){
+
+            // check if the owner of this accepted job is the logged-in user
+            if($logged_user_id == $accepted_job->seeker_id){
+                return View::make('accepted.show')
+                    ->with('accepted_job', $accepted_job);
+            }
+            // if not the owner, redirect to accepted index
+            else{
+                return Redirect::to('seeker/accepted');
+            }
+        }
+        
+        // if the accepted job with those id does not exist
+        else {
+            return Redirect::to('seeker/accepted');
         }
         
     }
@@ -118,17 +153,6 @@ class AcceptedJobController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
     {
         //
     }
