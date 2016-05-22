@@ -32,6 +32,16 @@
             {{ Form::number('upah_min', Input::old('upah_min'), array('class' => 'form-control')) }}
         </div>
 
+        <div class="form-group">
+        <label for="category">Kategori</label>
+            <select class="form-control" id="category" name="category">
+                <option value="" selected="selected"></option>
+                @foreach ($category as $cat)
+                <option value="{{$cat->id}}">{{$cat->kategori}}</option>
+                @endforeach
+            </select>
+        </div>
+
         <button type="submit" value="Add Skill" class="btn btn-success" style="border-radius: 5px;"><i class="fa fa-plus"></i> Create Job</button>
 
         {{ Form::close() }}

@@ -115,15 +115,16 @@ class JobPageController extends Controller
 	{
 		// load the create form (app/views/nerds/create.blade.php)
 		$id = Auth::user()->id;
+		$category = Category::all();
 		if(FreelancerInfo::where('user_info_id', '=', $id)->exists()) {
-			return View::make('job.create');
+			return View('job.create')->with('category', $category);
 		}
 		else {
 			$newFreelancerInfo = new FreelancerInfo;
 			$newFreelancerInfo->user_info_id = $id;
 			$newFreelancerInfo->available = true;
 			$newFreelancerInfo->save();
-			return View::make('job.create');	
+			return View('job.create')->with('category', $category);
 		}
 		
 	}
@@ -141,7 +142,8 @@ class JobPageController extends Controller
 			'judul'		=> 'required',
 			'deskripsi'	=> 'required',
 			'upah_max'	=> 'required|numeric',
-			'upah_min'	=> 'required|numeric'
+			'upah_min'	=> 'required|numeric',
+			'category'	=> 'required'
 			);
 		$validator = Validator::make(Input::all(), $rules);
 
@@ -160,6 +162,11 @@ class JobPageController extends Controller
             	$new_job->upah_max = Input::get('upah_max');
             	$new_job->upah_min = Input::get('upah_min');
             	$new_job->save();
+
+            	$new_job_cat = new JobCategory;
+            	$new_job_cat->job_id = Job::where('judul', Input::get('judul'))->first()->id;
+            	$new_job_cat->category_id = Input::get('category');
+            	$new_job_cat->save();
 
             // redirect
             //Session::flash('message', 'Successfully created job!');
