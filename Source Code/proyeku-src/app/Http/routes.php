@@ -28,12 +28,17 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('/accept-job-request', 'JobRequestController@acceptJob');
     
     Route::get('/freelancer/accepted', 'AcceptedJobController@freelancerIndex');
-    Route::get('/freelancer/accepted/{id}', 'AcceptedJobController@freelancerShow');
     Route::post('/freelancer/accepted/requestdone', 'AcceptedJobController@freelancerRequestDone');
+    Route::get('/freelancer/accepted/{id}', 'AcceptedJobController@freelancerShow');
+    Route::get('/freelancer/accepted/{id}/edit', 'AcceptedJobController@freelancerEdit');
 
     Route::get('/seeker/accepted', 'AcceptedJobController@seekerIndex');
-    Route::get('/seeker/accepted/{id}', 'AcceptedJobController@seekerShow');
     Route::post('/seeker/accepted/requestdone', 'AcceptedJobController@seekerRequestDone');
+    Route::get('/seeker/accepted/{id}', 'AcceptedJobController@seekerShow');
+    Route::get('/seeker/accepted/{id}/edit', 'AcceptedJobController@seekerEdit');
+
+    Route::post('/freelancerseeker/update', 'AcceptedJobController@update');
+
 });
 
 Route::group(['middleware' => ['web']], function () {

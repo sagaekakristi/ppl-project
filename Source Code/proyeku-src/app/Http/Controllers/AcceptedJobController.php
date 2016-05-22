@@ -18,6 +18,8 @@ use View;
 use DB;
 use App\AcceptedJob;
 use App\Message;
+use Validator;
+use Session;
 
 class AcceptedJobController extends Controller
 {
@@ -121,6 +123,7 @@ class AcceptedJobController extends Controller
                 return View::make('accepted.seeker.show')
                     ->with('accepted_job', $accepted_job);
             }
+
             // if not the owner, redirect to accepted index
             else{
                 return Redirect::to('seeker/accepted');
@@ -134,27 +137,91 @@ class AcceptedJobController extends Controller
         
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function freelancerEdit($id)
     {
-        //
+        // get the job
+        $accepted_job = AcceptedJob::find($id);
+        $logged_user_id = Auth::user()->id;
+
+        // if the accepted job with those id exist
+        if($accepted_job != null){
+            $job_freelancer_id = Job::find($accepted_job->job_id)->freelancer_info_id;
+
+            // check if the owner of this accepted job is the logged-in user
+            if($logged_user_id == $job_freelancer_id){
+                // show the edit form and pass the nerd
+                return View::make('accepted.edit')
+                    ->with('position', 'freelancer')
+                    ->with('accepted_job', $accepted_job);
+            }
+
+            // if not the owner, redirect to accepted index
+            else{
+                return Redirect::to('seeker/accepted');
+            }
+        }
+        // if the accepted job with those id does not exist
+        else {
+            return Redirect::to('seeker/accepted');
+        }
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function seekerEdit($id)
     {
-        //
+        // get the job
+        $accepted_job = AcceptedJob::find($id);
+        $logged_user_id = Auth::user()->id;
+        // if the accepted job with those id exist
+        if($accepted_job != null){
+
+            if($logged_user_id == $accepted_job->seeker_id){
+                // show the edit form and pass the nerd
+                return View::make('accepted.edit')
+                    ->with('position', 'seeker')
+                    ->with('accepted_job', $accepted_job);
+            }
+            
+            // if not the owner, redirect to accepted index
+            else{
+                return Redirect::to('freelancer/accepted');
+            }
+        }
+        // if the accepted job with those id does not exist
+        else {
+            return Redirect::to('freelancer/accepted');
+        }
+
+        
+    }
+
+    public function update()
+    {
+        $id = Input::get('id');
+        $position = Input::get('position');
+
+        // validate
+        // read more on validation at http://laravel.com/docs/validation
+        $rules = array(
+            'rating' => 'required'
+            );
+        $validator = Validator::make(Input::all(), $rules);
+
+        // process the login
+        if ($validator->fails()) {
+            return Redirect::to($position.'/accepted'.'/'.$id.'/edit')
+            ->withErrors($validator)
+                ->withInput(Input::except('password')); // TODO: Check
+        } else {
+        // store
+            $accepted_job = AcceptedJob::find($id);
+            $accepted_job->deskripsi = Input::get('deskripsi');
+            $accepted_job->rating = Input::get('rating');
+            $accepted_job->save();
+
+        // redirect
+            Session::flash('message', 'Successfully updated detail on accepted job!');
+            return Redirect::to($position.'/accepted'.'/'.$id);
+        }
     }
 
     public function freelancerRequestDone()
@@ -167,6 +234,7 @@ class AcceptedJobController extends Controller
         if($accepted_job->seeker_confirm_done == 1){
             // ubah status accepted job ini menjadi done
             $accepted_job->status = 1;
+            $accepted_job->waktu_selesai = DB::raw('CURRENT_TIMESTAMP');
             $accepted_job->save();
         }
         // kalo freelancer belum setuju done
@@ -187,6 +255,7 @@ class AcceptedJobController extends Controller
         if($accepted_job->freelancer_confirm_done == 1){
             // ubah status accepted job ini menjadi done
             $accepted_job->status = 1;
+            $accepted_job->waktu_selesai = DB::raw('CURRENT_TIMESTAMP');
             $accepted_job->save();
         }
         // kalo freelancer belum setuju done
