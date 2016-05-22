@@ -68,6 +68,13 @@
         </div>
 
     </form>
+    @if(isset($friendmsg))
+        wkwk
+    @else
+        @foreach ($friends as $friend)
+        <div>{{$friend}}</div>
+        @endforeach
+    @endif
 
     @if(isset($message))
     <div class="bg-warning" style='padding: 20px'>{{$message}}</div>

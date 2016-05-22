@@ -18,14 +18,14 @@ class SearchController extends Controller{
         if(is_null($upah_max) || $upah_max===""){
             $upah_max = PHP_INT_MAX;
         } else 
-            $upah_max = intval($upah_max);
+        $upah_max = intval($upah_max);
         //dump($upah_max);
 
         $upah_min = $request->upah_min;
         if(is_null($upah_min)){
             $upah_min = 0;
         } else 
-            $upah_min = intval($upah_min);
+        $upah_min = intval($upah_min);
         //dump($upah_min);
 
         $kategori = $request->category;
@@ -38,23 +38,23 @@ class SearchController extends Controller{
         //dump($order);
 
         $catList = DB::table('category')
-                        -> select('kategori')
-                        -> get();
+        -> select('kategori')
+        -> get();
         //dump($catList);
 
         $jobs = DB::table('job')
-                    -> join('users', 'users.id', '=', 'job.freelancer_info_id')
-                    -> join('user_info', 'user_info.user_id', '=', 'users.id')
-                    -> join('job_category', 'job_category.job_id', '=', 'job.id')
-                    -> join('category', 'category.id', '=', 'job_category.category_id')
-                    -> select('users.name', 'user_info.alamat', 'job.judul', 'job.deskripsi', 'job.upah_max', 'job.upah_min', 'job.id', 'user_info.profile_picture_link', 'user_info.user_rating')
-                    -> where('judul', 'LIKE', '%'.$search.'%')
-                    -> where('user_info.alamat', 'LIKE', '%'.$location.'%')
-                    -> where('job.upah_max', '<=', $upah_max)
-                    -> where('job.upah_min', '>=', $upah_min)
-                    -> where('category.kategori', 'LIKE', '%'.$kategori.'%')
-                    -> orderBy($order)
-                    -> paginate(2);
+        -> join('users', 'users.id', '=', 'job.freelancer_info_id')
+        -> join('user_info', 'user_info.user_id', '=', 'users.id')
+        -> join('job_category', 'job_category.job_id', '=', 'job.id')
+        -> join('category', 'category.id', '=', 'job_category.category_id')
+        -> select('users.name', 'user_info.alamat', 'job.judul', 'job.deskripsi', 'job.upah_max', 'job.upah_min', 'job.id', 'user_info.profile_picture_link', 'user_info.user_rating')
+        -> where('judul', 'LIKE', '%'.$search.'%')
+        -> where('user_info.alamat', 'LIKE', '%'.$location.'%')
+        -> where('job.upah_max', '<=', $upah_max)
+        -> where('job.upah_min', '>=', $upah_min)
+        -> where('category.kategori', 'LIKE', '%'.$kategori.'%')
+        -> orderBy($order)
+        -> paginate(2);
                     //->get();
         //dump(count($jobs)==0);
         //dd($jobs);
@@ -69,26 +69,35 @@ class SearchController extends Controller{
             
             $friends = $graphNode["friends"];
         }
-        if( count($friends) != 0) {
-            foreach($friends as $friend) {
-                printf($friend['name']);
+
+        if( count($friends) == 0) {
+            if(count($jobs) == 0){
+                return View('search')
+                ->with('message','unexist')
+                ->with('search', $search)
+                ->with('catList', $catList)
+                ->with('friendmsg', 'null');
+            } else{
+                return View('search')
+                ->with('jobs', $jobs)
+                ->with('search', $search)
+                ->with('catList', $catList)
+                ->with('friendmsg', 'null');
             }
         } else {
-            $a = "No Friend!";
-            dd($a);
+            if(count($jobs) == 0){
+                return View('search')
+                ->with('message','unexist')
+                ->with('search', $search)
+                ->with('catList', $catList)
+                ->with('friends', $friends);
+            } else{
+                return View('search')
+                ->with('jobs', $jobs)
+                ->with('search', $search)
+                ->with('catList', $catList)
+                ->with('friends', $friends);
+            }
         }
-        
-        if(count($jobs)==0){
-            return View('search')
-            ->with('message','unexist')
-            ->with('search', $search)
-            ->with('catList', $catList);
-        } else{
-            return View('search')
-            ->with('jobs', $jobs)
-            ->with('search', $search)
-            ->with('catList', $catList);
-        }
-        
     }
 }
