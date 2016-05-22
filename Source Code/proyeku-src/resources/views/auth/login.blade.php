@@ -2,6 +2,7 @@
 
 <!-- Custom CSS -->
 <link href="{{url('/assets/css/login.css')}}" rel="stylesheet">
+<link href="{{url('/assets/css/bootstrap-social.css')}}" rel="stylesheet">
 
 @extends('layouts.header')
 @section('header')
@@ -81,10 +82,13 @@
                         <input type="submit" value="Sign Up" style="background-color: #F26151;">
                     </form>
                 </div>
+                <hr>
                 <div class="">
-                    <form action="{{url('fbred')}}">
-                        <input type="image" src="{{url('/assets/pictures/fb-logo.png')}}" style="height: 80px; width: 80px;" >
-                    </form>
+                    <div class="center-block" style="width: 100%">
+                        <a href="{{url('fbred')}}" type="submit" class="btn btn-block btn-social btn-facebook">
+                            <span class="fa fa-facebook"></span> Sign in with Facebook
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

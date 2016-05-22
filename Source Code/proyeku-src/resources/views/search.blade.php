@@ -1,5 +1,6 @@
 <!-- Custom CSS -->
 <link href="{{url('/assets/css/search.css')}}" rel="stylesheet">
+<link href="{{url('/assets/css/bootstrap-social.css')}}" rel="stylesheet">
 
 @extends('layouts.header')
 @section('header')
@@ -73,12 +74,15 @@
 </div>
 
 @if(empty($fbfriends))
-<div>
+<section>
     Login with Facebook to get friends as freelancer suggestion!
-    <form action="{{url('fbred')}}">
-        <input type="image" src="{{url('/assets/pictures/fb-logo.png')}}" style="height: 80px; width: 80px;" >
-    </form>
-</div>
+    <div class="center-block" style="width: 25%">
+        <a href="{{url('fbred')}}" type="submit" class="btn btn-block btn-social btn-facebook">
+            <span class="fa fa-facebook"></span> Sign in with Facebook
+        </a>
+    </div>
+    <div class="topspace"></div>
+</section>
 @endif
 
 @if(!empty($recomendedJobs))
