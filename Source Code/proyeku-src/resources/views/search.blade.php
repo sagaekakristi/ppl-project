@@ -135,8 +135,11 @@
 @endforeach
 @endif
 
-@if(empty($jobs))
-<div class="bg-warning" style='padding: 20px'>No job!</div>
+@unless (count($jobs))
+<div class="bg-warning" style='padding: 20px'>
+    Unfortunately no freelancer found.
+    Try different keyword.
+</div>
 @else
 @foreach ($jobs as $job)
 <div class="jumbotron">
@@ -185,6 +188,6 @@
 </div>
 @endforeach
 {!! $jobs->links() !!}
-@endif
+@endunless
 </div>
 @stop
