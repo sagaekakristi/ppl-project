@@ -3,8 +3,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use DB;
+use Session;
+use Facebook;
 class SearchController extends Controller{
-    public function search(Request $request){
+    public function search(Request $request, Facebook $fb){
 
         $search = $request->search;
         //dump($search);
@@ -57,6 +59,25 @@ class SearchController extends Controller{
         //dump(count($jobs)==0);
         //dd($jobs);
 
+        if (Session::has('fb_user_access_token')) {
+            try {
+                $response = $fb->get('/me?fields=friends', Session::get('fb_user_access_token'));
+            } catch(\Facebook\Exceptions\FacebookSDKException $e) {
+                dd($e->getMessage());
+            }
+            $graphNode = $response->getGraphObject();
+            
+            $friends = $graphNode["friends"];
+        }
+        if( count($friends) != 0) {
+            foreach($friends as $friend) {
+                printf($friend['name']);
+            }
+        } else {
+            $a = "No Friend!";
+            dd($a);
+        }
+        
         if(count($jobs)==0){
             return View('search')
             ->with('message','unexist')
@@ -68,5 +89,6 @@ class SearchController extends Controller{
             ->with('search', $search)
             ->with('catList', $catList);
         }
+        
     }
 }
