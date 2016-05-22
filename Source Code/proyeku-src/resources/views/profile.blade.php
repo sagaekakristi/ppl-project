@@ -102,126 +102,128 @@ function convertToCurrency($uang) {
 					{{$users->name}} has no any special skills at this time
 					@else
 					<ul>
-					@foreach($skills as $skill)
+						@foreach($skills as $skill)
 						<li>{{ $skill->skill }}
-					@endforeach
-					</ul>
-					@endif
+							@endforeach
+						</ul>
+						@endif
 
+					</div>
 				</div>
-			</div>
 
-			<div class="col-md-12 headline">
-				<h1>Services Opened</h1>
-				<hr class="hr">
-				<div class="row" style="text-align: center;">
-					@if($allJobOpen != "[]")
-					<?php $j = 1; ?>
-					<div class="col-md-12">
-						@foreach($allJobOpen as $list) 
-						<div class="col-md-3" style="margin-bottom: 10px;"> 
-							<table class="table" style="text-align: center;">
-								<tr style="height: 100px;">
-									<td style="font-size: 18px;"> 
-										{{ $list['judul'] }}
-									</td>
-								</tr>
-								<tr style="height: 120px; text-align: center;"> 
-									<td style="font-size: 15px;"> 
-										{{ $list['deskripsi'] }}
-									</td>
-								</tr>
-								<tr style="height: 100px;">
-									<td style="font-size: 15px;"> 
-										Kategori:
-										<br>
-										<?php $category = findAllCategoryByJobId($list['id']); ?>
-										@if(count($category))
-										@foreach($category as $category)
-										{!!categoryIdToName($category['category_id'])!!}
-										@endforeach
-										@else
-										-
-										@endif
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target=#<?php echo $j; ?>>View Details</button> 
-									</td> 
-								</tr>
-							</table>
-						</div>
-						<!-- Modal -->
-						<div id=<?php print $j; ?> class="modal fade" role="dialog">
-							<div class="modal-dialog">
-								<!-- Modal content-->
-								<div class="modal-content">
-									<div class="modal-header">
-										<button type="button" class="close" data-dismiss="modal">&times;</button>
-										<h4 class="modal-title">Job Detail</h4>
-									</div>
-									<div class="modal-body">
-										<table class="table">
-											<tr>
-												<td>
-													Judul
-												</td>
-												<td>
-													: {{ $list['judul'] }}
-												</td>
-											</tr>
-											<tr>
-												<td>
-													Deskripsi
-												</td>
-												<td>
-													: {{ $list['deskripsi'] }}
-												</td>
-											</tr>
-											<tr>
-												<td>
-													Kategori
-												</td>
-												<td>
-													: <?php $category = findAllCategoryByJobId($list['id']); ?>
-													@if(count($category))
-													@foreach($category as $category)
-													{!!categoryIdToName($category['category_id'])!!}
-													@endforeach
-													@else
-													-
-													@endif
-												</td>
-											</tr>
-											<tr>
-												<td>
-													Upah
-												</td>
-												<td>
-													: Rp {{ convertToCurrency($list['upah_min']) }} - Rp {{ convertToCurrency($list['upah_max']) }}
-												</td>
-											</tr>
-										</table>
-										<div> 
-											<?php $id = getJobId($list['id']); ?>
-											<a href="{{url('job/'.$id)}}" type="button" class="btn btn-danger btn-md">Pesan dan Kontak</a> 
+				<div class="col-md-12 headline">
+					<h1>Services Opened</h1>
+					<hr class="hr">
+					<div class="row" style="text-align: center;">
+						@if($allJobOpen != "[]")
+						<?php $j = 1; ?>
+						<div class="col-md-12">
+							@foreach($allJobOpen as $list) 
+							<div class="col-md-3" style="margin-bottom: 10px;"> 
+								<table class="table" style="text-align: center;">
+									<tr style="height: 100px;">
+										<td style="font-size: 18px;"> 
+											{{ $list['judul'] }}
+										</td>
+									</tr>
+									<tr style="height: 120px; text-align: center;"> 
+										<td style="font-size: 15px;"> 
+											{{ $list['deskripsi'] }}
+										</td>
+									</tr>
+									<tr style="height: 100px;">
+										<td style="font-size: 15px;"> 
+											Kategori:
+											<br>
+											<?php $category = findAllCategoryByJobId($list['id']); ?>
+											@if(count($category))
+											@foreach($category as $category)
+											{!!categoryIdToName($category['category_id'])!!}
+											@endforeach
+											@else
+											-
+											@endif
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target=#<?php echo $j; ?>>View Details</button> 
+										</td> 
+									</tr>
+								</table>
+							</div>
+							<!-- Modal -->
+							<div id=<?php print $j; ?> class="modal fade" role="dialog">
+								<div class="modal-dialog">
+									<!-- Modal content-->
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal">&times;</button>
+											<h4 class="modal-title">Job Detail</h4>
+										</div>
+										<div class="modal-body">
+											<table class="table">
+												<tr>
+													<td>
+														Judul
+													</td>
+													<td>
+														: {{ $list['judul'] }}
+													</td>
+												</tr>
+												<tr>
+													<td>
+														Deskripsi
+													</td>
+													<td>
+														: {{ $list['deskripsi'] }}
+													</td>
+												</tr>
+												<tr>
+													<td>
+														Kategori
+													</td>
+													<td>
+														: <?php $category = findAllCategoryByJobId($list['id']); ?>
+														@if(count($category))
+														@foreach($category as $category)
+														{!!categoryIdToName($category['category_id'])!!}
+														@endforeach
+														@else
+														-
+														@endif
+													</td>
+												</tr>
+												<tr>
+													<td>
+														Upah
+													</td>
+													<td>
+														: Rp {{ convertToCurrency($list['upah_min']) }} - Rp {{ convertToCurrency($list['upah_max']) }}
+													</td>
+												</tr>
+											</table>
+											<div> 
+												@if(isset($id) && $id != Auth::user()->id) 
+												<?php $id = getJobId($list['id']); ?>
+												<a href="{{url('job/'.$id)}}" type="button" class="btn btn-danger btn-md">Pesan dan Kontak</a> 
+												@endif
+											</div>
 										</div>
 									</div>
 								</div>
+								<?php $j++; ?>
 							</div>
-							<?php $j++; ?>
+							@endforeach
 						</div>
-						@endforeach
+						@else
+						<div class="col-md-12">
+							<span style="float: left;">{{ $users->name }} has not open any job at this time</span>
+						</div>
+						@endif
 					</div>
-					@else
-					<div class="col-md-12">
-						<span style="float: left;">{{ $users->name }} has not open any job at this time</span>
-					</div>
-					@endif
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
-@stop
+	@stop

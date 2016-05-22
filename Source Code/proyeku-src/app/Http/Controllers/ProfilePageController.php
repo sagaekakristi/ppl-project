@@ -243,4 +243,25 @@ class ProfilePageController extends Controller
             return Redirect::to('/profile'); 
         }
     }
+
+    public function directToProfile($id) { 
+        $user_info = UserInfo::find($id); 
+        $users = User::find($id); 
+        
+        $alamat = $user_info->alamat; 
+        $tanggal_lahir = $user_info->tanggal_lahir; 
+        $jenis_kelamin = $user_info->jenis_kelamin; 
+        $nama = $users->name; 
+        
+        $user_info = UserInfo::find($id); 
+        $freelancer_info = FreelancerInfo::find($user_info->user_id); 
+        
+        $skills = FreelancerInfoSkill::where('freelancer_info_id', $id)->get(); 
+        
+        return View::make('profile') 
+        ->with('user_info', $user_info) 
+        ->with('users', $users) 
+        ->with('skills', $skills) 
+        ->with('id', $id); 
+    } 
 }

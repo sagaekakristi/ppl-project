@@ -73,7 +73,7 @@
 					@endforeach
 				</table>
 				<div>
-					<a href="/admin/manage/job/create" class="btn btn-success">Add job</a>
+					<a href="/admin/manage/job/create" class="btn btn-success"><i class="fa fa-plus"></i> Add job</a>
 				</div>
 				<div class="pagination"> {{ $jobs->links() }} </div>
 			</div>
