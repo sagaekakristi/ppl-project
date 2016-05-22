@@ -58,11 +58,14 @@ class SearchController extends Controller{
         -> where('job.upah_min', '>=', $upah_min)
         -> where('category.kategori', 'LIKE', '%'.$kategori.'%')
         -> orderBy($order)
-        -> paginate(2);
+        -> paginate(10);
         //-> get();
                     //->get();
         //dump(count($jobs)==0);
         //dd($jobs);
+
+        $recomendedJobs = array();
+        $fbfriends = array();
 
         if (Session::has('fb_user_access_token')) {
             try {
@@ -75,8 +78,6 @@ class SearchController extends Controller{
             $fbfriends = json_decode($graphNode["friends"], true);
         }
 
-        $recomendedJobs = array();
-
         foreach ($fbfriends as $fbfriend) {
             $friendSocAccs = SocialAccount::where('provider_user_id', $fbfriend['id'])->get();
             foreach($friendSocAccs as $friendSocAcc) {
@@ -85,6 +86,7 @@ class SearchController extends Controller{
                     foreach($jobs as $job) {
                         if($job->user_id == $friendAcc->id) {
                             array_push($recomendedJobs, $job);
+                            $jobs->forget($jobs->search($job));
                             // $a = 'WKWK';
                             // dd($a);
                         }
@@ -92,8 +94,6 @@ class SearchController extends Controller{
                 }
             }
         }
-
-        //dd($recomendedJobs);
 
         return View('search')
         ->with('jobs', $jobs)
