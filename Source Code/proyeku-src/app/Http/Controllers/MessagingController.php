@@ -36,9 +36,9 @@ class MessagingController extends Controller
         $logged_user_id = Auth::user()->id;
         $messages = Message::where('receiver_user_id', $logged_user_id)->get();
 
-        $query = "SELECT * ";
-        $query .= "FROM message ";
-        $query .= "WHERE receiver_user_id = ".$logged_user_id." ";
+        $query = "SELECT m.id, m.sender_user_id, m.receiver_user_id, m.message_content, m.created_at, u.name ";
+        $query .= "FROM message m, users u ";
+        $query .= "WHERE receiver_user_id = ".$logged_user_id." and u.id = m.sender_user_id ";
         $query .= "ORDER BY created_at DESC ";
         $messages = DB::select(DB::raw($query));
 

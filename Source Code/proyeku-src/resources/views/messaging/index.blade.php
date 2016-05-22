@@ -23,7 +23,7 @@
 			@foreach($messages as $a_message) 
 			<tr> 
 				<td> 
-					{{ $a_message->sender_user_id }}</a> 
+					{{ $a_message->name }}</a> 
 				</td> 
 				<td> 
 					{{ $a_message->message_content }} 
@@ -41,7 +41,7 @@
 					?> 
 				</td> 
 				<td> 
-					<a type="button" href="{{ URL::to('message/' . $a_message->sender_user_id) }}" class="btn btn-success">View</a> 
+					<a type="button" href="{{ URL::to('message/' . $a_message->sender_user_id) }}" class="btn btn-success">View Conversation</a> 
 				</td> 
 			</tr> 
 			@endforeach 
