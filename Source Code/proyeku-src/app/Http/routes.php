@@ -45,6 +45,10 @@ Route::group(['middleware' => ['web']], function () {
     Route::resource('/message', 'MessagingController', ['only' => ['index', 'create', 'store', 'show']]);
 });
 
+Route::group(['middleware' => ['web']], function () {
+    Route::get('/notification', 'NotificationController@index');
+});
+
 Route::group(['middleware' => ['web']], function () { 
     Route::get('/profile', 'ProfilePageController@index');
     Route::get('/profile/edit/account', 'ProfilePageController@editAccount');
@@ -64,6 +68,7 @@ Route::group(['middleware' => ['web']], function () {
 Route::group(['middleware' => ['web']], function () {
 
     Route::resource('/admin/manage/user', 'AdminUserController');
+    Route::resource('/admin/manage/user/search', 'AdminUserController@index');
     Route::resource('/admin/manage/job', 'AdminJobController');
 
 });

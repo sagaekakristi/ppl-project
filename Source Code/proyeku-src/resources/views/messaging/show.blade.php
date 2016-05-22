@@ -12,43 +12,27 @@
 	<br>
 	<div>
 		<div class="col-md-6" style="float: left; background-color: white; border-radius: 10px; margin-bottom: 5px;">
-			@foreach($messages_received as $a_message)
+		@foreach($messages as $a_message)
+		@if($a_message->sender_user_id == Auth::user()->id)
+			<h3> You </h3>
+		@else
 			<h3> {{ $sender_name }}</h3>
-			<?php 
-			$time = $a_message->created_at;
-			$arrayTime = (explode(' ', $time, 2));
-			echo $arrayTime[0].', ';
-			?>
-
-			<?php
-			echo $arrayTime[1];
-			?>
-			<hr style="width: 100%; height: 1px; background-color: #E3E7EA;">
-
-			<p style="font-size: 17px;">{{ $a_message->message_content }}</p>
-			<br>
-			@endforeach
-		</div>
-		@if($messages_sent != "[]")
-		<div class="col-md-6 col-md-offset-3" style="float: right; background-color: white; border-radius: 10px; margin-bottom: 20px;">
-			@foreach($messages_sent as $a_message)
-			<h3> {{ $account_name }}</h3>
-			<?php 
-			$time = $a_message->created_at;
-			$arrayTime = (explode(' ', $time, 2));
-			echo $arrayTime[0].', ';
-			?>
-
-			<?php
-			echo $arrayTime[1];
-			?>
-			<hr style="width: 100%; height: 1px; background-color: #E3E7EA;">
-
-			<p style="font-size: 17px;">{{ $a_message->message_content }}</p>
-			<br>
-			@endforeach
-		</div>
 		@endif
+		<?php 
+		$time = $a_message->created_at;
+		$arrayTime = (explode(' ', $time, 2));
+		echo $arrayTime[0].', ';
+		?>
+
+		<?php
+		echo $arrayTime[1];
+		?>
+		<hr style="width: 100%; height: 1px; background-color: #E3E7EA;">
+
+		<p style="font-size: 17px;">{{ $a_message->message_content }}</p>
+		<br>
+		@endforeach
+		</div>
 
 		{{ Form::open(array('url' => 'message')) }}
 		{{ Form::hidden('to_id', $sender_user_id) }}

@@ -18,6 +18,7 @@ use View;
 use DB;
 use App\AcceptedJob;
 use App\Message;
+use App\Notification;
 
 class JobRequestController extends Controller
 {
@@ -49,6 +50,26 @@ class JobRequestController extends Controller
 				$newJobRequest->save();	
 
 				// send message from seeker to freelancer
+				$logged_user_id = Auth::user()->id;
+				if($message != ''){
+					$freelancer_info_id = Job::find($job_id)->freelancer_info_id;
+					$job_owner_user_id = $freelancer_info_id;
+
+					$new_message = new Message;
+			        $new_message->sender_user_id = $logged_user_id;
+			        $new_message->receiver_user_id = $job_owner_user_id;
+			        $new_message->message_content = $message;
+			        $new_message->save();
+				}
+
+				// add notification to the freelacer
+				$freelancer_id = User::find(FreelancerInfo::find(Job::find($job_id)->freelancer_info_id)->user_info_id)->id;
+				$seeker_name = User::find($seeker_id)->name;
+				$job_name = Job::find($job_id)->judul;
+				$notification = new Notification;
+		    	$notification->user_id = $freelancer_id;
+		    	$notification->notif = "Anda mendapat tawaran job dari ".$seeker_name." untuk job ".$job_name;
+		    	$notification->save();
 			}
 			else{ 
 				// if the seeker is the owner itself!
@@ -58,19 +79,6 @@ class JobRequestController extends Controller
 		else{
 			// seeker already requested this job
 			// mungkin mau nambah session info disini
-		}
-
-		// store
-		if($message != ''){
-			$logged_user_id = Auth::user()->id;
-			$freelancer_info_id = Job::find($job_id)->freelancer_info_id;
-			$job_owner_user_id = $freelancer_info_id;
-
-			$new_message = new Message;
-	        $new_message->sender_user_id = $logged_user_id;
-	        $new_message->receiver_user_id = $job_owner_user_id;
-	        $new_message->message_content = $message;
-	        $new_message->save();
 		}
 
 		return Redirect::to('job/'.$job_id); // need revise into calling JobPageController controller to be more scalable
@@ -138,6 +146,16 @@ class JobRequestController extends Controller
 		$query = "DELETE FROM job_request ";
         $query = $query."WHERE job_id = " . $job_id . " and seeker_id = " . $seeker_id;
         DB::select(DB::raw($query));
+
+        // add notification to the freelacer
+		$freelancer_id = User::find(FreelancerInfo::find(Job::find($job_id)->freelancer_info_id)->user_info_id)->id;
+		$freelancer_name = User::find($freelancer_id)->name;
+		$job_name = Job::find($job_id)->judul;
+
+		$notification = new Notification;
+    	$notification->user_id = $seeker_id;
+    	$notification->notif = "Tawaran job ".$job_name." telah diterima oleh freelancer ".$freelancer_name;
+    	$notification->save();
 
 		return Redirect::to('show-job-request/');
 	}
