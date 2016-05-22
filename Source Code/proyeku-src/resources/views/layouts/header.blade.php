@@ -49,7 +49,6 @@ if(!(Auth::guest())) {
 						<ul class="dropdown-menu" style="margin-top: 30px; background-color: #1485A3;">
 							<li><a href="{{url('profile')}}" style="background-color: #1485A3; color: #D5EDF5;">Profile</a></li>
 							<li><a href="{{url('profile/edit/account')}}" style="background-color: #1485A3; color: #D5EDF5;">Edit Profile</a></li>
-							<li><a href="{{url('/notification')}}" style="background-color: #1485A3; color: #D5EDF5;">Notification</a></li>
 							<li><a href="{{url('/message')}}" style="background-color: #1485A3; color: #D5EDF5;">Message</a></li>
 							@if(count($FreelancerInfo) > 0) 
 							<li><a href="{{url('/show-job-request')}}" style="background-color: #1485A3; color: #D5EDF5;">Job Request</a></li>
@@ -77,6 +76,7 @@ if(!(Auth::guest())) {
 							</div>
 						</form>
 					</li>
+					<li><a href="{{url('/notification')}}" style="background-color: #1485A3;"><i class="fa fa-bell"></i></a></li>
 				</ul>
 			</div>
 		</div>

@@ -8,7 +8,6 @@
 
 @section('content')
 
-
 <div class="container" style="margin-bottom: 30px;">
 	<h1 style="color: #3D566E; font-family: Titillium Web">Accepted Jobs</h1>
 	<br>
@@ -16,21 +15,29 @@
 		@if(count($accepted_jobs) > 0)
 		<table class="table"> 
 			<tr> 
+				<th>Seeker</th>
 				<th>Job Id</th> 
-				<th>From</th> 
+				<th>Job Name</th>
 				<th>Accepted Date</th> 
 				<th>Accepted Time</th> 
 				<th></th>
 			</tr> 
 			@foreach($accepted_jobs as $a_accepted_job) 
 			<tr> 
-				<td>{{ $a_accepted_job->job_id }}</td>
 				<td>
-					<?php $user = App\User::where('id', $a_accepted_job->seeker_id)->get()->first(); 
+					<?php 
+					$user = App\User::where('id', $a_accepted_job->seeker_id)->get()->first(); 
 					echo $user['name'];
 					?>
 
-				</td> 
+				</td>
+				<td>{{ $a_accepted_job->job_id }}</td>
+				<td>
+					<?php 
+					$jobName = App\Job::where('id', $a_accepted_job->job_id)->get()->first();
+					echo $jobName['judul'];
+					?>
+				</td>
 				<td> 
 					<?php  
 					$time = $a_accepted_job->waktu_mulai; 

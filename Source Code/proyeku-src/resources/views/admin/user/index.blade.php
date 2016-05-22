@@ -10,10 +10,15 @@
 <div class="container-fluid" id="body">
 	<div>
 		<h1 style="font-family: Titillium Web;">List Of All Users</h1>
-		{{Form::open(array('url' => '/admin/manage/user/search'))}}
-		{{Form::label('search', 'Search')}}
-		{{Form::text('search', Input::old('search'), array('class' => 'form-control'))}}
-		{{Form::submit('search', array('class' => 'btn'))}}
+		<div class="col-md-4 col-md-offset-4">
+			{{Form::open(array('url' => '/admin/manage/user/search'))}}
+			<div class="input-group"> 
+				{{Form::text('search', Input::old('search'), array('class' => 'form-control', 'placeholder' => 'Search user here...'))}}
+				<div class="input-group-btn">
+					<button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+				</div>
+			</div>
+		</div>
 		{{Form::close()}}
 		<div>
 			<table class="table table-hover table-condensed">
@@ -47,7 +52,7 @@
 					@endforeach
 				</table>
 				<div>
-					<a href="/admin/manage/user/create" class="btn btn-success">Add user</a>
+					<a href="/admin/manage/user/create" class="btn btn-success"><i class="fa fa-plus"></i> Add user</a>
 				</div>
 				<div class="pagination"> {{ $users->links() }} </div>
 			</div>

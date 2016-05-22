@@ -92,25 +92,24 @@ function convertToCurrency($uang) {
 			</tr>
 		</table>
 
-		@if(Auth::user() != null)
+		<div class="col-md-10 col-md-offset-1" style="text-align: center;">
+			@if(Auth::user() != null)
 			@if($show_request_button == true)
-				<h2>Request this Job</h2>
-				{{ Form::open(array('action'=>'JobRequestController@requestJob', 'method' => 'post')) }}
-				{{ Form::hidden('job_id', $job_id) }}
-				{{ Form::hidden('seeker_id', Auth::user()->id) }}
+			{{ Form::open(array('action'=>'JobRequestController@requestJob', 'method' => 'post')) }}
+			{{ Form::hidden('job_id', $job_id) }}
+			{{ Form::hidden('seeker_id', Auth::user()->id) }}
 
-				{{ Form::label('message', 'Pesan Tambahan') }}
-				{{ Form::text('message', Input::old('deskripsi'), array('class' => 'form-control')) }}
-
-				{{ Form::submit('Request this Job!', array('class' => 'btn btn-success')) }}
-				{{ Form::close() }}
+			{{ Form::textarea('message', Input::old('deskripsi'), array('class' => 'form-control', 'placeholder' => 'Write additional message here... (optional)', 'style' => 'height: 100px;')) }}
+			<br>
+			<button class="btn btn-success" type="submit" style="border-radius: 5px;">Request Job</button>
+			{{ Form::close() }}
 			@elseif($this_is_the_owner == false)
-				You have send your request for this job!
+			You have send your request for this job!
 			@endif
-		@else
+			@else
 			You need to login to request this job.
-		@endif
-
+			@endif
+		</div>
 	</div>
 </div>
 @stop
