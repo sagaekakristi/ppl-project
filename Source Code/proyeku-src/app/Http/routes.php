@@ -28,8 +28,8 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('/accept-job-request', 'JobRequestController@acceptJob');
     
     //Route::get('/show-job-accepted', 'JobRequestController@showAllAcceptedJob');
-    Route::get('/show-job-accepted', 'AcceptedJobController@index');
-    
+    Route::get('/accepted', 'AcceptedJobController@index');
+    Route::get('/accepted/{id}', 'AcceptedJobController@show');
 });
 
 Route::group(['middleware' => ['web']], function () {

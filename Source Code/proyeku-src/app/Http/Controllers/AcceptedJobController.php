@@ -52,10 +52,10 @@ class AcceptedJobController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
-    }
+    // public function create()
+    // {
+    //     //
+    // }
 
     /**
      * Store a newly created resource in storage.
@@ -63,10 +63,10 @@ class AcceptedJobController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
-    }
+    // public function store(Request $request)
+    // {
+    //     //
+    // }
 
     /**
      * Display the specified resource.
@@ -76,7 +76,27 @@ class AcceptedJobController extends Controller
      */
     public function show($id)
     {
-        //
+        $accepted_job = AcceptedJob::find($id);
+        $logged_user_id = Auth::user()->id;
+
+        // if the accepted job with those id exist
+        if($accepted_job != null){
+            $job_freelancer_id = Job::find($accepted_job->job_id)->freelancer_info_id;
+            // check if the owner of this accepted job is the logged-in user
+            if($logged_user_id == $job_freelancer_id){
+                return View::make('accepted.show')
+                    ->with('accepted_job', $accepted_job);
+            }
+            // if not the owner, redirect to accepted index
+            else{
+                return Redirect::to('show-job-accepted');
+            }
+        }
+        // if the accepted job with those id does not exist
+        else {
+            return Redirect::to('show-job-accepted');
+        }
+        
     }
 
     /**
