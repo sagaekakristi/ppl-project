@@ -15,6 +15,7 @@
         @foreach ($notification as $a_notification)
             <li>{{$a_notification->notif}}
         @endforeach
+        <div class="pagination"> {{ $notification->links() }} </div>
         </ul>
     </div> 
 </div> 
