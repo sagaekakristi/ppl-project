@@ -13,15 +13,18 @@ class UpdateJobFreelancerinfoidCascade extends Migration
     public function up()
     {
         Schema::table('job_category', function ($table) {
-            $table->dropForeign(['job_id', 'category_id']);
+            $table->dropForeign(['job_id']);
             $table->foreign('job_id')
             ->references('id')->on('job')
             ->onDelete('cascade')
+            ->onUpdate('cascade')
             ->change();
 
+            $table->dropForeign(['category_id']);
             $table->foreign('category_id')
             ->references('id')->on('category')
             ->onDelete('cascade')
+            ->onUpdate('cascade')
             ->change();
         });
     }
@@ -34,15 +37,18 @@ class UpdateJobFreelancerinfoidCascade extends Migration
     public function down()
     {
         Schema::table('job_category', function ($table) {
-            $table->dropForeign(['job_id', 'category_id']);
+            $table->dropForeign(['job_id']);
             $table->foreign('job_id')
             ->references('id')->on('job')
             ->onDelete('restrict')
+            ->onUpdate('restrict')
             ->change();
 
+            $table->dropForeign(['category_id']);
             $table->foreign('category_id')
             ->references('id')->on('category')
             ->onDelete('restrict')
+            ->onUpdate('restrict')
             ->change();
         });
     }
