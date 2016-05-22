@@ -69,7 +69,12 @@
 
     </form>
     @if(isset($friendmsg))
-        wkwk
+        <div>
+            Login with Facebook to get friends as freelancer suggestion!
+            <form action="{{url('fbred')}}">
+                <input type="image" src="{{url('/assets/pictures/fb-logo.png')}}" style="height: 80px; width: 80px;" >
+            </form>
+        </div>
     @else
         @foreach ($friends as $friend)
         <div>{{$friend}}</div>
