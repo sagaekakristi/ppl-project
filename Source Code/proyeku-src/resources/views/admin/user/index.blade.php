@@ -29,9 +29,9 @@
 					<td><a href="/admin/manage/user/{{ $user->id }}">{{ $user->email }}</a></td>
 					@foreach ($userinfo as $infouser)
 					@if($user->id == $infouser->user_id)
-					<td><a href="/admin/manage/job/{{ $user->id }}">{{ $infouser->tanggal_lahir }}</a></td>
-					<td><a href="/admin/manage/job/{{ $user->id }}">{{ $infouser->alamat }}</a></td>
-					<td><a href="/admin/manage/job/{{ $user->id }}">{{ $infouser->jenis_kelamin }}</a></td>
+					<td><a href="/admin/manage/user/{{ $user->id }}">{{ $infouser->tanggal_lahir }}</a></td>
+					<td><a href="/admin/manage/user/{{ $user->id }}">{{ $infouser->alamat }}</a></td>
+					<td><a href="/admin/manage/user/{{ $user->id }}">{{ $infouser->jenis_kelamin }}</a></td>
 					@endif
 					@endforeach
 					<td class="icon"><a href="/admin/manage/user/{{ $user->id }}/edit" class="btn btn-info pull-left" style="margin-right: 3px;">Edit</a></td>
