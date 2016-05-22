@@ -54,7 +54,8 @@
                 {{ Form::label('skill', 'New Skill') }}
                 {{ Form::text('skill', Input::old('skill'), array('class' => 'form-control')) }}
             </div>
-            {{Form::submit('Add skill', array('class' => 'btn btn-success')) }}
+            <button type="submit" value="Add Skill" class="btn btn-success" style="border-radius: 5px;"><i class="fa fa-plus"></i> Add Skill</button>
+
             {{Form::close()}}
         </div> 
     </div> 

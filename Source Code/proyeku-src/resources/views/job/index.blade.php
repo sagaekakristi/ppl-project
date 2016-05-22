@@ -40,10 +40,10 @@ function convertToCurrency($uang) {
     return strrev($currency);
 }
 ?>
-<div class="container" style="margin-bottom: 100px;">
+<div class="container" id="body">
     <h1 style="font-family: Titillium Web;">List of Jobs</h1>
     <br>
-    @if($jobs != "[]")
+    @if(count($jobs) > 0)
     <table class="table">
         <tr>
             <th>Judul</th>
@@ -82,6 +82,6 @@ function convertToCurrency($uang) {
         <span style="float: center; font-size: 17px;">Oops, you have not open any job!</span>
     </div>
     @endif
-    <a class="btn btn-small btn-success" href="{{url('job/create')}}">Create Job</a>
+    <a class="btn btn-small btn-success" href="{{url('job/create')}}"><i class="fa fa-plus" aria-hidden="true"></i> Create Job</a>
 </div>
 @stop

@@ -32,7 +32,7 @@
             {{ Form::number('upah_min', Input::old('upah_min'), array('class' => 'form-control')) }}
         </div>
 
-        {{ Form::submit('Create the Job!', array('class' => 'btn btn-success')) }}
+        <button type="submit" value="Add Skill" class="btn btn-success" style="border-radius: 5px;"><i class="fa fa-plus"></i> Create Job</button>
 
         {{ Form::close() }}
     </div>
