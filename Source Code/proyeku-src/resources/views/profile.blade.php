@@ -25,9 +25,14 @@ function categoryIdToName($id) {
 	$Category = App\Category::where('id', $id)->get()->first();
 	return $Category['kategori'];
 }
-?>
 
-<?php
+$rating;
+if(isset($id)) {
+	$rating = App\AcceptedJob::where('seeker_id', $id)->get()->first();
+} else {
+	$rating = App\AcceptedJob::where('seeker_id', Auth::user()->id)->get()->first();
+}
+
 //Method agar upah mudah dibaca 
 function convertToCurrency($uang) {
 	$number = (string) $uang;
@@ -70,21 +75,17 @@ function convertToCurrency($uang) {
 				@endif
 			</div> 
 			<div class="col-md-8 col-md-offset-2" style="text-align: center;"> 
-				<h3>{{ $users->name }}</h3> 
-				<div class="star-rating">
-					<div class="star-rating__wrap">
-						<input class="star-rating__input" id="star-rating-5" type="radio" name="rating" value="5">
-						<label class="star-rating__ico fa fa-star-o fa-lg" for="star-rating-5"></label>
-						<input class="star-rating__input" id="star-rating-4" type="radio" name="rating" value="4">
-						<label class="star-rating__ico fa fa-star-o fa-lg" for="star-rating-4"></label>
-						<input class="star-rating__input" id="star-rating-3" type="radio" name="rating" value="3">
-						<label class="star-rating__ico fa fa-star-o fa-lg" for="star-rating-3"></label>
-						<input class="star-rating__input" id="star-rating-2" type="radio" name="rating" value="2">
-						<label class="star-rating__ico fa fa-star-o fa-lg" for="star-rating-2"></label>
-						<input class="star-rating__input" id="star-rating-1" type="radio" name="rating" value="1">
-						<label class="star-rating__ico fa fa-star-o fa-lg" for="star-rating-1"></label>
-					</div>
-				</div>
+				<h3>{{ $users->name }}</h3>
+				<?php
+				if($rating['rating'] > 0) {
+					for($i = 0; $i < $rating['rating']; $i++) {
+						echo '<i class="fa fa-star-o fa-2x"></i>';
+					}
+				} else {
+					echo 'Not rated yet';
+				}
+				?>
+				<br>
 				<div>
 					<h4>{{ $user_info->alamat }}</h4> 
 				</div>

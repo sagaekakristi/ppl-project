@@ -11,7 +11,7 @@
 	<h1 style="color: #3D566E; font-family: Titillium Web">Messages</h1>
 	<br>
 	<div>
-		@if($messages != "[]")
+		@if(count($messages) > 0)
 		<table class="table"> 
 			<tr> 
 				<th>From</th> 
