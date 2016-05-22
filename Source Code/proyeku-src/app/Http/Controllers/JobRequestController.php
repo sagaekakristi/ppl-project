@@ -147,12 +147,12 @@ class JobRequestController extends Controller
 	 *
 	 * @return Response
 	 */
-	public function showAllAcceptedJob()
-	{
-		$logged_user_id = Auth::user()->id;
-		$accepted_jobs = AcceptedJob::all();
+	// public function showAllAcceptedJob()
+	// {
+	// 	$logged_user_id = Auth::user()->id;
+	// 	$accepted_jobs = AcceptedJob::all();
 
-		return View::make('job.accepted')
-            ->with('accepted_jobs', $accepted_jobs);
-	}
+	// 	return View::make('job.accepted')
+ //            ->with('accepted_jobs', $accepted_jobs);
+	// }
 }

@@ -45,7 +45,7 @@ class SearchController extends Controller{
                     -> join('user_info', 'user_info.user_id', '=', 'users.id')
                     -> join('job_category', 'job_category.job_id', '=', 'job.id')
                     -> join('category', 'category.id', '=', 'job_category.category_id')
-                    -> select('users.name', 'user_info.alamat', 'job.judul', 'job.deskripsi', 'job.upah_max', 'job.upah_min', 'job.id', 'user_info.profile_picture_link')
+                    -> select('users.name', 'user_info.alamat', 'job.judul', 'job.deskripsi', 'job.upah_max', 'job.upah_min', 'job.id', 'user_info.profile_picture_link', 'user_info.user_rating')
                     -> where('judul', 'LIKE', '%'.$search.'%')
                     -> where('user_info.alamat', 'LIKE', '%'.$location.'%')
                     -> where('job.upah_max', '<=', $upah_max)
@@ -54,12 +54,14 @@ class SearchController extends Controller{
                     -> orderBy($order)
                     -> paginate(2);
                     //->get();
+        //dump(count($jobs)==0);
         //dd($jobs);
 
         if(count($jobs)==0){
             return View('search')
             ->with('message','unexist')
-            ->with('search', $search);
+            ->with('search', $search)
+            ->with('catList', $catList);
         } else{
             return View('search')
             ->with('jobs', $jobs)
