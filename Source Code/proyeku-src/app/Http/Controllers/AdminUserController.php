@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use View;
 use Input;
+use DB;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests;
 use App\User;
@@ -21,7 +22,15 @@ class AdminUserController extends Controller
     public function index()
     {
         //
-    	$users = User::paginate(5);
+        $search = Input::get('search');
+        if($search != null) {
+            $users = DB::table('users')
+            ->where('name', 'LIKE', '%'.$search.'%')
+            ->where('email', 'LIKE', '%'.$search.'%')
+            ->paginate(5);
+        } else {
+    	   $users = User::paginate(5);
+        }
     	$userinfo = UserInfo::all();
     	return View::make('admin.user.index')
     	->with('users', $users)

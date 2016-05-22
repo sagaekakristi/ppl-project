@@ -10,6 +10,11 @@
 <div class="container-fluid" id="body">
 	<div>
 		<h1 style="font-family: Titillium Web;">List Of All Users</h1>
+		{{Form::open(array('url' => '/admin/manage/user/search'))}}
+		{{Form::label('search', 'Search')}}
+		{{Form::text('search', Input::old('search'), array('class' => 'form-control'))}}
+		{{Form::submit('search', array('class' => 'btn'))}}
+		{{Form::close()}}
 		<div>
 			<table class="table table-hover table-condensed">
 				<tr>
