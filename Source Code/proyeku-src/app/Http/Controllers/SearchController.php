@@ -5,6 +5,9 @@ use Illuminate\Http\Request;
 use DB;
 use Session;
 use Facebook;
+use App\User;
+use App\SocialAccount;
+
 class SearchController extends Controller{
     public function search(Request $request, Facebook $fb){
 
@@ -47,7 +50,7 @@ class SearchController extends Controller{
         -> join('user_info', 'user_info.user_id', '=', 'users.id')
         -> join('job_category', 'job_category.job_id', '=', 'job.id')
         -> join('category', 'category.id', '=', 'job_category.category_id')
-        -> select('users.name', 'user_info.alamat', 'job.judul', 'job.deskripsi', 'job.upah_max', 'job.upah_min', 'job.id', 'user_info.profile_picture_link', 'user_info.user_rating', 'job.freelancer_info_id')
+        -> select('user_info.user_id', 'users.name', 'user_info.alamat', 'job.judul', 'job.deskripsi', 'job.upah_max', 'job.upah_min', 'job.id', 'user_info.profile_picture_link', 'user_info.user_rating')
         -> where('judul', 'LIKE', '%'.$search.'%')
         -> where('user_info.alamat', 'LIKE', '%'.$location.'%')
         -> where('job.upah_max', '<=', $upah_max)
@@ -55,6 +58,7 @@ class SearchController extends Controller{
         -> where('category.kategori', 'LIKE', '%'.$kategori.'%')
         -> orderBy($order)
         -> paginate(2);
+        //-> get();
                     //->get();
         //dump(count($jobs)==0);
         //dd($jobs);
@@ -67,10 +71,42 @@ class SearchController extends Controller{
             }
             $graphNode = $response->getGraphObject();
             
-            $friends = $graphNode["friends"];
+            $fbfriends = $graphNode["friends"];
         }
 
-        if( count($friends) == 0) {
+        foreach ($fbfriends as $fbfriend) {
+            $friendSocAccs = SocialAccount::where('provider_user_id', $fbfriend['id'])->get();
+            foreach($friendSocAccs as $friendSocAcc) {
+                $friendAccs = User::where('id', $friendSocAcc->user_id)->get();
+                foreach($friendAccs as $friendAcc) {
+                    //dd($friendAcc->name);
+                }
+            }
+        }
+
+        foreach($jobs as $job) {
+            dump($job->id);
+        }
+        
+
+        // foreach ($fbfriends as $fbfriend) {
+        //     $friendSocAccs = SocialAccount::where('provider_user_id', $fbfriend['id'])->get();
+        //     foreach($friendSocAccs as $friendSocAcc) {
+        //         $friendAccs = User::where('id', $friendSocAcc->user_id)->get();
+        //         foreach($friendAccs as $friendAcc) {
+        //             foreach($jobs as $job) {
+        //                 if($job->user_id == $friendAcc->id) {
+        //                     $a = 'WKWK';
+        //                     dd($a);
+        //                 }
+        //                 dd($job->user_id);
+        //             }
+        //             dd($friendAcc->id);
+        //         }
+        //     }
+        // }
+
+        if( count($fbfriends) == 0) {
             if(count($jobs) == 0){
                 return View('search')
                 ->with('message','unexist')
@@ -90,13 +126,13 @@ class SearchController extends Controller{
                 ->with('message','unexist')
                 ->with('search', $search)
                 ->with('catList', $catList)
-                ->with('friends', $friends);
+                ->with('fbfriends', $fbfriends);
             } else{
                 return View('search')
                 ->with('jobs', $jobs)
                 ->with('search', $search)
                 ->with('catList', $catList)
-                ->with('friends', $friends);
+                ->with('fbfriends', $fbfriends);
             }
         }
     }
