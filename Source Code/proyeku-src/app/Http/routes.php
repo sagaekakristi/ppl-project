@@ -58,6 +58,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('/profile/add/skill', 'ProfilePageController@addSkill');
     Route::post('/profile/add/info', 'ProfilePageController@addInfo');
     Route::put('/profile/update/upload', 'ProfilePageController@upload');
+    Route::resource('/profile/view', 'ProfilePageController@directToProfile'); 
 }); 
 
 Route::group(['middleware' => ['web']], function () {

@@ -76,8 +76,8 @@
             </form>
         </div>
     @else
-        @foreach ($friends as $friend)
-        <div>{{$friend}}</div>
+        @foreach ($fbfriends as $fbfriend)
+        <div>{{$fbfriend}}</div>
         @endforeach
     @endif
 

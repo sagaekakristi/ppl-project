@@ -1,26 +1,63 @@
-@foreach($messages_received as $a_message)
-<p>
-{{ $a_message->sender_user_id }}
-{{ $a_message->message_content }}
-{{ $a_message->created_at }}
-</p>
-@endforeach
+<!-- Custom CSS -->
+<link href="{{url('/assets/css/message.css')}}" rel="stylesheet">
 
-@foreach($messages_sent as $a_message)
-<p>
-{{ $a_message->sender_user_id }}
-{{ $a_message->message_content }}
-{{ $a_message->created_at }}
-</p>
-@endforeach
+@extends('layouts.header')
+@section('header')
+@parent
+@stop
 
+@section('content')
+<div class="container" id="body">
+	<h1 style="color: #3D566E; font-family: Titillium Web">Messages</h1>
+	<br>
+	<div>
+		<div class="col-md-6" style="float: left; background-color: white; border-radius: 10px; margin-bottom: 5px;">
+			@foreach($messages_received as $a_message)
+			<h3> {{ $sender_name }}</h3>
+			<?php 
+			$time = $a_message->created_at;
+			$arrayTime = (explode(' ', $time, 2));
+			echo $arrayTime[0].', ';
+			?>
 
-{{ Form::open(array('url' => 'message')) }}
-{{ Form::hidden('to_id', $sender_user_id) }}
-{{ Form::hidden('from_id', Auth::user()->id) }}
-<div class="form-group">
-    {{ Form::label('message', 'Pesan') }}
-    {{ Form::text('message', Input::old('message'), array('class' => 'form-control')) }}
+			<?php
+			echo $arrayTime[1];
+			?>
+			<hr style="width: 100%; height: 1px; background-color: #E3E7EA;">
+
+			<p style="font-size: 17px;">{{ $a_message->message_content }}</p>
+			<br>
+			@endforeach
+		</div>
+		@if($messages_sent != "[]")
+		<div class="col-md-6 col-md-offset-3" style="float: right; background-color: white; border-radius: 10px; margin-bottom: 20px;">
+			@foreach($messages_sent as $a_message)
+			<h3> {{ $account_name }}</h3>
+			<?php 
+			$time = $a_message->created_at;
+			$arrayTime = (explode(' ', $time, 2));
+			echo $arrayTime[0].', ';
+			?>
+
+			<?php
+			echo $arrayTime[1];
+			?>
+			<hr style="width: 100%; height: 1px; background-color: #E3E7EA;">
+
+			<p style="font-size: 17px;">{{ $a_message->message_content }}</p>
+			<br>
+			@endforeach
+		</div>
+		@endif
+
+		{{ Form::open(array('url' => 'message')) }}
+		{{ Form::hidden('to_id', $sender_user_id) }}
+		{{ Form::hidden('from_id', Auth::user()->id) }}
+		<div class="form-group">
+			{{ Form::textarea('message', Input::old('message'), array('class' => 'form-control', 'placeholder' => 'Reply here...', 'style' => 'height: 100px; margin-bottom: 5px;')) }}
+			{{ Form::submit('Send!', array('class' => 'btn btn-success')) }}
+		</div>
+		{{ Form::close() }}
+	</div>
 </div>
-{{ Form::submit('Send!', array('class' => 'btn btn-success')) }}
-{{ Form::close() }}
+@stop

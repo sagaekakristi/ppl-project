@@ -37,7 +37,7 @@ class MessagingController extends Controller
 
         // load the view and pass the jobs
         return View::make('messaging.index')
-            ->with('messages', $messages);
+        ->with('messages', $messages);
     }
 
     /**
@@ -82,18 +82,24 @@ class MessagingController extends Controller
         $logged_user_id = Auth::user()->id;
         $sender_user_id = $id;
         $messages_received = Message::where('receiver_user_id', $logged_user_id)
-            ->where('sender_user_id', $sender_user_id)
-            ->get();
+        ->where('sender_user_id', $sender_user_id)
+        ->get();
 
         $messages_sent = Message::where('receiver_user_id', $sender_user_id)
-            ->where('sender_user_id', $logged_user_id)
-            ->get();
+        ->where('sender_user_id', $logged_user_id)
+        ->get();
+
+        $sender_name = User::find($sender_user_id)->name; 
+        
+        $account_name = User::find($logged_user_id)->name; 
 
         // load the view and pass the jobs
         return View::make('messaging.show')
-            ->with('sender_user_id', $sender_user_id)
-            ->with('messages_received', $messages_received)
-            ->with('messages_sent', $messages_sent);
+        ->with('sender_user_id', $sender_user_id)
+        ->with('messages_received', $messages_received)
+        ->with('messages_sent', $messages_sent)
+        ->with('sender_name', $sender_name) 
+        ->with('account_name', $account_name); 
     }
 
     /**

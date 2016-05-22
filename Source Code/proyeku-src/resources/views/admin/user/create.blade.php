@@ -42,7 +42,7 @@
 				{{ Form::text('jenis_kelamin', Input::old('jenis_kelamin'), array('class' => 'form-control')) }}
 			</div>
 
-			{{ Form::submit('Add user', array('class' => 'btn btn-success')) }}
+			<button type="submit" value="Add Skill" class="btn btn-success" style="border-radius: 5px;"><i class="fa fa-plus"></i> Add User</button> 
 
 			{{ Form::close() }}
 		</div>

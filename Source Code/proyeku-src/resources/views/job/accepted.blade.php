@@ -1,5 +1,5 @@
 <!-- Custom CSS -->
-<link href="{{url('/assets/css/profile.css')}}" rel="stylesheet">
+<link href="{{url('/assets/css/message.css')}}" rel="stylesheet">
 
 @extends('layouts.header')
 @section('header')
@@ -12,13 +12,32 @@
 	<br>
 	<div>
 		@if($accepted_jobs != "[]")
-		@foreach($accepted_jobs as $a_accepted_job)
-		<p>
-			{{ $a_accepted_job->job_id }}
-			{{ $a_accepted_job->seeker_id }}
-			{{ $a_accepted_job->waktu_mulai }}
-		</p>
-		@endforeach
+		<table class="table"> 
+			<tr> 
+				<th>Job Id</th> 
+				<th>Seeker Id</th> 
+				<th>Accepted Date</th> 
+				<th>Accepted Time</th> 
+			</tr> 
+			@foreach($accepted_jobs as $a_accepted_job) 
+			<tr> 
+				<td>{{ $a_accepted_job->job_id }}</td> 
+				<td>{{ $a_accepted_job->seeker_id }}</td> 
+				<td> 
+					<?php  
+					$time = $a_accepted_job->waktu_mulai; 
+					$arrayTime = (explode(' ', $time, 2)); 
+					echo $arrayTime[0]; 
+					?> 
+				</td> 
+				<td> 
+					<?php 
+					echo $arrayTime[1]; 
+					?> 
+				</td> 
+			</tr> 
+			@endforeach 
+		</table> 
 		@else
 		<div class="col-md-12" style="margin-bottom: 165px; background-color: white; height: 100px; text-align: center;">
 			<br>

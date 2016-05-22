@@ -1,0 +1,28 @@
+@import url(https://fonts.googleapis.com/css?family=Titillium+Web);
+
+@font-face { 
+	font-family: Blenda Script; 
+	src: url('../font/Blenda Script.otf'); 
+}
+
+th {
+	color: white;
+	background-color: #1485A3;
+	border: 2px;
+}
+
+tr {
+	background-color: white;
+}
+
+tr td a {
+	color: #22313F;
+}
+
+div h1 {
+	color: #3D566E;
+}
+
+#body {
+	margin-bottom: 20px;
+}

@@ -1,5 +1,5 @@
 <!-- Custom CSS -->
-<link href="{{url('/assets/css/profile.css')}}" rel="stylesheet">
+<link href="{{url('/assets/css/message.css')}}" rel="stylesheet">
 
 @extends('layouts.header')
 @section('header')
@@ -12,13 +12,40 @@
 	<br>
 	<div>
 		@if($messages != "[]")
-		@foreach($messages as $a_message)
-		<p>
-			<a href="{{ URL::to('message/' . $a_message->sender_user_id) }}">{{ $a_message->sender_user_id }}</a>
-			{{ $a_message->message_content }}
-			{{ $a_message->created_at }}
-		</p>
-		@endforeach
+		<table class="table"> 
+			<tr> 
+				<th>From</th> 
+				<th>Message</th> 
+				<th>Date</th> 
+				<th>Time</th> 
+				<th></th> 
+			</tr> 
+			@foreach($messages as $a_message) 
+			<tr> 
+				<td> 
+					{{ $a_message->sender_user_id }}</a> 
+				</td> 
+				<td> 
+					{{ $a_message->message_content }} 
+				</td> 
+				<td> 
+					<?php  
+					$time = $a_message->created_at; 
+					$arrayTime = (explode(' ', $time, 2)); 
+					echo $arrayTime[0] 
+					?> 
+				</td> 
+				<td> 
+					<?php 
+					echo $arrayTime[1]; 
+					?> 
+				</td> 
+				<td> 
+					<a type="button" href="{{ URL::to('message/' . $a_message->sender_user_id) }}" class="btn btn-success">View</a> 
+				</td> 
+			</tr> 
+			@endforeach 
+		</table> 
 		@else
 		<div class="col-md-12" style="margin-bottom: 130px; background-color: white; height: 100px; text-align: center;">
 			<br>

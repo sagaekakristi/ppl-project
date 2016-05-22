@@ -47,7 +47,7 @@ class SearchController extends Controller{
         -> join('user_info', 'user_info.user_id', '=', 'users.id')
         -> join('job_category', 'job_category.job_id', '=', 'job.id')
         -> join('category', 'category.id', '=', 'job_category.category_id')
-        -> select('users.name', 'user_info.alamat', 'job.judul', 'job.deskripsi', 'job.upah_max', 'job.upah_min', 'job.id', 'user_info.profile_picture_link', 'user_info.user_rating')
+        -> select('users.name', 'user_info.alamat', 'job.judul', 'job.deskripsi', 'job.upah_max', 'job.upah_min', 'job.id', 'user_info.profile_picture_link', 'user_info.user_rating', 'job.freelancer_info_id')
         -> where('judul', 'LIKE', '%'.$search.'%')
         -> where('user_info.alamat', 'LIKE', '%'.$location.'%')
         -> where('job.upah_max', '<=', $upah_max)
