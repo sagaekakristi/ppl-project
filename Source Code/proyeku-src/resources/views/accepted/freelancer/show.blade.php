@@ -8,19 +8,23 @@
 
 @section('content')
 
+<?php
+$user = App\User::where('id', $accepted_job->seeker_id)->get()->first();
+?>
+
 <div class="container" style="margin-bottom: 140px;">
 	<h1>Job Detail</h1>
 	<table class="table">
 		<tr>
 			<th>Job Id</th>
-			<th>Seeker Id</th>
+			<th>From</th>
 			<th>Start Date</th>
 			<th>Start time</th>
 			<th></th>
 		</tr>
 		<tr>
 			<td>{{ $accepted_job->job_id }}</td>
-			<td>{{ $accepted_job->seeker_id }}</td>
+			<td>{{ $user['name'] }}</td>
 			<td> 
 				<?php  
 				$time = $accepted_job->waktu_mulai; 

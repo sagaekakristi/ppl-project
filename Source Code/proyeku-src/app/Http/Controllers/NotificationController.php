@@ -23,7 +23,7 @@ class NotificationController extends Controller
     {
         $logged_user_id = Auth::user()->id;
         $users = User::find($logged_user_id);
-        $notification = Notification::where('user_id', $logged_user_id)->get();
+        $notification = Notification::where('user_id', $logged_user_id)->paginate(5);
 
         return View::make('notification')
         ->with('users', $users)
