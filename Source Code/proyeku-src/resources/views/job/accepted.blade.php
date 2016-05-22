@@ -7,7 +7,9 @@
 @stop
 
 @section('content')
-<div class="container">
+
+
+<div class="container" style="margin-bottom: 30px;">
 	<h1 style="color: #3D566E; font-family: Titillium Web">Accepted Jobs</h1>
 	<br>
 	<div>
@@ -15,7 +17,7 @@
 		<table class="table"> 
 			<tr> 
 				<th>Job Id</th> 
-				<th>Seeker Id</th> 
+				<th>From</th> 
 				<th>Accepted Date</th> 
 				<th>Accepted Time</th> 
 				<th></th>
@@ -23,7 +25,12 @@
 			@foreach($accepted_jobs as $a_accepted_job) 
 			<tr> 
 				<td>{{ $a_accepted_job->job_id }}</td>
-				<td>{{ $a_accepted_job->seeker_id }}</td> 
+				<td>
+					<?php $user = App\User::where('id', $a_accepted_job->seeker_id)->get()->first(); 
+					echo $user['name'];
+					?>
+
+				</td> 
 				<td> 
 					<?php  
 					$time = $a_accepted_job->waktu_mulai; 

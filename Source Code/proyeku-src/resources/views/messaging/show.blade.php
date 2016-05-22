@@ -11,28 +11,47 @@
 	<h1 style="color: #3D566E; font-family: Titillium Web">Messages</h1>
 	<br>
 	<div>
-		<div class="col-md-6" style="float: left; background-color: white; border-radius: 10px; margin-bottom: 5px;">
 		@foreach($messages as $a_message)
 		@if($a_message->sender_user_id == Auth::user()->id)
-			<h3> You </h3>
-		@else
-			<h3> {{ $sender_name }}</h3>
-		@endif
-		<?php 
-		$time = $a_message->created_at;
-		$arrayTime = (explode(' ', $time, 2));
-		echo $arrayTime[0].', ';
-		?>
+		<div class="col-md-12">
+			<div class="col-md-6" style="float: left; background-color: white; border-radius: 10px; margin-bottom: 5px;">
+				<h3> You </h3>
+				<?php 
+				$time = $a_message->created_at;
+				$arrayTime = (explode(' ', $time, 2));
+				echo $arrayTime[0].', ';
+				?>
 
-		<?php
-		echo $arrayTime[1];
-		?>
-		<hr style="width: 100%; height: 1px; background-color: #E3E7EA;">
+				<?php
+				echo $arrayTime[1];
+				?>
+				<hr style="width: 100%; height: 1px; background-color: #E3E7EA;">
 
-		<p style="font-size: 17px;">{{ $a_message->message_content }}</p>
-		<br>
-		@endforeach
+				<p style="font-size: 17px;">{{ $a_message->message_content }}</p>
+				<br>
+			</div>
 		</div>
+		@else
+		<div class="col-md-12">
+			<div class="col-md-6" style="float: right; background-color: white; border-radius: 10px; margin-bottom: 5px;">
+				<h3> {{ $sender_name }}</h3>
+				<?php 
+				$time = $a_message->created_at;
+				$arrayTime = (explode(' ', $time, 2));
+				echo $arrayTime[0].', ';
+				?>
+
+				<?php
+				echo $arrayTime[1];
+				?>
+				<hr style="width: 100%; height: 1px; background-color: #E3E7EA;">
+
+				<p style="font-size: 17px;">{{ $a_message->message_content }}</p>
+				<br>
+			</div>
+		</div>
+		@endif
+		@endforeach
 
 		{{ Form::open(array('url' => 'message')) }}
 		{{ Form::hidden('to_id', $sender_user_id) }}
