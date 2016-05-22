@@ -18,6 +18,8 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('/fbred', 'SocialAuthController@redirect');
     Route::get('/callback', 'SocialAuthController@callback');
+
+    Route::get( '/search', 'SearchController@search');
 });
 Route::group(['middleware' => ['web']], function () {
     Route::resource('/job', 'JobPageController');
@@ -54,5 +56,3 @@ Route::group(['middleware' => ['web']], function () {
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
 });
-
-Route::get( '/search', 'SearchController@search');
