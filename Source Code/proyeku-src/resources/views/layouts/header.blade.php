@@ -68,7 +68,7 @@ if(!(Auth::guest())) {
 					<li><a href="{{ url('/logout') }}" style="background-color: #1485A3; color: #D5EDF5">Logout</a></li>
 					@endif
 					<li>
-						<form class="navbar-form" role="search" action="{{url('/searchredirect')}}">
+						<form class="navbar-form" role="search" action="{{url('/search')}}">
 							<div class="input-group">
 								<input type="text" class="form-control" placeholder="Search" name="search">
 								<div class="input-group-btn">
