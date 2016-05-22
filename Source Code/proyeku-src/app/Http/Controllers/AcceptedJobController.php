@@ -88,7 +88,7 @@ class AcceptedJobController extends Controller
 
             // check if the owner of this accepted job is the logged-in user
             if($logged_user_id == $job_freelancer_id){
-                return View::make('accepted.show')
+                return View::make('accepted.freelancer.show')
                     ->with('accepted_job', $accepted_job);
             }
             // if not the owner, redirect to accepted index
@@ -118,7 +118,7 @@ class AcceptedJobController extends Controller
 
             // check if the owner of this accepted job is the logged-in user
             if($logged_user_id == $accepted_job->seeker_id){
-                return View::make('accepted.show')
+                return View::make('accepted.seeker.show')
                     ->with('accepted_job', $accepted_job);
             }
             // if not the owner, redirect to accepted index
@@ -126,7 +126,7 @@ class AcceptedJobController extends Controller
                 return Redirect::to('seeker/accepted');
             }
         }
-        
+
         // if the accepted job with those id does not exist
         else {
             return Redirect::to('seeker/accepted');
@@ -155,5 +155,45 @@ class AcceptedJobController extends Controller
     public function update(Request $request, $id)
     {
         //
+    }
+
+    public function freelancerRequestDone()
+    {
+        $accepted_job_id = Input::get('accepted_job_id');
+        $accepted_job = AcceptedJob::find($accepted_job_id);
+        $accepted_job->freelancer_confirm_done = 1;        
+
+        // kalo seeker juga udah setuju done
+        if($accepted_job->seeker_confirm_done == 1){
+            // ubah status accepted job ini menjadi done
+            $accepted_job->status = 1;
+            $accepted_job->save();
+        }
+        // kalo freelancer belum setuju done
+        else {
+            $accepted_job->save();
+        }
+
+        return Redirect::to('freelancer/accepted/'.$accepted_job_id);
+    }
+
+    public function seekerRequestDone()
+    {
+        $accepted_job_id = Input::get('accepted_job_id');
+        $accepted_job = AcceptedJob::find($accepted_job_id);
+        $accepted_job->seeker_confirm_done = 1;        
+
+        // kalo freelancer juga udah setuju done
+        if($accepted_job->freelancer_confirm_done == 1){
+            // ubah status accepted job ini menjadi done
+            $accepted_job->status = 1;
+            $accepted_job->save();
+        }
+        // kalo freelancer belum setuju done
+        else {
+            $accepted_job->save();
+        }
+
+        return Redirect::to('seeker/accepted/'.$accepted_job_id);
     }
 }

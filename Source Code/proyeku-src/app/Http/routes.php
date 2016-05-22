@@ -29,9 +29,11 @@ Route::group(['middleware' => ['web']], function () {
     
     Route::get('/freelancer/accepted', 'AcceptedJobController@freelancerIndex');
     Route::get('/freelancer/accepted/{id}', 'AcceptedJobController@freelancerShow');
+    Route::post('/freelancer/accepted/requestdone', 'AcceptedJobController@freelancerRequestDone');
 
     Route::get('/seeker/accepted', 'AcceptedJobController@seekerIndex');
     Route::get('/seeker/accepted/{id}', 'AcceptedJobController@seekerShow');
+    Route::post('/seeker/accepted/requestdone', 'AcceptedJobController@seekerRequestDone');
 });
 
 Route::group(['middleware' => ['web']], function () {
