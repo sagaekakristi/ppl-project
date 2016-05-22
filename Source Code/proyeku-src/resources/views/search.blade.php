@@ -112,8 +112,9 @@
             </div>
         </div>
         <div class="col-md-8 text-left">
+            <span class="label label-primary">Recomended</span>
             <div>
-                <h2>{{ $recomendedJob->name }} <small>Occupation</small><br><small>{{ $recomendedJob->alamat }}</small></h2>
+                <h2>{{ $recomendedJob->name }} <small>{{--Occupation--}}</small><br><small>{{ $recomendedJob->alamat }}</small></h2>
             </div>
             <div>
                 <h3>{{ $recomendedJob->judul }}</h3>
@@ -122,7 +123,7 @@
                 </h5>
             </div>
             <div>
-                <h5>Upah:{{ $recomendedJob->upah_max }}-{{ $recomendedJob->upah_min }}</h5>
+                <h5>Upah:{{ $recomendedJob->upah_min }}-{{ $recomendedJob->upah_max }}</h5>
             </div>
         </div>
     </div>
@@ -164,7 +165,7 @@
         </div>
         <div class="col-md-8 text-left">
             <div>
-                <h2>{{ $job->name }} <small>Occupation</small><br><small>{{ $job->alamat }}</small></h2>
+                <h2>{{ $job->name }} <small>{{--Occupation--}}</small><br><small>{{ $job->alamat }}</small></h2>
             </div>
             <div>
                 <h3>{{ $job->judul }}</h3>
@@ -173,7 +174,7 @@
                 </h5>
             </div>
             <div>
-                <h5>Upah:{{ $job->upah_max }}-{{ $job->upah_min }}</h5>
+                <h5>Upah:{{ $job->upah_min }}-{{ $job->upah_max }}</h5>
             </div>
         </div>
     </div>
