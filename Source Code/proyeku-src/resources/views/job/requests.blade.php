@@ -1,5 +1,5 @@
 <!-- Custom CSS -->
-<link href="{{url('/assets/css/profile.css')}}" rel="stylesheet">
+<link href="{{url('/assets/css/message.css')}}" rel="stylesheet">
 
 @extends('layouts.header')
 @section('header')

@@ -11,17 +11,18 @@
 	<h1 style="color: #3D566E; font-family: Titillium Web">Accepted Jobs</h1>
 	<br>
 	<div>
-		@if($accepted_jobs != "[]")
+		@if(count($accepted_jobs) > 0)
 		<table class="table"> 
 			<tr> 
 				<th>Job Id</th> 
 				<th>Seeker Id</th> 
 				<th>Accepted Date</th> 
 				<th>Accepted Time</th> 
+				<th></th>
 			</tr> 
 			@foreach($accepted_jobs as $a_accepted_job) 
 			<tr> 
-				<td>{{ $a_accepted_job->job_id }}</td> 
+				<td>{{ $a_accepted_job->job_id }}</td>
 				<td>{{ $a_accepted_job->seeker_id }}</td> 
 				<td> 
 					<?php  
@@ -34,7 +35,8 @@
 					<?php 
 					echo $arrayTime[1]; 
 					?> 
-				</td> 
+				</td>
+				<td><a type="button" class="btn btn-success" href="{{url('freelancer/accepted/'.$a_accepted_job->id)}}">View</a></td>
 			</tr> 
 			@endforeach 
 		</table> 
