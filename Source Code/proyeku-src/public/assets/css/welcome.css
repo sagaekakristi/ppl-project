@@ -80,10 +80,11 @@ section .miring2 {
 
 input[type="submit"] {
     height: 40px;
+    min-width: 88px;
     width: auto;
     background-color: #1485A3;
     color: aliceblue;
-    font-size: 15px;    
+    font-size: 15px;
     font-weight: bolder;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
