@@ -46,16 +46,18 @@ Route::group(['middleware' => ['web']], function () {
 });
 
 Route::group(['middleware' => ['web']], function () { 
-    Route::get('/profile', 'ProfilePageController@index'); 
-    Route::get('/profile/edit/account', 'ProfilePageController@editAccount'); 
-    Route::get('/profile/edit/info', 'ProfilePageController@editInfo'); 
+    Route::get('/profile', 'ProfilePageController@index');
+    Route::get('/profile/edit/account', 'ProfilePageController@editAccount');
+    Route::get('/profile/edit/info', 'ProfilePageController@editInfo');
     Route::get('/profile/view/skill', 'ProfilePageController@viewSkill');
     Route::post('/profile/delete/skill', 'ProfilePageController@deleteSkill');
-    Route::put('/profile/update/account', 'ProfilePageController@updateAccount'); 
+    Route::put('/profile/update/account', 'ProfilePageController@updateAccount');
     Route::put('/profile/update/info', 'ProfilePageController@updateInfo');
     Route::get('/profile/create/skill', 'ProfilePageController@createSkill');
+    Route::get('/profile/create/info', 'ProfilePageController@createInfo');
     Route::post('/profile/add/skill', 'ProfilePageController@addSkill');
-    Route::put('/profile/update/upload', 'ProfilePageController@upload'); 
+    Route::post('/profile/add/info', 'ProfilePageController@addInfo');
+    Route::put('/profile/update/upload', 'ProfilePageController@upload');
 }); 
 
 Route::group(['middleware' => ['web']], function () {
