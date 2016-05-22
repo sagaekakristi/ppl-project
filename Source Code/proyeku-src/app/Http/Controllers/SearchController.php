@@ -9,6 +9,7 @@ use App\User;
 use App\SocialAccount;
 
 class SearchController extends Controller{
+
     public function search(Request $request, Facebook $fb){
 
         $search = $request->search;
@@ -71,69 +72,34 @@ class SearchController extends Controller{
             }
             $graphNode = $response->getGraphObject();
             
-            $fbfriends = $graphNode["friends"];
+            $fbfriends = json_decode($graphNode["friends"], true);
         }
+
+        $recomendedJobs = array();
 
         foreach ($fbfriends as $fbfriend) {
             $friendSocAccs = SocialAccount::where('provider_user_id', $fbfriend['id'])->get();
             foreach($friendSocAccs as $friendSocAcc) {
                 $friendAccs = User::where('id', $friendSocAcc->user_id)->get();
                 foreach($friendAccs as $friendAcc) {
-                    //dd($friendAcc->name);
+                    foreach($jobs as $job) {
+                        if($job->user_id == $friendAcc->id) {
+                            array_push($recomendedJobs, $job);
+                            // $a = 'WKWK';
+                            // dd($a);
+                        }
+                    }
                 }
             }
         }
 
-        foreach($jobs as $job) {
-            dump($job->id);
-        }
-        
+        //dd($recomendedJobs);
 
-        // foreach ($fbfriends as $fbfriend) {
-        //     $friendSocAccs = SocialAccount::where('provider_user_id', $fbfriend['id'])->get();
-        //     foreach($friendSocAccs as $friendSocAcc) {
-        //         $friendAccs = User::where('id', $friendSocAcc->user_id)->get();
-        //         foreach($friendAccs as $friendAcc) {
-        //             foreach($jobs as $job) {
-        //                 if($job->user_id == $friendAcc->id) {
-        //                     $a = 'WKWK';
-        //                     dd($a);
-        //                 }
-        //                 dd($job->user_id);
-        //             }
-        //             dd($friendAcc->id);
-        //         }
-        //     }
-        // }
-
-        if( count($fbfriends) == 0) {
-            if(count($jobs) == 0){
-                return View('search')
-                ->with('message','unexist')
-                ->with('search', $search)
-                ->with('catList', $catList)
-                ->with('friendmsg', 'null');
-            } else{
-                return View('search')
-                ->with('jobs', $jobs)
-                ->with('search', $search)
-                ->with('catList', $catList)
-                ->with('friendmsg', 'null');
-            }
-        } else {
-            if(count($jobs) == 0){
-                return View('search')
-                ->with('message','unexist')
-                ->with('search', $search)
-                ->with('catList', $catList)
-                ->with('fbfriends', $fbfriends);
-            } else{
-                return View('search')
-                ->with('jobs', $jobs)
-                ->with('search', $search)
-                ->with('catList', $catList)
-                ->with('fbfriends', $fbfriends);
-            }
-        }
+        return View('search')
+        ->with('jobs', $jobs)
+        ->with('search', $search)
+        ->with('catList', $catList)
+        ->with('fbfriends', $fbfriends)
+        ->with('recomendedJobs', $recomendedJobs);
     }
 }
