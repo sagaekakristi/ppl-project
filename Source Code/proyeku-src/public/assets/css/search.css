@@ -81,3 +81,11 @@ div h1 {
 .list {
 	background-color: white;
 }
+
+.topspace {
+	margin-top: 50px;
+}
+
+#searchform {
+	margin-bottom: 50px;
+}
