@@ -31,7 +31,7 @@ class ProfilePageController extends Controller
      */
     public function index()
     {
-    	$logged_user_id = Auth::user()->id;
+        $logged_user_id = Auth::user()->id;
         $user_info = UserInfo::find($logged_user_id);
         $users = User::find($logged_user_id);
         
@@ -127,6 +127,15 @@ class ProfilePageController extends Controller
         ->with('freelancer_info', $freelancer_info);
     }
 
+    public function createInfo()
+    {
+        $logged_user_id = Auth::user()->id; 
+        $user = user::find($logged_user_id);
+        
+        return View::make('userInfoForm')
+        ->with('user', $user);
+    }
+
     public function addSkill()
     {
         $logged_user_id = Auth::user()->id;
@@ -141,6 +150,19 @@ class ProfilePageController extends Controller
         return Redirect::to('/profile/view/skill')
         ->with('user_info', $user_info)
         ->with('skills', $skills);
+    }
+
+    public function addInfo()
+    {
+        $logged_user_id = Auth::user()->id;
+        $user_info = new UserInfo;
+        $user_info->user_id = $logged_user_id;
+        $user_info->tanggal_lahir = Input::get('tanggal_lahir');
+        $user_info->alamat = Input::get('alamat');
+        $user_info->jenis_kelamin = Input::get('jenis_kelamin');
+        $user_info->save();
+        
+        return Redirect::to('/');
     }
 
     public function updateAccount()  

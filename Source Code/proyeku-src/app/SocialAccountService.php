@@ -14,10 +14,10 @@ class SocialAccountService
         ->first();
 
         if ($account) {
-// Kalo ada > return user
+            // Kalo ada > return user
             return $account->user;
         } else {
-// Kalo gaada > register
+            // Kalo gaada > register
             $account = new SocialAccount([
                 'provider_user_id' => $providerUser->getId(),
                 'provider' => 'facebook'
@@ -25,8 +25,7 @@ class SocialAccountService
 
             $user = User::whereEmail($providerUser->getEmail())->first();
 
-            if (!$user) {
-
+            if(!$user) {
                 $user = User::create([
                     'email' => $providerUser->getEmail(),
                     'name' => $providerUser->getName(),
@@ -39,6 +38,5 @@ class SocialAccountService
             return $user;
 
         }
-
     }
 }
