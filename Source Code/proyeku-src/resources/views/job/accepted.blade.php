@@ -16,6 +16,7 @@
 		<table class="table"> 
 			<tr> 
 				<th>Seeker</th>
+				<th>Freelancer</th>
 				<th>Job Id</th> 
 				<th>Job Name</th>
 				<th>Accepted Date</th> 
@@ -26,10 +27,16 @@
 			<tr> 
 				<td>
 					<?php 
+					$job = App\Job::where('id', $a_accepted_job->job_id)->get()->first();
+					$user = App\User::where('id', $job['freelancer_info_id'])->get()->first(); 
+					echo $user['name'];
+					?>
+				</td>
+				<td>
+					<?php 
 					$user = App\User::where('id', $a_accepted_job->seeker_id)->get()->first(); 
 					echo $user['name'];
 					?>
-
 				</td>
 				<td>{{ $a_accepted_job->job_id }}</td>
 				<td>
@@ -50,7 +57,7 @@
 					echo $arrayTime[1]; 
 					?> 
 				</td>
-				<td><a type="button" class="btn btn-success" href="{{url('freelancer/accepted/'.$a_accepted_job->id)}}">View</a></td>
+				<td><a type="button" class="btn btn-success" href="{{url('seeker/accepted/'.$a_accepted_job->id)}}">View</a></td>
 			</tr> 
 			@endforeach 
 		</table> 

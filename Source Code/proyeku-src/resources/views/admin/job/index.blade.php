@@ -41,6 +41,7 @@
 	@section('content')
 	<div class="container-fluid" id="body">
 		<h1 style="font-family: Titillium Web;">List of All Jobs</h1>
+		@if(count($jobs) > 0)
 		<div>
 			<table class="table table-hover">
 				<tr>
@@ -77,6 +78,13 @@
 				</div>
 				<div class="pagination"> {{ $jobs->links() }} </div>
 			</div>
+			@else
+			<div class="col-md-12" style="background-color: white; height: 100px; text-align: center; margin-bottom: 10px;">
+				<br>
+				<br>
+				<span style="float: center; font-size: 17px;">No user has create a job</span>
+			</div>
+			@endif
 		</div>
 		@stop
 	</body>

@@ -39,7 +39,8 @@
 			<span style="float: center; font-size: 17px;">There is no job requests to show!</span>
 		</div>
 		@endif
-		<a class="btn btn-small btn-success" href="{{url('/freelancer/accepted')}}" style="margin-bottom: 120px; margin-top: 10px;">See Accepted Job</a>
+		<a type="button" class="btn btn-small btn-success" href="{{url('/freelancer/accepted')}}" style="margin-bottom: 120px; margin-top: 10px;">See Accepted Job as Freelancer</a>
+		<a type="button" class="btn btn-small btn-success" href="{{url('/seeker/accepted')}}" style="margin-bottom: 120px; margin-top: 10px;">See Accepted Job as Seeker</a>
 	</div>
 </div>
 @stop
