@@ -205,9 +205,14 @@ function convertToCurrency($uang) {
 												</tr>
 											</table>
 											<div> 
+												@if(Auth::guest())
+												<?php $id = getJobId($list['id']); ?>
+												<a href="{{url('job/'.$id)}}" type="button" class="btn btn-danger btn-md">Pesan dan Kontak</a>
+												@else
 												@if(isset($id) && $id != Auth::user()->id) 
 												<?php $id = getJobId($list['id']); ?>
 												<a href="{{url('job/'.$id)}}" type="button" class="btn btn-danger btn-md">Pesan dan Kontak</a> 
+												@endif
 												@endif
 											</div>
 										</div>

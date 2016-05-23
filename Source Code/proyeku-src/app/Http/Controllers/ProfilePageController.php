@@ -171,7 +171,6 @@ class ProfilePageController extends Controller
         $rules = array( 
             'email'             => 'required', 
             'password'          => 'required|confirmed',
-            'confirm_password'  => 'required'
             ); 
 
         $validator = Validator::make(Input::all(), $rules); 

@@ -79,8 +79,6 @@
             {{ Form::close() }} 
         </div>
 
-        <hr style="width: 100%; height: 1px; background-color: #E3E7EA;">
-
         <!-- UPDATE ACCOUNT -->
         <div class="col-md-12" style="margin-top: 20px;">
             {{ Form::model($user, array('enctype'=>'multipart/form-data', 'action'=>'ProfilePageController@updateAccount', $user->id, 'files'=>true, 'method' => 'PUT')) }}
@@ -96,8 +94,8 @@
             </div> 
 
             <div class="form-group"> 
-                {{ Form::label('confirm_password', 'Confirm Password') }}
-                {{ Form::password('confirm_password', array('placeholder'=>'Confirm Password', 'class'=>'form-control' )) }} 
+                {{ Form::label('password_confirmation', 'Confirm Password') }}
+                {{ Form::password('password_confirmation', array('placeholder'=>'Confirm Password', 'class'=>'form-control' )) }} 
             </div> 
 
             {{ Form::submit('Update', array('class' => 'btn btn-success')) }} 

@@ -46,7 +46,18 @@ function convertToCurrency($uang) {
 		<table class="table">
 			<tr>
 				<td>
-					Judul
+					Freelancer name
+				</td>
+				<td>
+					<?php
+					$user = App\User::where('id', $data['job_info']->freelancer_info_id)->get()->first();
+					echo $user['name'];
+					?>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					Job Name
 				</td>
 				<td>
 					{{$data['job_info']->judul}}
@@ -54,7 +65,7 @@ function convertToCurrency($uang) {
 			</tr>
 			<tr>
 				<td>
-					Deskripsi
+					Description
 				</td>
 				<td>
 					{{$data['job_info']->deskripsi}}
@@ -78,7 +89,7 @@ function convertToCurrency($uang) {
 			</tr>
 			<tr>
 				<td>
-					Kategori
+					Category
 				</td>
 				<td>	
 					@if(count($data['category_array']))
@@ -92,7 +103,7 @@ function convertToCurrency($uang) {
 			</tr>
 		</table>
 
-		<div class="col-md-10 col-md-offset-1" style="text-align: center;">
+		<div class="col-md-10 col-md-offset-1" style="text-align: center; margin-bottom: 20px;">
 			@if(Auth::user() != null)
 			@if($show_request_button == true)
 			{{ Form::open(array('action'=>'JobRequestController@requestJob', 'method' => 'post')) }}
@@ -107,7 +118,8 @@ function convertToCurrency($uang) {
 			You have send your request for this job!
 			@endif
 			@else
-			You need to login to request this job.
+			<h5>You have to login to request this job</h5>
+			<a type="button" href="{{ url('/login') }}" style="color: #D5EDF5;" class="btn btn-success"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</a>
 			@endif
 		</div>
 	</div>

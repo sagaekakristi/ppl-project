@@ -10,6 +10,15 @@
 
 <div class="container-fluid">
     <div class="col-md-8 col-md-offset-2" style="background-color: white; border-radius: 5px; margin-top: 30px; margin-bottom: 30px;">
+        @if (count($errors) > 0)
+        <div class="alert alert-danger" style="margin-top: 10px; text-align: center;">
+            <ul>
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
         <h1>Edit {{ $job->judul }}</h1>
         <br>
         {{ Form::model($job, array('route' => array('job.update', $job->id), 'method' => 'PUT')) }}
