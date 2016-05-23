@@ -169,8 +169,9 @@ class ProfilePageController extends Controller
     { 
 
         $rules = array( 
-            'email'         => 'required', 
-            'password'      => 'required' 
+            'email'             => 'required', 
+            'password'          => 'required|confirmed',
+            'confirm_password'  => 'required'
             ); 
 
         $validator = Validator::make(Input::all(), $rules); 
@@ -182,7 +183,7 @@ class ProfilePageController extends Controller
         } else {
             $id = Auth::user()->id;
             $updated_user = User::find($id);
-            $updated_user->email = Input::get('email'); 
+            $updated_user->email = Input::get('email');
             $updated_user->password = bcrypt(Input::get('password')); 
             $updated_user->save(); 
 

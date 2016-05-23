@@ -95,6 +95,11 @@
                 {{ Form::password('password', array('placeholder'=>'Password', 'class'=>'form-control' )) }} 
             </div> 
 
+            <div class="form-group"> 
+                {{ Form::label('confirm_password', 'Confirm Password') }}
+                {{ Form::password('confirm_password', array('placeholder'=>'Confirm Password', 'class'=>'form-control' )) }} 
+            </div> 
+
             {{ Form::submit('Update', array('class' => 'btn btn-success')) }} 
             {{ Form::close() }} 
         </div> 

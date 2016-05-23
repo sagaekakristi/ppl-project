@@ -78,11 +78,11 @@ class JobPageController extends Controller
 		}
 		
 		return View::make('job.show')
-			->with('data', $data)
-			->with('jobs', $job_info)
-			->with('job_id', $id)
-			->with('show_request_button', $show_request_button)
-			->with('this_is_the_owner', $this_is_the_owner);
+		->with('data', $data)
+		->with('jobs', $job_info)
+		->with('job_id', $id)
+		->with('show_request_button', $show_request_button)
+		->with('this_is_the_owner', $this_is_the_owner);
 	}
 
 	/**
@@ -184,10 +184,12 @@ class JobPageController extends Controller
 	{
 		// get the job
 		$job = Job::find($id);
+		$category = Category::All();
 
         // show the edit form and pass the nerd
 		return View::make('job.edit')
-		->with('job', $job);
+		->with('job', $job)
+		->with('category', $category);
 	}
 
 	/**
@@ -204,7 +206,8 @@ class JobPageController extends Controller
 			'judul'		=> 'required',
 			'deskripsi'	=> 'required',
 			'upah_max'	=> 'required|numeric',
-			'upah_min'	=> 'required|numeric'
+			'upah_min'	=> 'required|numeric',
+			'kategori'	=> 'required'
 			);
 		$validator = Validator::make(Input::all(), $rules);
 
@@ -220,7 +223,12 @@ class JobPageController extends Controller
             	$updated_job->deskripsi = Input::get('deskripsi');
             	$updated_job->upah_max = Input::get('upah_max');
             	$updated_job->upah_min = Input::get('upah_min');
+
             	$updated_job->save();
+
+            	$updated_category = JobCategory::where('job_id', $id)->first();
+            	$updated_category->category_id = Input::get('kategori');
+            	$updated_category->save()
 
             // redirect
             	Session::flash('message', 'Successfully updated job!');

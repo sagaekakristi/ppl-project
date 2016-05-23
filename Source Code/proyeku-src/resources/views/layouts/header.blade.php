@@ -76,7 +76,9 @@ if(!(Auth::guest())) {
 							</div>
 						</form>
 					</li>
+					@if(!Auth::guest())
 					<li><a href="{{url('/notification')}}" style="background-color: #1485A3;"><i class="fa fa-bell"></i></a></li>
+					@endif
 				</ul>
 			</div>
 		</div>
