@@ -228,7 +228,7 @@ class JobPageController extends Controller
 
             	$updated_category = JobCategory::where('job_id', $id)->first();
             	$updated_category->category_id = Input::get('kategori');
-            	$updated_category->save()
+            	$updated_category->save();
 
             // redirect
             	Session::flash('message', 'Successfully updated job!');

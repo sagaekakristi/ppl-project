@@ -172,7 +172,7 @@
         </div>
         <div class="col-md-8 text-left">
             <div>
-                <h2>{{ $job->name }} <small>{{--Occupation--}}</small><br><small>{{ $job->alamat }}</small></h2>
+                <h2><a href="{{ URL::to('/profile/view', array('name'=>$job->freelancer_info_id)) }}">{{$job->name}}</a><small>Occupation</small><br><small>{{ $job->alamat }}</small></h2>
             </div>
             <div>
                 <h3>{{ $job->judul }}</h3>
