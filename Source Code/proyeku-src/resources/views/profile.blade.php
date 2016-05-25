@@ -29,15 +29,13 @@ function categoryIdToName($id) {
 //Calculate rating
 $rating;
 if(isset($id)) {
-	$user = App\User::where('id', Auth::user()->id)->get()->first();
+	$user = App\User::where('id', $id)->get()->first();
 	$job = App\Job::where('freelancer_info_id', $user['id'])->get()->first();
 	$accJob = App\AcceptedJob::where('job_id',$job['id'])->get()->first();
-	echo $accJob;
 } else {
 	$user = App\User::where('id', Auth::user()->id)->get()->first();
 	$job = App\Job::where('freelancer_info_id', $user['id'])->get()->first();
 	$accJob = App\AcceptedJob::where('job_id',$job['id'])->get()->first();
-	echo $accJob;
 }
 
 //Method agar upah mudah dibaca 

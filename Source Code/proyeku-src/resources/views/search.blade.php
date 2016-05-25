@@ -145,7 +145,7 @@ $rating;
 
     @if(!empty($recomendedJobs))
     @foreach ($recomendedJobs as $recomendedJob)
-    <div class="jumbotron">
+    <div class="col-md-8 col-md-offset-2">
         <div class="row">
             <div class="col-md-4">
                 <div>
@@ -205,7 +205,7 @@ $rating;
             <div class="col-md-4">
                 <div>
                     <?php 
-                    $users = App\User::find($job->freelancer_info_id)->first();
+                    $users = App\User::where('id', $job->freelancer_info_id)->get()->first();
                     $picture = $users['id'] . '.jpg';
                     ?>
                     @if (file_exists(public_path('/upload/'.$picture)))
@@ -216,7 +216,18 @@ $rating;
                 </div>
                 <br>
                 <div>
-                 
+                    <?php
+                    $user = App\User::where('id', $job->freelancer_info_id)->get()->first();
+                    $joblist = App\Job::where('freelancer_info_id', $user['id'])->get()->first();
+                    $accJob = App\AcceptedJob::where('job_id',$joblist['id'])->get()->first();
+                    if($accJob['rating'] > 0) {
+                        for($i = 0; $i < $accJob['rating']; $i++) {
+                            echo '<i class="fa fa-star-o fa-2x" style="color: orange;"></i>';
+                        }
+                    } else {
+                        echo 'Not rated yet';
+                    }
+                    ?>
                 </div>
                 <br>
                 <div>
@@ -229,23 +240,23 @@ $rating;
             </div>
             <div class="col-md-8 text-left">
                 <div>
-                    <h2><a href="{{ URL::to('/profile/view', array('name'=>$job->freelancer_info_id)) }}">{{$job->name}}</a>
-                        <br>
-                    </div>
-                    <div>
-                        <h3>{{ $job->judul }}</h3>
-                        <h5>
-                            {{ $job->deskripsi }} 
-                        </h5>
-                    </div>
-                    <div>
-                        <h5>Upah: Rp {{ convertToCurrency($job->upah_min) }} - Rp {{ convertToCurrency($job->upah_max) }}</h5>
-                    </div>
+                    <h2><a href="{{ URL::to('/profile/view', array('name'=>$job->freelancer_info_id)) }}" style="color: black;">{{$job->name}}</a></h2>
+                    <br>
+                </div>
+                <div>
+                    <h3>{{ $job->judul }}</h3>
+                    <h5>
+                        {{ $job->deskripsi }} 
+                    </h5>
+                </div>
+                <div>
+                    <h5>Upah: Rp {{ convertToCurrency($job->upah_min) }} - Rp {{ convertToCurrency($job->upah_max) }}</h5>
                 </div>
             </div>
         </div>
-        @endforeach
-        {!! $jobs->links() !!}
-        @endunless
     </div>
-    @stop
+    @endforeach
+    {!! $jobs->links() !!}
+    @endunless
+</div>
+@stop
