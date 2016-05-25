@@ -7,7 +7,7 @@
 @stop
 
 @section('content')
-<div class="container" style="margin-bottom: 30px;">
+<div class="container" style="margin-bottom: 160px;">
 	<h1 style="color: #3D566E; font-family: Titillium Web">Messages</h1>
 	<br>
 	<div>

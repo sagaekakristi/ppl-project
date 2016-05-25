@@ -13,7 +13,7 @@ $user = App\User::where('id', $accepted_job->seeker_id)->get()->first();
 $job = App\Job::where('id', $accepted_job->job_id)->get()->first();
 ?>
 
-<div class="container" style="margin-bottom: 140px;">
+<div class="container" style="margin-bottom: 170px;">
 	<h1>Job Detail</h1>
 	<table class="table">
 		<tr>
@@ -42,7 +42,6 @@ $job = App\Job::where('id', $accepted_job->job_id)->get()->first();
 				echo $arrayTime[1]; 
 				?> 
 			</td>
-			@if($accepted_job->status != 1)
 			{{ Form::open(array('action'=>'AcceptedJobController@freelancerRequestDone', 'method' => 'post')) }}
 			{{ Form::hidden('accepted_job_id', $accepted_job->id) }}
 			<td>
@@ -54,9 +53,7 @@ $job = App\Job::where('id', $accepted_job->job_id)->get()->first();
 				{{ Form::close() }}
 				@endif
 			</td>
-			@endif
 		</tr>
 	</table>
-	<a type="button" class="btn btn-success" href="{{ url('/freelancer/accepted/'.$accepted_job->id.'/edit') }}">Give a rating</a>
 </div>
 @stop

@@ -8,15 +8,15 @@
 
 @section('content')
 
-<div class="container" style="margin-bottom: 30px;">
+<div class="container" style="margin-bottom: 150px;">
 	<h1 style="color: #3D566E; font-family: Titillium Web">Accepted Jobs</h1>
 	<br>
 	<div>
 		@if(count($accepted_jobs) > 0)
 		<table class="table"> 
 			<tr> 
-				<th>Seeker</th>
 				<th>Freelancer</th>
+				<th>Seeker</th>
 				<th>Job Id</th> 
 				<th>Job Name</th>
 				<th>Accepted Date</th> 
@@ -28,14 +28,14 @@
 				<td>
 					<?php 
 					$job = App\Job::where('id', $a_accepted_job->job_id)->get()->first();
-					$user = App\User::where('id', $job['freelancer_info_id'])->get()->first(); 
-					echo $user['name'];
+					$freelancer = App\User::where('id', $job['freelancer_info_id'])->get()->first(); 
+					echo $freelancer['name'];
 					?>
 				</td>
 				<td>
 					<?php 
-					$user = App\User::where('id', $a_accepted_job->seeker_id)->get()->first(); 
-					echo $user['name'];
+					$seeker = App\User::where('id', $a_accepted_job->seeker_id)->get()->first(); 
+					echo $seeker['name'];
 					?>
 				</td>
 				<td>{{ $a_accepted_job->job_id }}</td>
@@ -57,7 +57,12 @@
 					echo $arrayTime[1]; 
 					?> 
 				</td>
+
+				@if(Auth::user()->name == $freelancer['name'])
+				<td><a type="button" class="btn btn-success" href="{{url('freelancer/accepted/'.$a_accepted_job->id)}}">View</a></td>
+				@else
 				<td><a type="button" class="btn btn-success" href="{{url('seeker/accepted/'.$a_accepted_job->id)}}">View</a></td>
+				@endif
 			</tr> 
 			@endforeach 
 		</table> 

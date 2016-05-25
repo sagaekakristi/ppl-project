@@ -26,11 +26,18 @@ function categoryIdToName($id) {
 	return $Category['kategori'];
 }
 
+//Calculate rating
 $rating;
 if(isset($id)) {
-	$rating = App\AcceptedJob::where('seeker_id', $id)->get()->first();
+	$user = App\User::where('id', Auth::user()->id)->get()->first();
+	$job = App\Job::where('freelancer_info_id', $user['id'])->get()->first();
+	$accJob = App\AcceptedJob::where('job_id',$job['id'])->get()->first();
+	echo $accJob;
 } else {
-	$rating = App\AcceptedJob::where('seeker_id', Auth::user()->id)->get()->first();
+	$user = App\User::where('id', Auth::user()->id)->get()->first();
+	$job = App\Job::where('freelancer_info_id', $user['id'])->get()->first();
+	$accJob = App\AcceptedJob::where('job_id',$job['id'])->get()->first();
+	echo $accJob;
 }
 
 //Method agar upah mudah dibaca 
@@ -77,9 +84,9 @@ function convertToCurrency($uang) {
 			<div class="col-md-8 col-md-offset-2" style="text-align: center;"> 
 				<h3>{{ $users->name }}</h3>
 				<?php
-				if($rating['rating'] > 0) {
-					for($i = 0; $i < $rating['rating']; $i++) {
-						echo '<i class="fa fa-star-o fa-2x"></i>';
+				if($accJob['rating'] > 0) {
+					for($i = 0; $i < $accJob['rating']; $i++) {
+						echo '<i class="fa fa-star-o fa-2x" style="color: orange;"></i>';
 					}
 				} else {
 					echo 'Not rated yet';

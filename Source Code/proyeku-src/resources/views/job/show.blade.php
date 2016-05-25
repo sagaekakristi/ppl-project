@@ -115,7 +115,9 @@ function convertToCurrency($uang) {
 			<button class="btn btn-success" type="submit" style="border-radius: 5px;">Request Job</button>
 			{{ Form::close() }}
 			@elseif($this_is_the_owner == false)
-			You have send your request for this job!
+			<div class="alert alert-success">
+				You have send your request for this job!
+			</div>
 			@endif
 			@else
 			<h5>You have to login to request this job</h5>

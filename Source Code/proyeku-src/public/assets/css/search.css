@@ -17,6 +17,12 @@
 	color: #2c3e50;
 }
 
+#header {
+	background-color: white;
+	margin-bottom: 50px;
+	border-radius: 10px;
+}
+
 .star-rating{
 	font-size: 0;
 }
@@ -88,4 +94,8 @@ div h1 {
 
 #searchform {
 	margin-bottom: 50px;
+}
+
+.jumbotron {
+	background-color: white;
 }
