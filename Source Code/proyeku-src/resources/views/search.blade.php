@@ -120,13 +120,13 @@ $rating;
                         </div>
                         <div class="col-md-12">
                             <div class="input-group-btn">
-                                <button class="btn btn-default" type="reset" style="border-radius: 5px; background-color: #F26151; color: white; height: 40px;"><strong>Reset Field</strong></button>
+                                <button class="btn btn-default" type="reset" style="border-radius: 5px; background-color: #F26151; color: white; height: 40px;"><i class="fa fa-refresh" aria-hidden="true"></i> <strong>Reset Field</strong></button>
                             </div>
                         </div>
                     </div>
                 </div>
             </form>
-            <button id="advance" class="btn btn-info">Advance Search</button>
+            <button id="advance" class="btn btn-info"><i class="fa fa-search" aria-hidden="true"></i> Advance Search</button>
             <div>
                 @if(empty($fbfriends))
                 <section style="margin-top: 20px;">
@@ -145,30 +145,38 @@ $rating;
 
     @if(!empty($recomendedJobs))
     @foreach ($recomendedJobs as $recomendedJob)
-    <div class="col-md-8 col-md-offset-2">
+    <div class="jumbotron">
         <div class="row">
             <div class="col-md-4">
                 <div>
-                    <img width="125" height="125" class="searchPic" src="{{url($recomendedJob->profile_picture_link)}}">
+                    <?php 
+                    $users = App\User::where('id', $job->freelancer_info_id)->get()->first();
+                    $picture = $users['id'] . '.jpg';
+                    ?>
+                    @if (file_exists(public_path('/upload/'.$picture)))
+                    <img src="{{url('/upload/'.$picture)}}" class="img-circle" style="height: 200px; width: 200px;">
+                    @else
+                    <img src="{{url('/assets/pictures/profile-default-icon.png')}}" class="img-circle" style="height: 200px; width: 200px;">
+                    @endif
                 </div>
                 <div class="star-rating">
-                    <div class="star-rating__wrap">
-                        <input class="star-rating__input" id="star-rating-5" type="radio" name="rating" value="5">
-                        <label class="star-rating__ico fa fa-star-o fa-lg" for="star-rating-5"></label>
-                        <input class="star-rating__input" id="star-rating-4" type="radio" name="rating" value="4">
-                        <label class="star-rating__ico fa fa-star-o fa-lg" for="star-rating-4"></label>
-                        <input class="star-rating__input" id="star-rating-3" type="radio" name="rating" value="3">
-                        <label class="star-rating__ico fa fa-star-o fa-lg" for="star-rating-3"></label>
-                        <input class="star-rating__input" id="star-rating-2" type="radio" name="rating" value="2">
-                        <label class="star-rating__ico fa fa-star-o fa-lg" for="star-rating-2"></label>
-                        <input class="star-rating__input" id="star-rating-1" type="radio" name="rating" value="1">
-                        <label class="star-rating__ico fa fa-star-o fa-lg" for="star-rating-1"></label>
-                    </div>
+                    <?php
+                    $user = App\User::where('id', $job->freelancer_info_id)->get()->first();
+                    $joblist = App\Job::where('freelancer_info_id', $user['id'])->get()->first();
+                    $accJob = App\AcceptedJob::where('job_id',$joblist['id'])->get()->first();
+                    if($accJob['rating'] > 0) {
+                        for($i = 0; $i < $accJob['rating']; $i++) {
+                            echo '<i class="fa fa-star-o fa-2x" style="color: orange;"></i>';
+                        }
+                    } else {
+                        echo 'Not rated yet';
+                    }
+                    ?>
                 </div>
                 <div>
                     <a href="{{url('/job/'.$recomendedJob->id)}}" class="btn btn-default" style="background-color: #F26151; color: white; height: 40px;">
                         <div class="col-md-1">
-                            <strong>Hire</strong>
+                            <i class="fa fa-check" aria-hidden="true"></i> <strong>Hire</strong>
                         </div>
                     </a>
                 </div>
@@ -233,7 +241,7 @@ $rating;
                 <div>
                     <a href="{{url('/job/'.$job->id)}}" class="btn btn-default" style="background-color: #F26151; color: white; height: 35px;">
                         <div class="col-md-1">
-                            <strong>Hire</strong>
+                            <i class="fa fa-check" aria-hidden="true"></i> <strong>Hire</strong>
                         </div>
                     </a>
                 </div>

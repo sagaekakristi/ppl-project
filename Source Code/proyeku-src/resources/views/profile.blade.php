@@ -30,6 +30,7 @@ function categoryIdToName($id) {
 $rating;
 if(isset($id)) {
 	$user = App\User::where('id', $id)->get()->first();
+	//Harusnya ambil job_id saja, terus dimasukin ke array
 	$job = App\Job::where('freelancer_info_id', $user['id'])->get()->first();
 	$accJob = App\AcceptedJob::where('job_id',$job['id'])->get()->first();
 } else {
