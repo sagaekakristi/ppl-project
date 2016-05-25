@@ -26,7 +26,7 @@ class AdminUserController extends Controller
         if($search != null) {
             $users = DB::table('users')
             ->where('name', 'LIKE', '%'.$search.'%')
-            ->where('email', 'LIKE', '%'.$search.'%')
+            ->orWhere('email', 'LIKE', '%'.$search.'%')
             ->paginate(5);
         } else {
     	   $users = User::paginate(5);

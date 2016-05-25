@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use View;
 use Input;
+use DB;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests;
 use App\Job;
@@ -25,7 +26,7 @@ class AdminJobController extends Controller
         if($search != null) {
             $jobs = DB::table('job')
             ->where('judul', 'LIKE', '%'.$search.'%')
-            ->where('deskripsi', 'LIKE', '%'.$search.'%')
+            ->orWhere('deskripsi', 'LIKE', '%'.$search.'%')
             ->paginate(5);
         } else {
             $jobs = Job::paginate(5);
