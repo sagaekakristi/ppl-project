@@ -41,6 +41,16 @@
 	@section('content')
 	<div class="container-fluid" id="body">
 		<h1 style="font-family: Titillium Web;">List of All Jobs</h1>
+		<div class="col-md-4 col-md-offset-4">
+			{{Form::open(array('url' => '/admin/manage/job/search'))}}
+			<div class="input-group"> 
+				{{Form::text('search', Input::old('search'), array('class' => 'form-control', 'placeholder' => 'Search job here...'))}}
+				<div class="input-group-btn">
+					<button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+				</div>
+			</div>
+		</div>
+		{{Form::close()}}
 		@if(count($jobs) > 0)
 		<div>
 			<table class="table table-hover">

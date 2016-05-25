@@ -21,9 +21,16 @@ class AdminJobController extends Controller
     public function index()
     {
         //
-        $jobs = Job::paginate(5);
+        $search = Input::get('search');
+        if($search != null) {
+            $jobs = DB::table('job')
+            ->where('judul', 'LIKE', '%'.$search.'%')
+            ->where('deskripsi', 'LIKE', '%'.$search.'%')
+            ->paginate(5);
+        } else {
+            $jobs = Job::paginate(5);
+        }
         $users = User::all();
-
         return View::make('admin.job.index')
         ->with('jobs', $jobs)
         ->with('users', $users);
