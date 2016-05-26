@@ -14,7 +14,12 @@
 </head>
 <?php 
 if(!(Auth::guest())) { 
-	$FreelancerInfo = App\FreelancerInfo::where('user_info_id', '=', Auth::user()->id)->get(); 
+	$FreelancerInfo = App\FreelancerInfo::where('user_info_id', '=', Auth::user()->id)->get();
+	$notif = App\Notification::where('user_id', '=', Auth::user()->id)->get();
+	$read = true;
+	foreach($notif as $a_notif) {
+		$read = $read && $a_notif->read;
+	}
 } 
 ?> 
 <body>
@@ -77,7 +82,11 @@ if(!(Auth::guest())) {
 						</form>
 					</li>
 					@if(!Auth::guest())
-					<li><a href="{{url('/notification')}}" style="background-color: #1485A3;"><i class="fa fa-bell"></i></a></li>
+						@if(!$read)
+							<li><a href="{{url('/notification')}}" style="color: red;"><i class="fa fa-bell"></i></a></li>
+						@else
+							<li><a href="{{url('/notification')}}" style="background-color: #1485A3;"><i class="fa fa-bell"></i></a></li>
+						@endif
 					@endif
 				</ul>
 			</div>

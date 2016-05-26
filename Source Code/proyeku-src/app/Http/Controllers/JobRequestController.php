@@ -69,6 +69,7 @@ class JobRequestController extends Controller
 				$notification = new Notification;
 		    	$notification->user_id = $freelancer_id;
 		    	$notification->notif = "Anda mendapat tawaran job dari ".$seeker_name." untuk job ".$job_name;
+		    	$notification->type = 1;
 		    	$notification->save();
 			}
 			else{ 
@@ -155,6 +156,7 @@ class JobRequestController extends Controller
 		$notification = new Notification;
     	$notification->user_id = $seeker_id;
     	$notification->notif = "Tawaran job ".$job_name." telah diterima oleh freelancer ".$freelancer_name;
+    	$notification->type = 2;
     	$notification->save();
 
 		return Redirect::to('show-job-request/');

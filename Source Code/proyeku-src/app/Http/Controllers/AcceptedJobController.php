@@ -9,6 +9,7 @@ use App\Http\Requests;
 use App\User;
 use App\Job;
 use App\JobRequest;
+use App\Notification;
 use Input;
 use App\UserInfo;
 use App\FreelancerInfo;
@@ -211,58 +212,78 @@ class AcceptedJobController extends Controller
             return Redirect::to($position.'/accepted'.'/'.$id.'/edit')
             ->withErrors($validator)
                 ->withInput(Input::except('password')); // TODO: Check
-            } else {
-        // store
-                $accepted_job = AcceptedJob::find($id);
-                $accepted_job->deskripsi = Input::get('deskripsi');
-                $accepted_job->rating = Input::get('rating');
-                $accepted_job->save();
+        } else {
+            // store
+            $accepted_job = AcceptedJob::find($id);
+            $accepted_job->deskripsi = Input::get('deskripsi');
+            $accepted_job->rating = Input::get('rating');
+            $accepted_job->save();
 
-        // redirect
-                Session::flash('message', 'Successfully updated detail on accepted job!');
-                return Redirect::to($position.'/accepted'.'/'.$id);
-            }
-        }
-
-        public function freelancerRequestDone()
-        {
-            $accepted_job_id = Input::get('accepted_job_id');
-            $accepted_job = AcceptedJob::find($accepted_job_id);
-            $accepted_job->freelancer_confirm_done = 1;        
-
-        // kalo seeker juga udah setuju done
-            if($accepted_job->seeker_confirm_done == 1){
-            // ubah status accepted job ini menjadi done
-                $accepted_job->status = 1;
-                $accepted_job->waktu_selesai = DB::raw('CURRENT_TIMESTAMP');
-                $accepted_job->save();
-            }
-        // kalo freelancer belum setuju done
-            else {
-                $accepted_job->save();
-            }
-
-            return Redirect::to('freelancer/accepted/'.$accepted_job_id);
-        }
-
-        public function seekerRequestDone()
-        {
-            $accepted_job_id = Input::get('accepted_job_id');
-            $accepted_job = AcceptedJob::find($accepted_job_id);
-            $accepted_job->seeker_confirm_done = 1;        
-
-        // kalo freelancer juga udah setuju done
-            if($accepted_job->freelancer_confirm_done == 1){
-            // ubah status accepted job ini menjadi done
-                $accepted_job->status = 1;
-                $accepted_job->waktu_selesai = DB::raw('CURRENT_TIMESTAMP');
-                $accepted_job->save();
-            }
-        // kalo freelancer belum setuju done
-            else {
-                $accepted_job->save();
-            }
-
-            return Redirect::to('seeker/accepted/'.$accepted_job_id);
+            // redirect
+            Session::flash('message', 'Successfully updated detail on accepted job!');
+            return Redirect::to($position.'/accepted'.'/'.$id);
         }
     }
+
+    public function freelancerRequestDone()
+    {
+        $accepted_job_id = Input::get('accepted_job_id');
+        $accepted_job = AcceptedJob::find($accepted_job_id);
+        $accepted_job->freelancer_confirm_done = 1;
+        $job = Job::find($accepted_job->job_id);
+        $freelancer = User::find($job->freelancer_info_id);
+        $seeker_id = $accepted_job->seeker_id;
+
+        // notif buat seeker
+        $notification = new Notification;
+        $notification->user_id = $seeker_id;
+        $notification->notif = "Proyek untuk job ".$job->judul." telah diselesaikan oleh ".$freelancer->name;
+        $notification->type = 3;
+        $notification->save();
+
+        // kalo seeker juga udah setuju done
+        if($accepted_job->seeker_confirm_done == 1){
+        // ubah status accepted job ini menjadi done
+            $accepted_job->status = 1;
+            $accepted_job->waktu_selesai = DB::raw('CURRENT_TIMESTAMP');
+            $accepted_job->save();
+        }
+        // kalo freelancer belum setuju done
+        else {
+            $accepted_job->save();
+        }
+
+        return Redirect::to('freelancer/accepted/'.$accepted_job_id);
+    }
+
+    public function seekerRequestDone()
+    {
+        $accepted_job_id = Input::get('accepted_job_id');
+        $accepted_job = AcceptedJob::find($accepted_job_id);
+        $accepted_job->seeker_confirm_done = 1;
+        $job = Job::find($accepted_job->job_id);
+        $freelancer = User::find($job->freelancer_info_id);
+        $seeker = User::find($accepted_job->seeker_id);
+
+        //notif buat freelancer
+        $notification = new Notification;
+        $notification->user_id = $freelancer->id;
+        $notification->notif = "Proyek untuk job ".$job->judul." yang direquest oleh ".$seeker->name." telah selesai";
+        $notification->type = 4;
+        $notification->save();
+
+    // kalo freelancer juga udah setuju done
+        if($accepted_job->freelancer_confirm_done == 1){
+        // ubah status accepted job ini menjadi done
+            $accepted_job->status = 1;
+            $accepted_job->waktu_selesai = DB::raw('CURRENT_TIMESTAMP');
+            $accepted_job->save();
+        }
+    // kalo freelancer belum setuju done
+        else {
+            $accepted_job->save();
+        }
+
+        return Redirect::to('seeker/accepted/'.$accepted_job_id);
+    }
+}
