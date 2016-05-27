@@ -95,6 +95,7 @@ class SearchController extends Controller{
             }
         }
 
+        $request->flash();
         return View('search')
         ->with('jobs', $jobs)
         ->with('search', $search)
