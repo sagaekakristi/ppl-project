@@ -150,7 +150,7 @@ $rating;
             <div class="col-md-4">
                 <div>
                     <?php 
-                    $users = App\User::where('id', $job->freelancer_info_id)->get()->first();
+                    $users = App\User::where('id', $recomendedJob->freelancer_info_id)->get()->first();
                     $picture = $users['id'] . '.jpg';
                     ?>
                     @if (file_exists(public_path('/upload/'.$picture)))
@@ -161,7 +161,7 @@ $rating;
                 </div>
                 <div class="star-rating">
                     <?php
-                    $user = App\User::where('id', $job->freelancer_info_id)->get()->first();
+                    $user = App\User::where('id', $recomendedJob->freelancer_info_id)->get()->first();
                     $joblist = App\Job::where('freelancer_info_id', $user['id'])->get()->first();
                     $accJob = App\AcceptedJob::where('job_id',$joblist['id'])->get()->first();
                     if($accJob['rating'] > 0) {
