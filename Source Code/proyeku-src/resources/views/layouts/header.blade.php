@@ -83,9 +83,9 @@ if(!(Auth::guest())) {
 					</li>
 					@if(!Auth::guest())
 						@if(!$read)
-							<li><a href="{{url('/notification')}}" style="color: red;"><i class="fa fa-bell"></i></a></li>
+							<li><a href="{{url('/notification')}}" style="color: rgb(242, 97, 81)"><i class="fa fa-bell"></i></a></li>
 						@else
-							<li><a href="{{url('/notification')}}" style="background-color: #1485A3;"><i class="fa fa-bell"></i></a></li>
+							<li><a href="{{url('/notification')}}" style="color: #D5EDF5"><i class="fa fa-bell"></i></a></li>
 						@endif
 					@endif
 				</ul>
